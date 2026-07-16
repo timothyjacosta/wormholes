@@ -78,7 +78,7 @@ test.describe('malicious payload corpus across every input path', () => {
 
       function resetDom(){
         document.querySelectorAll('.modal-backdrop.open').forEach(modal => modal.classList.remove('open'));
-        ['archiveList','literatureList','visionBoardGrid','globalSearchResults','universeArchiveList','connectionsMapWrap','wormholesMapWrap'].forEach(id => {
+        ['archiveList','literatureList','visionBoardGrid','globalSearchResults','universeArchiveList','connectionsMapWrap','wormholesMapWrap','themeManagerCardList'].forEach(id => {
           const element = document.getElementById(id);
           if(element) element.replaceChildren();
         });
@@ -123,6 +123,16 @@ test.describe('malicious payload corpus across every input path', () => {
         selectedMapNodeId = null;
         connectSourceId = null;
         window.__wormholesXssExecutions = 0;
+        try{
+  localStorage.removeItem('wormholesCustomThemeDecksV1');
+  localStorage.removeItem('wormholesSelectedThemeDeckIdsV1');
+} catch(error){}
+customThemeDecks = [];
+selectedThemeIds = [];
+themeStateLoaded = false;
+themeManagerDraft = null;
+themeManagerOriginalId = null;
+pendingThemeDeleteId = null;
         document.getElementById('currentUniverseLabel').textContent = 'Safe Universe';
         window.WormholesSearchIndex?.markDirty?.('security reset', {schedule:false});
       }
@@ -438,6 +448,61 @@ test.describe('malicious payload corpus across every input path', () => {
             surfaces = ['#universeArchiveList','#archiveList','#literatureList','#visionBoardGrid','#settingsStatus'];
             break;
           }
+          case 'custom-theme-title':
+case 'custom-theme-description': {
+  openThemeManager({newTheme:true});
+  document.getElementById('themeManagerTitle').value = pathId === 'custom-theme-title' ? payload : safeTitle;
+  document.getElementById('themeManagerDescription').value = pathId === 'custom-theme-description' ? payload : 'Safe description';
+  saveThemeManagerDraft();
+  renderThemeManagerDeckSelect();
+  renderThemeManagerCards();
+  surfaces = ['#themeManagerModal'];
+  break;
+}
+case 'custom-theme-card': {
+  openThemeManager({newTheme:true});
+  document.getElementById('themeManagerTitle').value = safeTitle;
+  addThemeManagerCard('what', payload);
+  renderThemeManagerCards();
+  surfaces = ['#themeManagerModal'];
+  break;
+}
+case 'custom-theme-bulk-cards': {
+  openThemeManager({newTheme:true});
+  document.getElementById('themeManagerTitle').value = safeTitle;
+  document.getElementById('themeBulkType').value = 'what';
+  document.getElementById('themeBulkCards').value = payload;
+  addThemeManagerBulkCards();
+  surfaces = ['#themeManagerModal'];
+  break;
+}
+case 'custom-theme-search': {
+  openThemeManager({newTheme:true});
+  document.getElementById('themeManagerTitle').value = safeTitle;
+  addThemeManagerCard('what', 'Safe card');
+  document.getElementById('themeManagerSearch').value = payload;
+  renderThemeManagerCards();
+  surfaces = ['#themeManagerModal'];
+  break;
+}
+case 'custom-theme-import': {
+  openThemeManager({newTheme:true});
+  const themeData = {
+    format:'Wormholes Theme Deck',
+    version:1,
+    theme:{
+      title:payload,
+      description:payload,
+      cards:{what:[payload], attribute:['Safe attribute'], story:['Safe story']}
+    }
+  };
+  const file = new File([JSON.stringify(themeData)], `theme-${index}.json`, {type:'application/json'});
+  await importThemeFile(file);
+  renderThemeManagerDeckSelect();
+  renderThemeManagerCards();
+  surfaces = ['#themeManagerModal'];
+  break;
+}
           default:
             throw new Error(`No malicious-input adapter for ${pathId}`);
         }
