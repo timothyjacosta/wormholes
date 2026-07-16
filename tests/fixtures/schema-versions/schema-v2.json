@@ -1,0 +1,49 @@
+{
+  "format": "Wormholes App Data Export",
+  "schemaVersion": 2,
+  "appVersion": "Beta 110",
+  "currentUniverseId": "v2-u1",
+  "universes": [
+    {
+      "id": "v2-u1",
+      "title": "Version Two Realm",
+      "summary": "A two-universe migration fixture.",
+      "bridges": [{"universeId": "v2-u2"}],
+      "createdAt": "2025-02-02T00:00:00.000Z"
+    },
+    {"id": "v2-u2", "title": "Version Two Neighbor", "createdAt": "2025-02-03T00:00:00.000Z"}
+  ],
+  "bridgeNotes": {"v2-u1||v2-u2": "A bridge note survives migration."},
+  "universeData": {
+    "v2-u1": {
+      "archive": [
+        {
+          "id": "v2-a1",
+          "title": "Border Observatory",
+          "what": {"val": "Place"},
+          "connections": [],
+          "bridges": [{"universeId": "v2-u2"}],
+          "createdAt": "2025-02-04T00:00:00.000Z"
+        }
+      ],
+      "connectionNotes": {},
+      "literature": [
+        {
+          "id": "v2-l1",
+          "title": "Observatory Log",
+          "content": "<p>Version two retained text.</p>",
+          "sourceName": "observatory.txt",
+          "fileType": "text",
+          "createdAt": "2025-02-05T00:00:00.000Z"
+        }
+      ],
+      "vision": []
+    },
+    "v2-u2": {
+      "archive": [],
+      "connectionNotes": {},
+      "literature": [],
+      "vision": []
+    }
+  }
+}

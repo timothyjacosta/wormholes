@@ -1,0 +1,54 @@
+{
+  "format": "Wormholes App Data Export",
+  "schemaVersion": 3,
+  "appVersion": "Beta 160",
+  "currentUniverseId": "v3-u1",
+  "universes": [
+    {
+      "id": "v3-u1",
+      "title": "Version Three Realm",
+      "summary": "Groups and cross-link tags are present.",
+      "bridges": [],
+      "createdAt": "2025-03-01T00:00:00.000Z",
+      "diskFolderName": "Version Three Realm -- v3-u1"
+    }
+  ],
+  "bridgeNotes": {},
+  "universeData": {
+    "v3-u1": {
+      "archive": [
+        {"id": "v3-a1", "title": "North Archive", "connections": [], "bridges": [], "createdAt": "2025-03-02T00:00:00.000Z"},
+        {"id": "v3-a2", "title": "South Archive", "connections": [], "bridges": [], "createdAt": "2025-03-03T00:00:00.000Z"},
+        {"id": "v3-g1", "kind": "group", "title": "Twin Archives", "groupIds": ["v3-a1", "v3-a2"], "connections": [], "bridges": [], "createdAt": "2025-03-04T00:00:00.000Z"}
+      ],
+      "connectionNotes": {},
+      "literature": [
+        {
+          "id": "v3-l1",
+          "title": "Archive Index",
+          "content": "<p>Version three retained text.</p>",
+          "fileType": "text",
+          "tags": {"universes": ["v3-u1"], "entries": ["v3-a1"]},
+          "createdAt": "2025-03-05T00:00:00.000Z"
+        },
+        {
+          "id": "v3-lg1",
+          "fileType": "group",
+          "title": "Index Collection",
+          "children": ["v3-l1"],
+          "createdAt": "2025-03-06T00:00:00.000Z"
+        }
+      ],
+      "vision": [
+        {
+          "id": "v3-v1",
+          "title": "Archive Seal",
+          "mimeType": "image/png",
+          "thumbnailDataUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9Zl9sAAAAASUVORK5CYII=",
+          "tags": {"universes": ["v3-u1"], "entries": ["v3-g1"]},
+          "createdAt": "2025-03-07T00:00:00.000Z"
+        }
+      ]
+    }
+  }
+}

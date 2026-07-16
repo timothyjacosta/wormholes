@@ -1,0 +1,57 @@
+{
+  "format": "Wormholes App Data Export",
+  "schemaVersion": 4,
+  "appVersion": "Beta 197",
+  "currentUniverseId": "v4-u1",
+  "universes": [
+    {
+      "id": "v4-u1",
+      "title": "Version Four Realm",
+      "summary": "A current-schema control fixture.",
+      "bridges": [],
+      "createdAt": "2026-07-12T00:00:00.000Z",
+      "diskFolderName": "Version Four Realm -- v4-u1"
+    }
+  ],
+  "bridgeNotes": {},
+  "universeData": {
+    "v4-u1": {
+      "archive": [
+        {
+          "id": "v4-a1",
+          "title": "Current Beacon",
+          "what": {"val": "Artifact"},
+          "attr1": {"val": "Bright"},
+          "attr2": {"val": "Patient"},
+          "pressure": {"val": "It must remain visible."},
+          "connections": [],
+          "bridges": [],
+          "createdAt": "2026-07-12T00:01:00.000Z"
+        }
+      ],
+      "connectionNotes": {},
+      "literature": [
+        {
+          "id": "v4-l1",
+          "kind": "",
+          "title": "Current Record",
+          "content": "<p>Version four retained text.</p>",
+          "sourceName": "",
+          "fileType": "text",
+          "mimeType": "text/html",
+          "fileData": "",
+          "fileSize": 0,
+          "convertedFrom": "",
+          "storage": "",
+          "folderFileName": "",
+          "contentStoreKey": "literature:v4-u1:v4-l1:content",
+          "contentStored": "",
+          "tags": {"universes": [], "entries": []},
+          "createdAt": "2026-07-12T00:02:00.000Z",
+          "updatedAt": "2026-07-12T00:02:00.000Z"
+        }
+      ],
+      "vision": []
+    }
+  }
+}

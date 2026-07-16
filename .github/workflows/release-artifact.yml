@@ -1,0 +1,162 @@
+name: Release artifact integrity
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-artifact-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  baseline-ci:
+    name: Required baseline before release
+    uses: ./.github/workflows/baseline-ci.yml
+
+  security-ci:
+    name: Required security before release
+    uses: ./.github/workflows/security.yml
+
+  release-artifact:
+    name: Build once, test exact artifact, publish unchanged
+    needs: [baseline-ci, security-ci]
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Check out the exact release commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: tests/package-lock.json
+
+      - name: Install locked dependencies
+        working-directory: tests
+        run: npm ci
+
+      - name: Run required quality checks before packaging
+        working-directory: tests
+        run: npm run quality
+
+      - name: Run required unit tests before packaging
+        working-directory: tests
+        run: npm run test:unit:core
+
+      - name: Assemble immutable release artifact exactly once
+        id: release
+        run: >-
+          node tools/build-release-artifact.mjs
+          --commit "$GITHUB_SHA"
+          --output-dir dist
+          --github-output "$GITHUB_OUTPUT"
+
+      - name: Verify recorded checksum before release-candidate testing
+        run: >-
+          node tools/verify-release-artifact.mjs
+          --artifact "${{ steps.release.outputs.artifact }}"
+          --checksum "${{ steps.release.outputs.checksum }}"
+          --expected-sha "${{ steps.release.outputs.sha256 }}"
+
+      - name: Extract the exact packaged artifact
+        run: |
+          mkdir -p release-candidate
+          unzip -q "${{ steps.release.outputs.artifact }}" -d release-candidate
+          echo "CANDIDATE_ROOT=$GITHUB_WORKSPACE/release-candidate/${{ steps.release.outputs.release_name }}" >> "$GITHUB_ENV"
+
+      - name: Verify extracted release candidate
+        run: >-
+          node tools/verify-release-artifact.mjs
+          --artifact "${{ steps.release.outputs.artifact }}"
+          --checksum "${{ steps.release.outputs.checksum }}"
+          --expected-sha "${{ steps.release.outputs.sha256 }}"
+          --candidate-root "$CANDIDATE_ROOT"
+
+      - name: Install required browser engines and system dependencies
+        working-directory: tests
+        run: npx playwright install --with-deps chromium firefox webkit
+
+      - name: Run critical browser tests against the packaged artifact
+        run: |
+          export PATH="$GITHUB_WORKSPACE/tests/node_modules/.bin:$PATH"
+          export NODE_PATH="$GITHUB_WORKSPACE/tests/node_modules"
+          cd "$CANDIDATE_ROOT/tests"
+          npm run ci:release:critical
+        env:
+          CI: true
+
+      - name: Run required cross-browser release gate against the packaged artifact
+        run: |
+          export PATH="$GITHUB_WORKSPACE/tests/node_modules/.bin:$PATH"
+          export NODE_PATH="$GITHUB_WORKSPACE/tests/node_modules"
+          cd "$CANDIDATE_ROOT/tests"
+          npm run ci:release:cross-browser
+        env:
+          CI: true
+
+      - name: Run accessibility gates against the packaged artifact
+        run: |
+          export PATH="$GITHUB_WORKSPACE/tests/node_modules/.bin:$PATH"
+          export NODE_PATH="$GITHUB_WORKSPACE/tests/node_modules"
+          cd "$CANDIDATE_ROOT/tests"
+          npm run ci:accessibility
+        env:
+          CI: true
+
+      - name: Run performance gates against the packaged artifact
+        run: |
+          export PATH="$GITHUB_WORKSPACE/tests/node_modules/.bin:$PATH"
+          export NODE_PATH="$GITHUB_WORKSPACE/tests/node_modules"
+          cd "$CANDIDATE_ROOT/tests"
+          npm run ci:performance
+        env:
+          CI: true
+
+      - name: Run security gates against the packaged artifact
+        run: |
+          export PATH="$GITHUB_WORKSPACE/tests/node_modules/.bin:$PATH"
+          export NODE_PATH="$GITHUB_WORKSPACE/tests/node_modules"
+          cd "$CANDIDATE_ROOT/tests"
+          npm run ci:security
+        env:
+          CI: true
+          WORMHOLES_CSP_NAVIGATION: served
+
+      - name: Prove the tested artifact was not changed
+        run: >-
+          node tools/verify-release-artifact.mjs
+          --artifact "${{ steps.release.outputs.artifact }}"
+          --checksum "${{ steps.release.outputs.checksum }}"
+          --expected-sha "${{ steps.release.outputs.sha256 }}"
+
+      - name: Publish the exact tested files as a workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.release.outputs.release_name }}
+          path: |
+            ${{ steps.release.outputs.artifact }}
+            ${{ steps.release.outputs.checksum }}
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Publish the same tested files to the tagged GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1 || \
+            gh release create "$GITHUB_REF_NAME" --verify-tag --title "${{ steps.release.outputs.release_name }}" --notes "Automated Wormholes release artifact."
+          gh release upload "$GITHUB_REF_NAME" \
+            "${{ steps.release.outputs.artifact }}" \
+            "${{ steps.release.outputs.checksum }}"

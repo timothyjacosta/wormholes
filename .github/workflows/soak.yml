@@ -1,0 +1,61 @@
+name: Long-session soak test
+
+on:
+  schedule:
+    - cron: '17 4 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: soak-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  soak:
+    name: Extended Chromium session
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    defaults:
+      run:
+        working-directory: tests
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: tests/package-lock.json
+
+      - name: Install locked test dependencies
+        run: npm ci
+
+      - name: Install Chromium and system dependencies
+        run: npx playwright install --with-deps chromium
+
+      - name: Run long-session soak test
+        run: npm run ci:soak
+        env:
+          CI: true
+          WORMHOLES_SOAK_CYCLES: 240
+          WORMHOLES_SOAK_DURATION_MS: 300000
+          WORMHOLES_SOAK_MAX_CYCLES: 1200
+          WORMHOLES_SOAK_MAX_HEAP_GROWTH_MB: 96
+
+      - name: Preserve soak reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wormholes-soak-reports
+          path: |
+            tests/soak/results/soak-report.json
+            tests/soak/playwright-report/
+            tests/test-results/
+          if-no-files-found: ignore
+          retention-days: 30

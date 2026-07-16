@@ -1,0 +1,42 @@
+name: Configure required repository checks
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: Type APPLY to create or update the required-check ruleset
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  configure:
+    name: Apply required checks
+    if: ${{ inputs.confirm == 'APPLY' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository policy tooling
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Require repository administration token
+        env:
+          ADMIN_TOKEN: ${{ secrets.WORMHOLES_REPOSITORY_ADMIN_TOKEN }}
+        run: test -n "$ADMIN_TOKEN"
+
+      - name: Create or update the required-check ruleset
+        env:
+          ADMIN_TOKEN: ${{ secrets.WORMHOLES_REPOSITORY_ADMIN_TOKEN }}
+        run: >-
+          node tools/configure-required-checks.mjs
+          --repository "$GITHUB_REPOSITORY"
+          --token-env ADMIN_TOKEN

@@ -1,0 +1,3 @@
+A smoke-test literature sample for Wormholes.
+
+This text file is intentionally small so the upload path can be tested without creating large fixture data.

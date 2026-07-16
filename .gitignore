@@ -1,0 +1,20 @@
+# Local dependencies and generated test output
+node_modules/
+tests/node_modules/
+test-results/
+tests/test-results/
+playwright-report/
+tests/playwright-report*/
+performance/results/
+tests/performance/results/
+soak/results/
+tests/soak/results/
+
+# Release artifacts are built once from a committed source tree
+dist/
+release-candidate/
+baseline-dist/
+baseline-candidate/
+
+# Ignore local dependency symlinks as well as directories
+tests/node_modules

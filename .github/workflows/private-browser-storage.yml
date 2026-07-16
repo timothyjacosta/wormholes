@@ -1,0 +1,54 @@
+name: Private browser and storage clearing checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: private-browser-storage-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  private-browser-storage:
+    name: Private context isolation and browser clearing
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    defaults:
+      run:
+        working-directory: tests
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: tests/package-lock.json
+
+      - name: Install locked test dependencies
+        run: npm ci
+
+      - name: Install Chromium and system dependencies
+        run: npx playwright install --with-deps chromium
+
+      - name: Run private-browser and clearing gate
+        run: npm run ci:private-browser-storage
+        env:
+          CI: true
+
+      - name: Preserve private-browser storage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: private-browser-storage-playwright-report
+          path: tests/playwright-report-storage-heavy/
+          if-no-files-found: ignore
+          retention-days: 14

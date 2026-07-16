@@ -1,0 +1,14 @@
+# Generated direct-file compatibility runtime. Format canonical modules instead.
+scripts/*.js
+
+# Generated runtime shell.
+Wormholes_Beta_*.served.html
+
+# Installed dependencies and test output.
+tests/node_modules/
+tests/playwright-report/
+tests/test-results/
+
+# Generated coverage reports and raw V8 data.
+tests/coverage/
+tests/.coverage-v8/

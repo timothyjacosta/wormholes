@@ -1,0 +1,107 @@
+name: Baseline CI
+
+on:
+  push:
+  pull_request:
+  merge_group:
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: baseline-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  required-baseline:
+    name: Required baseline
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out the exact commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: tests/package-lock.json
+
+      - name: Install locked dependencies
+        working-directory: tests
+        run: npm ci
+
+      - name: Run the aggregate quality gate
+        working-directory: tests
+        run: npm run quality
+
+      - name: Run the full core unit suite
+        working-directory: tests
+        run: npm run test:unit:core
+
+      - name: Build the baseline artifact once
+        id: artifact
+        run: >-
+          node tools/build-release-artifact.mjs
+          --commit "$GITHUB_SHA"
+          --output-dir baseline-dist
+          --github-output "$GITHUB_OUTPUT"
+
+      - name: Verify the baseline artifact checksum
+        run: >-
+          node tools/verify-release-artifact.mjs
+          --artifact "${{ steps.artifact.outputs.artifact }}"
+          --checksum "${{ steps.artifact.outputs.checksum }}"
+          --expected-sha "${{ steps.artifact.outputs.sha256 }}"
+
+      - name: Extract the exact baseline artifact
+        run: |
+          mkdir -p baseline-candidate
+          unzip -q "${{ steps.artifact.outputs.artifact }}" -d baseline-candidate
+          echo "BASELINE_CANDIDATE_ROOT=$GITHUB_WORKSPACE/baseline-candidate/${{ steps.artifact.outputs.release_name }}" >> "$GITHUB_ENV"
+
+      - name: Verify the extracted baseline candidate
+        run: >-
+          node tools/verify-release-artifact.mjs
+          --artifact "${{ steps.artifact.outputs.artifact }}"
+          --checksum "${{ steps.artifact.outputs.checksum }}"
+          --expected-sha "${{ steps.artifact.outputs.sha256 }}"
+          --candidate-root "$BASELINE_CANDIDATE_ROOT"
+
+      - name: Install Chromium and system dependencies
+        working-directory: tests
+        run: npx playwright install --with-deps chromium
+
+      - name: Run the artifact-level smoke test
+        run: |
+          export PATH="$GITHUB_WORKSPACE/tests/node_modules/.bin:$PATH"
+          export NODE_PATH="$GITHUB_WORKSPACE/tests/node_modules"
+          cd "$BASELINE_CANDIDATE_ROOT/tests"
+          npm run ci:baseline:artifact-smoke
+        env:
+          CI: true
+
+      - name: Prove the tested baseline artifact did not change
+        run: >-
+          node tools/verify-release-artifact.mjs
+          --artifact "${{ steps.artifact.outputs.artifact }}"
+          --checksum "${{ steps.artifact.outputs.checksum }}"
+          --expected-sha "${{ steps.artifact.outputs.sha256 }}"
+
+      - name: Preserve the baseline smoke report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: baseline-ci-playwright-report-${{ github.run_id }}
+          path: |
+            baseline-candidate/${{ steps.artifact.outputs.release_name }}/tests/playwright-report/
+            baseline-candidate/${{ steps.artifact.outputs.release_name }}/tests/test-results/
+          if-no-files-found: ignore
+          retention-days: 14

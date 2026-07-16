@@ -1,0 +1,96 @@
+name: Security CI
+
+on:
+  push:
+  pull_request:
+  merge_group:
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: security-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  required-security:
+    name: Required security
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out the exact commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: tests/package-lock.json
+
+      - name: Install locked dependencies
+        working-directory: tests
+        run: npm ci
+
+      - name: Install Chromium and system dependencies
+        working-directory: tests
+        run: npx playwright install --with-deps chromium
+
+      - name: Check served Content Security Policy
+        working-directory: tests
+        run: npm run ci:security:csp
+        env:
+          CI: true
+          WORMHOLES_CSP_NAVIGATION: served
+
+      - name: Check XSS protections
+        working-directory: tests
+        run: npm run ci:security:xss
+        env:
+          CI: true
+          WORMHOLES_CSP_NAVIGATION: served
+
+      - name: Check every declared input path
+        working-directory: tests
+        run: npm run ci:security:inputs
+        env:
+          CI: true
+          WORMHOLES_CSP_NAVIGATION: served
+
+      - name: Check rich-text sanitization
+        working-directory: tests
+        run: npm run ci:security:sanitization
+        env:
+          CI: true
+          WORMHOLES_CSP_NAVIGATION: served
+
+      - name: Check URL hardening
+        working-directory: tests
+        run: npm run ci:security:urls
+        env:
+          CI: true
+          WORMHOLES_CSP_NAVIGATION: served
+
+      - name: Check import validation
+        working-directory: tests
+        run: npm run ci:security:imports
+        env:
+          CI: true
+          WORMHOLES_CSP_NAVIGATION: served
+
+      - name: Preserve security reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-ci-playwright-report-${{ github.run_id }}
+          path: |
+            tests/playwright-report-security/
+            tests/test-results/
+          if-no-files-found: ignore
+          retention-days: 14

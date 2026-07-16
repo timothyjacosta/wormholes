@@ -1,0 +1,551 @@
+{
+  "format": "Wormholes Performance Budget Report",
+  "version": 1,
+  "appVersion": "Beta 197",
+  "generatedAt": "2026-07-12T20:04:14.725Z",
+  "environment": {
+    "node": "v22.16.0",
+    "platform": "linux",
+    "arch": "x64",
+    "cpuCount": 56
+  },
+  "budgetMultiplier": 1,
+  "iterations": 3,
+  "passed": true,
+  "results": [
+    {
+      "scenario": "small",
+      "label": "Small everyday project",
+      "iterations": 3,
+      "measurements": {
+        "generateMs": 1.18,
+        "stringifyMs": 1.59,
+        "parseMs": 1.36,
+        "summarizeMs": 0.16,
+        "integrityMs": 0.15,
+        "searchIndexMs": 19.67,
+        "searchQueriesMs": 0.33,
+        "paginationMs": 0.28
+      },
+      "budgetMultiplier": 1,
+      "comparisons": [
+        {
+          "metric": "generateMs",
+          "label": "Generate dataset",
+          "measuredMs": 1.18,
+          "budgetMs": 150,
+          "passed": true
+        },
+        {
+          "metric": "stringifyMs",
+          "label": "Serialize app data",
+          "measuredMs": 1.59,
+          "budgetMs": 150,
+          "passed": true
+        },
+        {
+          "metric": "parseMs",
+          "label": "Parse app data",
+          "measuredMs": 1.36,
+          "budgetMs": 100,
+          "passed": true
+        },
+        {
+          "metric": "summarizeMs",
+          "label": "Summarize app data",
+          "measuredMs": 0.16,
+          "budgetMs": 100,
+          "passed": true
+        },
+        {
+          "metric": "integrityMs",
+          "label": "Validate references",
+          "measuredMs": 0.15,
+          "budgetMs": 100,
+          "passed": true
+        },
+        {
+          "metric": "searchIndexMs",
+          "label": "Build Global Search index",
+          "measuredMs": 19.67,
+          "budgetMs": 500,
+          "passed": true
+        },
+        {
+          "metric": "searchQueriesMs",
+          "label": "Run 10 Global Search queries",
+          "measuredMs": 0.33,
+          "budgetMs": 250,
+          "passed": true
+        },
+        {
+          "metric": "paginationMs",
+          "label": "Run 200 pagination operations",
+          "measuredMs": 0.28,
+          "budgetMs": 100,
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "jsonBytes": 148765,
+      "searchRows": 222,
+      "summary": {
+        "universes": 3,
+        "archiveEntries": 108,
+        "groups": 12,
+        "literatureDocuments": 39,
+        "literatureGroups": 6,
+        "literatureDocumentsWithBody": 39,
+        "visionItems": 54,
+        "visionItemsWithImageData": 0,
+        "connections": 150,
+        "bridges": 12
+      }
+    },
+    {
+      "scenario": "medium",
+      "label": "Established project",
+      "iterations": 3,
+      "measurements": {
+        "generateMs": 9.42,
+        "stringifyMs": 12.55,
+        "parseMs": 3.66,
+        "summarizeMs": 1.74,
+        "integrityMs": 1.35,
+        "searchIndexMs": 177.88,
+        "searchQueriesMs": 3.59,
+        "paginationMs": 0.3
+      },
+      "budgetMultiplier": 1,
+      "comparisons": [
+        {
+          "metric": "generateMs",
+          "label": "Generate dataset",
+          "measuredMs": 9.42,
+          "budgetMs": 500,
+          "passed": true
+        },
+        {
+          "metric": "stringifyMs",
+          "label": "Serialize app data",
+          "measuredMs": 12.55,
+          "budgetMs": 500,
+          "passed": true
+        },
+        {
+          "metric": "parseMs",
+          "label": "Parse app data",
+          "measuredMs": 3.66,
+          "budgetMs": 300,
+          "passed": true
+        },
+        {
+          "metric": "summarizeMs",
+          "label": "Summarize app data",
+          "measuredMs": 1.74,
+          "budgetMs": 300,
+          "passed": true
+        },
+        {
+          "metric": "integrityMs",
+          "label": "Validate references",
+          "measuredMs": 1.35,
+          "budgetMs": 250,
+          "passed": true
+        },
+        {
+          "metric": "searchIndexMs",
+          "label": "Build Global Search index",
+          "measuredMs": 177.88,
+          "budgetMs": 2000,
+          "passed": true
+        },
+        {
+          "metric": "searchQueriesMs",
+          "label": "Run 10 Global Search queries",
+          "measuredMs": 3.59,
+          "budgetMs": 500,
+          "passed": true
+        },
+        {
+          "metric": "paginationMs",
+          "label": "Run 200 pagination operations",
+          "measuredMs": 0.3,
+          "budgetMs": 100,
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "jsonBytes": 1669268,
+      "searchRows": 1884,
+      "summary": {
+        "universes": 4,
+        "archiveEntries": 920,
+        "groups": 80,
+        "literatureDocuments": 360,
+        "literatureGroups": 40,
+        "literatureDocumentsWithBody": 360,
+        "visionItems": 480,
+        "visionItemsWithImageData": 0,
+        "connections": 2800,
+        "bridges": 80
+      }
+    },
+    {
+      "scenario": "large-single",
+      "label": "Large single-universe book",
+      "iterations": 3,
+      "measurements": {
+        "generateMs": 10.66,
+        "stringifyMs": 20.29,
+        "parseMs": 4.57,
+        "summarizeMs": 2.61,
+        "integrityMs": 0.92,
+        "searchIndexMs": 203.7,
+        "searchQueriesMs": 3.67,
+        "paginationMs": 0.26
+      },
+      "budgetMultiplier": 1,
+      "comparisons": [
+        {
+          "metric": "generateMs",
+          "label": "Generate dataset",
+          "measuredMs": 10.66,
+          "budgetMs": 700,
+          "passed": true
+        },
+        {
+          "metric": "stringifyMs",
+          "label": "Serialize app data",
+          "measuredMs": 20.29,
+          "budgetMs": 700,
+          "passed": true
+        },
+        {
+          "metric": "parseMs",
+          "label": "Parse app data",
+          "measuredMs": 4.57,
+          "budgetMs": 400,
+          "passed": true
+        },
+        {
+          "metric": "summarizeMs",
+          "label": "Summarize app data",
+          "measuredMs": 2.61,
+          "budgetMs": 350,
+          "passed": true
+        },
+        {
+          "metric": "integrityMs",
+          "label": "Validate references",
+          "measuredMs": 0.92,
+          "budgetMs": 400,
+          "passed": true
+        },
+        {
+          "metric": "searchIndexMs",
+          "label": "Build Global Search index",
+          "measuredMs": 203.7,
+          "budgetMs": 3000,
+          "passed": true
+        },
+        {
+          "metric": "searchQueriesMs",
+          "label": "Run 10 Global Search queries",
+          "measuredMs": 3.67,
+          "budgetMs": 700,
+          "passed": true
+        },
+        {
+          "metric": "paginationMs",
+          "label": "Run 200 pagination operations",
+          "measuredMs": 0.26,
+          "budgetMs": 100,
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "jsonBytes": 2397405,
+      "searchRows": 2251,
+      "summary": {
+        "universes": 1,
+        "archiveEntries": 950,
+        "groups": 50,
+        "literatureDocuments": 475,
+        "literatureGroups": 25,
+        "literatureDocumentsWithBody": 475,
+        "visionItems": 750,
+        "visionItemsWithImageData": 0,
+        "connections": 5000,
+        "bridges": 0
+      }
+    },
+    {
+      "scenario": "large-multi",
+      "label": "Ten-book multi-universe project",
+      "iterations": 3,
+      "measurements": {
+        "generateMs": 46.4,
+        "stringifyMs": 86.55,
+        "parseMs": 26.44,
+        "summarizeMs": 15.96,
+        "integrityMs": 4.3,
+        "searchIndexMs": 1042.4,
+        "searchQueriesMs": 15.89,
+        "paginationMs": 0.26
+      },
+      "budgetMultiplier": 1,
+      "comparisons": [
+        {
+          "metric": "generateMs",
+          "label": "Generate dataset",
+          "measuredMs": 46.4,
+          "budgetMs": 2000,
+          "passed": true
+        },
+        {
+          "metric": "stringifyMs",
+          "label": "Serialize app data",
+          "measuredMs": 86.55,
+          "budgetMs": 2000,
+          "passed": true
+        },
+        {
+          "metric": "parseMs",
+          "label": "Parse app data",
+          "measuredMs": 26.44,
+          "budgetMs": 1000,
+          "passed": true
+        },
+        {
+          "metric": "summarizeMs",
+          "label": "Summarize app data",
+          "measuredMs": 15.96,
+          "budgetMs": 800,
+          "passed": true
+        },
+        {
+          "metric": "integrityMs",
+          "label": "Validate references",
+          "measuredMs": 4.3,
+          "budgetMs": 800,
+          "passed": true
+        },
+        {
+          "metric": "searchIndexMs",
+          "label": "Build Global Search index",
+          "measuredMs": 1042.4,
+          "budgetMs": 7000,
+          "passed": true
+        },
+        {
+          "metric": "searchQueriesMs",
+          "label": "Run 10 Global Search queries",
+          "measuredMs": 15.89,
+          "budgetMs": 1500,
+          "passed": true
+        },
+        {
+          "metric": "paginationMs",
+          "label": "Run 200 pagination operations",
+          "measuredMs": 0.26,
+          "budgetMs": 100,
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "jsonBytes": 10856698,
+      "searchRows": 11610,
+      "summary": {
+        "universes": 10,
+        "archiveEntries": 4750,
+        "groups": 250,
+        "literatureDocuments": 1500,
+        "literatureGroups": 100,
+        "literatureDocumentsWithBody": 1500,
+        "visionItems": 5000,
+        "visionItemsWithImageData": 0,
+        "connections": 15000,
+        "bridges": 500
+      }
+    },
+    {
+      "scenario": "dense-map",
+      "label": "Dense map network",
+      "iterations": 3,
+      "measurements": {
+        "generateMs": 85.87,
+        "stringifyMs": 16.39,
+        "parseMs": 10.89,
+        "summarizeMs": 40.55,
+        "integrityMs": 8.7,
+        "searchIndexMs": 492.07,
+        "searchQueriesMs": 16.53,
+        "paginationMs": 0.26
+      },
+      "budgetMultiplier": 1,
+      "comparisons": [
+        {
+          "metric": "generateMs",
+          "label": "Generate dataset",
+          "measuredMs": 85.87,
+          "budgetMs": 2500,
+          "passed": true
+        },
+        {
+          "metric": "stringifyMs",
+          "label": "Serialize app data",
+          "measuredMs": 16.39,
+          "budgetMs": 1200,
+          "passed": true
+        },
+        {
+          "metric": "parseMs",
+          "label": "Parse app data",
+          "measuredMs": 10.89,
+          "budgetMs": 700,
+          "passed": true
+        },
+        {
+          "metric": "summarizeMs",
+          "label": "Summarize app data",
+          "measuredMs": 40.55,
+          "budgetMs": 1500,
+          "passed": true
+        },
+        {
+          "metric": "integrityMs",
+          "label": "Validate references",
+          "measuredMs": 8.7,
+          "budgetMs": 800,
+          "passed": true
+        },
+        {
+          "metric": "searchIndexMs",
+          "label": "Build Global Search index",
+          "measuredMs": 492.07,
+          "budgetMs": 5000,
+          "passed": true
+        },
+        {
+          "metric": "searchQueriesMs",
+          "label": "Run 10 Global Search queries",
+          "measuredMs": 16.53,
+          "budgetMs": 1200,
+          "passed": true
+        },
+        {
+          "metric": "paginationMs",
+          "label": "Run 200 pagination operations",
+          "measuredMs": 0.26,
+          "budgetMs": 100,
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "jsonBytes": 3859360,
+      "searchRows": 3604,
+      "summary": {
+        "universes": 4,
+        "archiveEntries": 3120,
+        "groups": 80,
+        "literatureDocuments": 144,
+        "literatureGroups": 16,
+        "literatureDocumentsWithBody": 144,
+        "visionItems": 240,
+        "visionItemsWithImageData": 0,
+        "connections": 48000,
+        "bridges": 4000
+      }
+    },
+    {
+      "scenario": "near-limit",
+      "label": "Near supported limits",
+      "iterations": 3,
+      "measurements": {
+        "generateMs": 301.9,
+        "stringifyMs": 193.85,
+        "parseMs": 79.65,
+        "summarizeMs": 87.54,
+        "integrityMs": 34.01,
+        "searchIndexMs": 4378.53,
+        "searchQueriesMs": 81.2,
+        "paginationMs": 0.24
+      },
+      "budgetMultiplier": 1,
+      "comparisons": [
+        {
+          "metric": "generateMs",
+          "label": "Generate dataset",
+          "measuredMs": 301.9,
+          "budgetMs": 7000,
+          "passed": true
+        },
+        {
+          "metric": "stringifyMs",
+          "label": "Serialize app data",
+          "measuredMs": 193.85,
+          "budgetMs": 5000,
+          "passed": true
+        },
+        {
+          "metric": "parseMs",
+          "label": "Parse app data",
+          "measuredMs": 79.65,
+          "budgetMs": 3500,
+          "passed": true
+        },
+        {
+          "metric": "summarizeMs",
+          "label": "Summarize app data",
+          "measuredMs": 87.54,
+          "budgetMs": 3000,
+          "passed": true
+        },
+        {
+          "metric": "integrityMs",
+          "label": "Validate references",
+          "measuredMs": 34.01,
+          "budgetMs": 2000,
+          "passed": true
+        },
+        {
+          "metric": "searchIndexMs",
+          "label": "Build Global Search index",
+          "measuredMs": 4378.53,
+          "budgetMs": 20000,
+          "passed": true
+        },
+        {
+          "metric": "searchQueriesMs",
+          "label": "Run 10 Global Search queries",
+          "measuredMs": 81.2,
+          "budgetMs": 4000,
+          "passed": true
+        },
+        {
+          "metric": "paginationMs",
+          "label": "Run 200 pagination operations",
+          "measuredMs": 0.24,
+          "budgetMs": 150,
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "jsonBytes": 21164211,
+      "searchRows": 24002,
+      "summary": {
+        "universes": 2,
+        "archiveEntries": 9000,
+        "groups": 600,
+        "literatureDocuments": 9000,
+        "literatureGroups": 600,
+        "literatureDocumentsWithBody": 9000,
+        "visionItems": 4800,
+        "visionItemsWithImageData": 0,
+        "connections": 96000,
+        "bridges": 20000
+      }
+    }
+  ]
+}

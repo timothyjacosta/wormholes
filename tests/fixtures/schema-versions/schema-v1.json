@@ -1,0 +1,26 @@
+{
+  "format": "Wormholes App Data Export",
+  "schemaVersion": 1,
+  "appVersion": "Beta 80",
+  "currentUniverseId": "v1-u1",
+  "universes": [
+    {"id": "v1-u1", "title": "Version One Realm"}
+  ],
+  "bridgeNotes": null,
+  "universeData": {
+    "v1-u1": {
+      "archive": [
+        {"id": "v1-a1", "title": "First Lantern", "what": {"val": "Artifact"}, "connections": ["v1-a2"]},
+        {"id": "v1-a2", "title": "Second Lantern", "what": {"val": "Artifact"}},
+        {"id": "v1-g1", "title": "Lantern Pair", "children": ["v1-a1", "v1-a2"]}
+      ],
+      "connectionNotes": {"v1-a1::v1-a2": "An early connection note."},
+      "literature": [
+        {"id": "v1-l1", "title": "Founding Note", "content": "<p>The first schema document.</p>"}
+      ],
+      "vision": [
+        {"id": "v1-v1", "title": "First Sigil", "dataUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9Zl9sAAAAASUVORK5CYII="}
+      ]
+    }
+  }
+}

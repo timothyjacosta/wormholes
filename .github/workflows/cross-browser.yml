@@ -1,0 +1,54 @@
+name: Cross-browser checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cross-browser-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  cross-browser:
+    name: Critical workflows (Chromium, Firefox, WebKit)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    defaults:
+      run:
+        working-directory: tests
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: tests/package-lock.json
+
+      - name: Install locked test dependencies
+        run: npm ci
+
+      - name: Install browser engines and system dependencies
+        run: npx playwright install --with-deps chromium firefox webkit
+
+      - name: Run cross-browser gate
+        run: npm run ci:cross-browser
+        env:
+          CI: true
+
+      - name: Preserve cross-browser report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cross-browser-playwright-report
+          path: tests/playwright-report/
+          if-no-files-found: ignore
+          retention-days: 14

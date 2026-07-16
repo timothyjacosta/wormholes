@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="default-src 'none'; base-uri 'none'; object-src 'none'; frame-src 'none'; child-src 'none'; worker-src 'none'; script-src 'self'; script-src-elem 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; style-src-elem 'self'; style-src-attr 'unsafe-inline'; img-src 'self' data: blob:; font-src 'none'; media-src 'none'; connect-src blob:; manifest-src 'none'; form-action 'none'" http-equiv="Content-Security-Policy"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Wormholes Beta 301" name="wormholes-build-version"/>
+<meta content="Desktop only — fluid window" name="wormholes-layout-mode"/>
+<meta content="8fb269ca202b32ff53d1aafc22c46b9b774ff351" name="wormholes-build-commit"/>
+<meta content="2026-07-16T17:42:39Z" name="wormholes-build-timestamp"/>
+<meta content="beta-297-8fb269c" name="wormholes-build-id"/>
+<title>Wormholes Beta 301 — Universe Builder</title>
+<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%232d3941'/%3E%3Cpath d='M17 37c7-17 23-17 30 0-8-5-21-5-30 0Z' fill='%23f2e7d0'/%3E%3Ccircle cx='32' cy='31' r='5' fill='%238fbad0'/%3E%3C/svg%3E" rel="icon"/>
+<link href="styles/wormholes.css" rel="stylesheet"/>
+<link href="styles/reskin.css" rel="stylesheet"/>
+</head>
+<body>
+<main>
+<div class="home-screen active" id="homeScreen">
+<div class="home-card">
+<div class="header-wrap">
+<h1>WORMHOLES</h1>
+<div class="subtitle">Everything can be connected</div>
+<div aria-hidden="true" class="ornament"><span>✦</span><span>◆</span><span>✦</span></div>
+</div>
+<div class="home-actions">
+<button class="home-safe-control" data-app-control="create-universe" id="createUniverseBtn" type="button">Create Universe</button>
+<button class="home-safe-control" data-app-control="enter-universe" id="enterUniverseBtn" type="button">Enter Universe</button>
+<button class="home-safe-control" data-app-control="manage-wormholes" id="manageWormholesBtn" type="button">Manage Bridges</button>
+</div>
+<p class="home-hint">Choose where to begin.</p>
+</div>
+</div>
+<div class="app-screen" id="appScreen">
+<div class="universe-topbar">
+<button class="home-return-button app-button" data-app-button="true" id="homeBtn" type="button">Exit Universe</button>
+<div class="universe-label" id="currentUniverseLabel">No universe selected</div>
+</div>
+<nav aria-label="Wormholes sections" class="tabs" role="tablist">
+<button aria-controls="currentTab" aria-selected="true" class="tab-button active app-button" data-app-button="true" id="currentTabBtn" role="tab" tabindex="0" type="button">Generate</button>
+<button aria-controls="createTab" aria-selected="false" class="tab-button app-button" data-app-button="true" id="createTabBtn" role="tab" tabindex="-1" type="button">Create</button>
+<button aria-controls="archiveTab" aria-selected="false" class="tab-button app-button" data-app-button="true" id="archiveTabBtn" role="tab" tabindex="-1" type="button">Archive &amp; Connections</button>
+<button aria-controls="literatureTab" aria-selected="false" class="tab-button app-button" data-app-button="true" id="literatureTabBtn" role="tab" tabindex="-1" type="button">Literature</button>
+<button aria-controls="visionTab" aria-selected="false" class="tab-button app-button" data-app-button="true" id="visionTabBtn" role="tab" tabindex="-1" type="button">Vision Board</button>
+</nav>
+<section aria-labelledby="currentTabBtn" class="tab-pane active" id="currentTab" role="tabpanel">
+<div class="controls roll-controls">
+<span class="roll-indicator">Roll</span>
+<button class="app-button" data-app-button="true" id="whatBtn" type="button">What</button>
+<span class="roll-button-stack attr-roll-stack">
+<button class="app-button" data-app-button="true" id="attrBtn" type="button">Attributes</button>
+<span aria-live="polite" class="roll-footnote" id="attrRollNote">2 rolls remain</span>
+</span>
+<button class="app-button" data-app-button="true" id="storyBtn" type="button">Story</button>
+<button class="app-button" data-app-button="true" id="quickFullRollBtn" type="button">Quick Roll</button>
+</div>
+<div class="theme-bar" data-theme-context="generate">
+<div class="theme-bar-main">
+<span class="theme-bar-label">Themes</span>
+<div aria-label="Active themes" aria-live="polite" class="theme-chip-list" data-theme-chip-list></div>
+<button class="theme-choose-button app-button" data-app-button="true" data-open-theme-picker type="button">Choose Themes</button>
+</div>
+<p class="theme-bar-note">Selected themes affect rolls and Create suggestions. Select several to mix them evenly.</p>
+</div>
+<div aria-hidden="true" class="roll-effects-layer" id="rollEffectsLayer">
+<canvas id="diceCanvas"></canvas>
+</div>
+<section id="result">
+<p>Roll to begin building.</p>
+</section>
+<div class="controls bottom-controls generate-bottom-controls">
+<div class="creation-action-buttons">
+<button class="app-button" data-app-button="true" id="newBtn" type="button">New Creation</button>
+<button class="app-button" data-app-button="true" id="archiveBtn" type="button">Archive Creation</button>
+</div>
+<label class="skip-roll-toggle" title="Skip the dice animation when rolling.">
+<input id="skipRollAnimationToggle" type="checkbox"/>
+<span>Skip animation</span>
+</label>
+</div>
+</section>
+<section aria-labelledby="createTabBtn" class="tab-pane" hidden="" id="createTab" role="tabpanel">
+<div class="create-panel">
+<h2>Create Manually</h2>
+<p class="create-intro">Choose or write each part.</p>
+<div class="theme-bar theme-bar-create" data-theme-context="create">
+<div class="theme-bar-main">
+<span class="theme-bar-label">Themes</span>
+<div aria-label="Active themes" aria-live="polite" class="theme-chip-list" data-theme-chip-list></div>
+<button class="theme-choose-button app-button" data-app-button="true" data-open-theme-picker type="button">Choose Themes</button>
+</div>
+<p class="theme-bar-note">The menus below show cards from selected themes. You can still write your own.</p>
+</div>
+<div class="create-grid">
+<label>
+        Creation Title
+        <input id="manualTitle" maxlength="500" placeholder="Example: The Brass Hollows" type="text"/>
+</label>
+<label>
+        What
+        <select id="manualWhat"></select>
+</label>
+<label class="sr-only" for="manualWhatCustom">Custom what</label>
+<input class="custom-input" id="manualWhatCustom" maxlength="200" placeholder="Custom what..." type="text"/>
+<label>
+        Attribute
+        <select id="manualAttr1"></select>
+</label>
+<label class="sr-only" for="manualAttr1Custom">Custom first attribute</label>
+<input class="custom-input" id="manualAttr1Custom" maxlength="200" placeholder="Custom attribute..." type="text"/>
+<label>
+        Attribute
+        <select id="manualAttr2"></select>
+</label>
+<label class="sr-only" for="manualAttr2Custom">Custom second attribute</label>
+<input class="custom-input" id="manualAttr2Custom" maxlength="200" placeholder="Custom attribute..." type="text"/>
+<label>
+        Story
+        <select id="manualStory"></select>
+</label>
+<label class="sr-only" for="manualStoryCustom">Custom story pressure</label>
+<input class="custom-input" id="manualStoryCustom" maxlength="200" placeholder="Custom story pressure..." type="text"/>
+</div>
+<div class="manual-error" id="manualError"></div>
+<div aria-live="polite" class="manual-draft-status" id="manualDraftStatus"></div>
+<div class="controls bottom-controls">
+<button class="app-button" data-app-button="true" disabled="" id="clearManualBtn" type="button">Start Over</button>
+<button class="app-button" data-app-button="true" disabled="" id="saveManualBtn" type="button">Archive Creation</button>
+</div>
+</div>
+</section>
+<section aria-labelledby="archiveTabBtn" class="tab-pane" hidden="" id="archiveTab" role="tabpanel">
+<aside class="archive">
+<div aria-labelledby="archiveListHeading" class="archive-screen active" id="archiveListScreen">
+<div class="archive-header archive-list-header">
+<div class="archive-heading-stack">
+<h2 id="archiveListHeading" tabindex="-1">Archive &amp; Connections</h2>
+<div aria-label="Archive view controls" class="archive-utility-actions">
+<button aria-controls="archiveFilterPanel" aria-expanded="false" class="archive-utility-button app-button" data-app-button="true" id="archiveFilterBtn" type="button">Filter</button>
+<button aria-controls="archiveSortPanel" aria-expanded="false" class="archive-utility-button app-button" data-app-button="true" id="archiveSortBtn" type="button">Sort</button>
+<div class="collection-density-control" data-density-control="archive">
+<label for="archiveDensitySlider">Density</label>
+<input aria-valuetext="Comfortable" id="archiveDensitySlider" max="3" min="1" step="1" type="range" value="2"/>
+<output aria-live="polite" for="archiveDensitySlider" id="archiveDensityValue">Comfortable</output>
+</div>
+</div>
+</div>
+<div class="archive-primary-actions">
+<button class="archive-connections-button app-button" data-app-button="true" id="connectionsBtn" type="button">Connections</button>
+</div>
+</div>
+<div class="archive-filter-panel" id="archiveFilterPanel" hidden data-escape-dismiss="closeArchiveFiltersBtn">
+<div class="archive-filter-grid">
+<label>
+<span>Type</span>
+<select id="archiveFilterType">
+<option value="all">All types</option>
+</select>
+</label>
+<label>
+<span>Group</span>
+<select id="archiveFilterGroup">
+<option value="all">All items</option>
+</select>
+</label>
+<fieldset class="archive-filter-status">
+<legend>Status</legend>
+<label><input id="archiveFilterConnections" type="checkbox"/> Has connections</label>
+<label><input id="archiveFilterNotes" type="checkbox"/> Has notes</label>
+<label><input id="archiveFilterSummary" type="checkbox"/> Has summary</label>
+</fieldset>
+</div>
+<div class="archive-filter-footer">
+<span aria-live="polite" id="archiveFilterResultCount"></span>
+<div class="archive-filter-actions">
+<button class="small-archive-button app-button" data-app-button="true" id="resetArchiveFiltersBtn" type="button">Reset</button>
+<button class="small-archive-button app-button" data-app-button="true" id="closeArchiveFiltersBtn" type="button">Done</button>
+</div>
+</div>
+</div>
+<div class="archive-sort-panel" id="archiveSortPanel" hidden data-escape-dismiss="closeArchiveSortBtn">
+<label class="archive-sort-field" for="archiveSortOrder">
+<span>Order</span>
+<select id="archiveSortOrder">
+<option value="archive">Custom Order</option>
+<option value="title-asc">Title A–Z</option>
+<option value="title-desc">Title Z–A</option>
+<option value="type-asc">Type A–Z</option>
+<option value="newest">Newest first</option>
+<option value="oldest">Oldest first</option>
+</select>
+</label>
+<div class="archive-sort-actions">
+<button class="small-archive-button app-button" data-app-button="true" id="resetArchiveSortBtn" type="button">Reset</button>
+<button class="small-archive-button app-button" data-app-button="true" id="closeArchiveSortBtn" type="button">Done</button>
+</div>
+</div>
+<div class="archive-count" id="archiveCount">0 creations saved</div>
+<div class="connect-status" id="connectStatus"></div>
+<div id="archiveList"></div>
+<nav aria-label="Archive pages" class="collection-pagination" id="archivePagination" hidden></nav>
+<p class="local-folder-section-status" id="archiveStorageFootnote">Local folder not connected</p>
+</div>
+<div aria-labelledby="connectionsHeading" class="archive-screen" id="connectionsScreen">
+<div class="archive-header">
+<h2 id="connectionsHeading" tabindex="-1">Connections</h2>
+<div class="archive-header-actions">
+<button class="small-archive-button danger-action app-button" data-app-button="true" id="clearConnectionsBtn" type="button" hidden>Remove All Connections</button>
+<button class="small-archive-button app-button" data-app-button="true" id="backToArchiveBtn" type="button">Back to Archive</button>
+</div>
+</div>
+<div class="relationship-guide" data-relationship-guide="connections">
+<div class="relationship-guide-summary">
+<p><strong>Connections</strong> link items in this universe.</p>
+<button aria-controls="connectionsHelpPanel" aria-expanded="false" class="relationship-help-toggle app-button" data-app-button="true" id="connectionsHelpBtn" type="button">What’s this?</button>
+</div>
+<div class="relationship-help-panel" id="connectionsHelpPanel" hidden>
+<p>Select one item, then another, to add or remove a connection. Select a connection line to add notes.</p>
+<p>To link an item in another universe, use a Bridge.</p>
+<button class="relationship-help-dismiss app-button" data-app-button="true" id="dismissConnectionsHelpBtn" type="button">Got it</button>
+</div>
+</div>
+<div aria-atomic="true" aria-live="polite" class="connections-map-status" id="connectionsMapStatus" role="status"></div>
+<div class="connections-map-wrap" id="connectionsMapWrap"></div>
+</div>
+</aside>
+</section>
+<section aria-labelledby="literatureTabBtn" class="tab-pane" hidden="" id="literatureTab" role="tabpanel">
+<aside class="archive literature-panel">
+<div class="archive-screen active" id="literatureListScreen">
+<div class="archive-header collection-list-header">
+<div class="collection-heading-stack">
+<h2>Literature</h2>
+<div aria-label="Literature view controls" class="collection-utility-actions">
+<button aria-controls="literatureFilterPanel" aria-expanded="false" class="collection-utility-button app-button" data-app-button="true" id="literatureFilterBtn" type="button">Filter</button>
+<button aria-controls="literatureSortPanel" aria-expanded="false" class="collection-utility-button app-button" data-app-button="true" id="literatureSortBtn" type="button">Sort</button>
+<div class="collection-density-control" data-density-control="literature">
+<label for="literatureDensitySlider">Density</label>
+<input aria-valuetext="Comfortable" id="literatureDensitySlider" max="3" min="1" step="1" type="range" value="2"/>
+<output aria-live="polite" for="literatureDensitySlider" id="literatureDensityValue">Comfortable</output>
+</div>
+</div>
+</div>
+<div class="archive-header-actions collection-primary-actions">
+<button class="small-archive-button app-button" data-app-button="true" id="uploadLiteratureBtn" type="button">Add Files</button>
+<button class="small-archive-button app-button" data-app-button="true" id="createLiteratureBtn" type="button">New Document</button>
+</div>
+</div>
+<div class="archive-filter-panel collection-filter-panel" id="literatureFilterPanel" hidden data-escape-dismiss="closeLiteratureFiltersBtn">
+<div class="archive-filter-grid">
+<label>
+<span>Item</span>
+<select id="literatureFilterType">
+<option value="all">All items</option>
+<option value="groups">Groups</option>
+</select>
+</label>
+<label>
+<span>Group</span>
+<select id="literatureFilterGroup">
+<option value="all">All items</option>
+<option value="grouped">Grouped documents</option>
+<option value="ungrouped">Ungrouped documents</option>
+</select>
+</label>
+<fieldset class="archive-filter-status">
+<legend>Status</legend>
+<label><input id="literatureFilterTags" type="checkbox"/> Has tags</label>
+<label><input id="literatureFilterContent" type="checkbox"/> Has content</label>
+</fieldset>
+</div>
+<div class="archive-filter-footer">
+<span aria-live="polite" id="literatureFilterResultCount"></span>
+<div class="archive-filter-actions">
+<button class="small-archive-button app-button" data-app-button="true" id="resetLiteratureFiltersBtn" type="button">Reset</button>
+<button class="small-archive-button app-button" data-app-button="true" id="closeLiteratureFiltersBtn" type="button">Done</button>
+</div>
+</div>
+</div>
+<div class="archive-sort-panel collection-sort-panel" id="literatureSortPanel" hidden data-escape-dismiss="closeLiteratureSortBtn">
+<label class="archive-sort-field" for="literatureSortOrder">
+<span>Order</span>
+<select id="literatureSortOrder">
+<option value="literature">Custom Order</option>
+<option value="title-asc">Title A–Z</option>
+<option value="title-desc">Title Z–A</option>
+<option value="updated-newest">Recently edited</option>
+<option value="updated-oldest">Least recently edited</option>
+<option value="created-newest">Newest created</option>
+<option value="created-oldest">Oldest created</option>
+</select>
+</label>
+<div class="archive-sort-actions">
+<button class="small-archive-button app-button" data-app-button="true" id="resetLiteratureSortBtn" type="button">Reset</button>
+<button class="small-archive-button app-button" data-app-button="true" id="closeLiteratureSortBtn" type="button">Done</button>
+</div>
+</div>
+<label class="sr-only" for="literatureFileInput">Add Literature Files</label>
+<input accept=".txt,.doc,.docx,text/plain,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" hidden="" id="literatureFileInput" multiple="" type="file"/>
+<div class="archive-count" id="literatureCount">0 docs saved</div>
+<div id="literatureList"></div>
+<nav aria-label="Literature pages" class="collection-pagination" id="literaturePagination" hidden></nav>
+<p class="local-folder-section-status" id="literatureStorageFootnote">Local folder not connected</p>
+</div>
+<div class="archive-screen" id="literatureEditorScreen">
+<div class="archive-header">
+<h2 id="literatureEditorHeading">New Document</h2>
+<div class="archive-header-actions">
+<span class="literature-save-status" data-state="idle" id="literatureSaveStatus" role="status" aria-live="polite">Not saved yet</span>
+<button class="small-archive-button app-button" data-app-button="true" id="saveLiteratureBtn" type="button">Save Document</button>
+<button class="small-archive-button app-button" data-app-button="true" id="cancelLiteratureEditorBtn" type="button">Back to Literature</button>
+</div>
+</div>
+<div class="manual-error" id="literatureError"></div>
+<label class="literature-title-label">
+        Title
+        <input id="literatureTitleInput" maxlength="500" placeholder="Document title" type="text"/>
+</label>
+<div class="literature-toolbar">
+<span class="literature-toolbar-label">Text</span>
+<label class="sr-only" for="literatureTextSize">Text Size</label>
+<select id="literatureTextSize">
+<option value="3">Normal</option>
+<option value="2">Small</option>
+<option value="4">Large</option>
+<option value="5">Huge</option>
+</select>
+<button class="small-archive-button app-button" data-app-button="true" id="literatureBoldBtn" type="button">Bold</button>
+<button class="small-archive-button app-button" data-app-button="true" id="literatureItalicBtn" type="button">Italic</button>
+</div>
+<div aria-label="Literature content editor" aria-multiline="true" class="literature-editor" contenteditable="true" id="literatureEditor" role="textbox" spellcheck="true"></div>
+</div>
+</aside>
+</section>
+<section aria-labelledby="visionTabBtn" class="tab-pane" hidden="" id="visionTab" role="tabpanel">
+<aside class="archive vision-board-panel">
+<div class="archive-header collection-list-header">
+<div class="collection-heading-stack">
+<h2>Vision Board</h2>
+<div aria-label="Vision Board view controls" class="collection-utility-actions">
+<button aria-controls="visionFilterPanel" aria-expanded="false" class="collection-utility-button app-button" data-app-button="true" id="visionFilterBtn" type="button">Filter</button>
+<button aria-controls="visionSortPanel" aria-expanded="false" class="collection-utility-button app-button" data-app-button="true" id="visionSortBtn" type="button">Sort</button>
+<div class="collection-density-control" data-density-control="vision">
+<label for="visionDensitySlider">Density</label>
+<input aria-valuetext="Comfortable" id="visionDensitySlider" max="3" min="1" step="1" type="range" value="2"/>
+<output aria-live="polite" for="visionDensitySlider" id="visionDensityValue">Comfortable</output>
+</div>
+</div>
+</div>
+<div class="archive-header-actions collection-primary-actions">
+<button class="small-archive-button app-button" data-app-button="true" id="uploadVisionBtn" type="button">Add Images</button>
+</div>
+</div>
+<div class="archive-filter-panel collection-filter-panel" id="visionFilterPanel" hidden data-escape-dismiss="closeVisionFiltersBtn">
+<div class="archive-filter-grid">
+<label>
+<span>Tags</span>
+<select id="visionFilterTags">
+<option value="all">All images</option>
+<option value="tagged">Tagged</option>
+<option value="untagged">Untagged</option>
+<option value="universe">Universe-tagged</option>
+<option value="creation">Creation-tagged</option>
+</select>
+</label>
+<label>
+<span>Storage</span>
+<select id="visionFilterStorage">
+<option value="all">All storage</option>
+<option value="app">Saved in app</option>
+<option value="folder">Local folder</option>
+</select>
+</label>
+<label>
+<span>Format</span>
+<select id="visionFilterFormat">
+<option value="all">All formats</option>
+<option value="png">PNG</option>
+<option value="jpeg">JPEG</option>
+</select>
+</label>
+</div>
+<div class="archive-filter-footer">
+<span aria-live="polite" id="visionFilterResultCount"></span>
+<div class="archive-filter-actions">
+<button class="small-archive-button app-button" data-app-button="true" id="resetVisionFiltersBtn" type="button">Reset</button>
+<button class="small-archive-button app-button" data-app-button="true" id="closeVisionFiltersBtn" type="button">Done</button>
+</div>
+</div>
+</div>
+<div class="archive-sort-panel collection-sort-panel" id="visionSortPanel" hidden data-escape-dismiss="closeVisionSortBtn">
+<label class="archive-sort-field" for="visionSortOrder">
+<span>Order</span>
+<select id="visionSortOrder">
+<option value="board">Custom Order</option>
+<option value="title-asc">Title A–Z</option>
+<option value="title-desc">Title Z–A</option>
+<option value="newest">Newest first</option>
+<option value="oldest">Oldest first</option>
+<option value="filename">Filename A–Z</option>
+</select>
+</label>
+<div class="archive-sort-actions">
+<button class="small-archive-button app-button" data-app-button="true" id="resetVisionSortBtn" type="button">Reset</button>
+<button class="small-archive-button app-button" data-app-button="true" id="closeVisionSortBtn" type="button">Done</button>
+</div>
+</div>
+<label class="sr-only" for="visionFileInput">Add Vision Board Images</label>
+<input accept=".jpg,.jpeg,.png,image/jpeg,image/png" hidden="" id="visionFileInput" multiple="" type="file"/>
+<div class="archive-count" id="visionBoardCount">0 images pinned</div>
+<div class="manual-error" id="visionBoardMessage"></div>
+<div class="vision-board-grid" id="visionBoardGrid"></div>
+<nav aria-label="Vision Board pages" class="collection-pagination" id="visionPagination" hidden></nav>
+<p class="local-folder-section-status" id="visionStorageFootnote">Local folder not connected</p>
+</aside>
+</section>
+</div>
+<div class="settings-dock" id="settingsDock">
+<button aria-controls="settingsPanel" aria-expanded="false" aria-haspopup="dialog" aria-label="Open settings menu" class="settings-gear app-button" data-app-button="true" id="settingsGearBtn" type="button">⚙</button>
+<div aria-labelledby="settingsGearBtn" aria-label="Settings" class="settings-panel" hidden="" id="settingsPanel" role="dialog" data-escape-dismiss="@settings">
+<section aria-labelledby="settingsHelpHeading" class="settings-section settings-section--help" data-settings-section>
+<h2 class="settings-section-title" id="settingsHelpHeading"><button aria-controls="settingsHelpBody" aria-expanded="false" class="settings-section-toggle" id="settingsHelpToggle" type="button"><span>Help &amp; About</span><span aria-hidden="true" class="settings-section-chevron"></span></button></h2>
+<div class="settings-section-body" hidden id="settingsHelpBody">
+<p class="settings-section-note">Learn how Wormholes works and get support details.</p>
+<button class="settings-menu-button app-button" data-app-button="true" id="quickStartMenuBtn" type="button">Quick Start</button>
+<button class="settings-menu-button app-button settings-tooltip-button" data-app-button="true" data-tooltip="See where your data is kept and how to protect it." id="privacyLocalDataBtn" type="button">Data Safety</button>
+<button class="settings-menu-button app-button" data-app-button="true" id="buildDiagnosticsBtn" type="button">About Wormholes</button>
+<button class="settings-menu-button app-button" data-app-button="true" id="supportReportBtn" type="button">Support Report</button>
+</div>
+</section>
+<section aria-labelledby="settingsStorageHeading" class="settings-section settings-section--storage" data-settings-section>
+<h2 class="settings-section-title" id="settingsStorageHeading"><button aria-controls="settingsStorageBody" aria-expanded="false" class="settings-section-toggle" id="settingsStorageToggle" type="button"><span>Storage</span><span aria-hidden="true" class="settings-section-chevron"></span></button></h2>
+<div class="settings-section-body" hidden id="settingsStorageBody">
+<p class="settings-section-note">See where Wormholes saves your files.</p>
+<div class="settings-local-block" role="group" aria-label="Local folder storage">
+<label class="local-folder-toggle settings-local-folder-toggle">
+<input id="settingsLocalFolderToggle" type="checkbox"/>
+<span>Use local folder</span>
+</label>
+<div class="settings-storage-summary">
+<p class="local-storage-footnote settings-storage-footnote" id="settingsStorageFootnote">Total: calculating…</p>
+<button aria-haspopup="dialog" aria-controls="storageUsageDashboardModal" class="settings-storage-more-button app-button" data-app-button="true" id="storageUsageDetailsBtn" type="button">View Storage Details</button>
+</div>
+</div>
+<button class="settings-menu-button app-button settings-tooltip-button" data-app-button="true" data-tooltip="Choose where Wormholes saves local files." id="changeTargetStorageBtn" type="button">Choose Storage Folder</button>
+</div>
+</section>
+<section aria-labelledby="settingsBackupHeading" class="settings-section settings-section--backup" data-settings-section>
+<h2 class="settings-section-title" id="settingsBackupHeading"><button aria-controls="settingsBackupBody" aria-expanded="false" class="settings-section-toggle" id="settingsBackupToggle" type="button"><span>Backup &amp; Recovery</span><span aria-hidden="true" class="settings-section-chevron"></span></button></h2>
+<div class="settings-section-body" hidden id="settingsBackupBody">
+<p class="settings-section-note">Save a backup or restore your work.</p>
+<p aria-live="polite" class="settings-backup-status" data-state="none" id="settingsBackupStatus">Backup: none</p>
+<button class="settings-menu-button app-button settings-tooltip-button" data-app-button="true" data-tooltip="Download a backup file with your Wormholes app data." id="exportAppDataBtn" type="button">Download Backup</button>
+<button class="settings-menu-button app-button settings-tooltip-button" data-app-button="true" data-tooltip="Replace this browser's Wormholes data with a backup file up to 256 MB." id="importAppDataBtn" type="button">Restore from Backup</button>
+<button class="settings-menu-button app-button settings-tooltip-button" data-app-button="true" data-tooltip="View recent restore points saved in this browser." id="recoverySnapshotsBtn" type="button">Restore Points</button>
+<button class="settings-menu-button app-button settings-tooltip-button" data-app-button="true" data-tooltip="Copy your current Wormholes folder into another folder." id="createBackupBtn" type="button">Back Up Folder</button>
+<button class="settings-menu-button app-button settings-tooltip-button" data-app-button="true" data-tooltip="Choose a Wormholes backup folder and use it as your storage folder." id="restoreBackupBtn" type="button">Choose Backup Folder</button>
+</div>
+</section>
+<section aria-labelledby="settingsAdvancedHeading" class="settings-section settings-section--advanced" data-settings-section>
+<h2 class="settings-section-title" id="settingsAdvancedHeading"><button aria-controls="settingsAdvancedBody" aria-expanded="false" class="settings-section-toggle" id="settingsAdvancedToggle" type="button"><span>Advanced</span><span aria-hidden="true" class="settings-section-chevron"></span></button></h2>
+<div class="settings-section-body" hidden id="settingsAdvancedBody">
+<p class="settings-section-note">View technical activity and troubleshooting details.</p>
+<button class="settings-menu-button app-button" data-app-button="true" id="activityLogBtn" type="button">Recent Activity</button>
+</div>
+</section>
+<section aria-labelledby="settingsDangerHeading" class="settings-section settings-section--danger" data-settings-section>
+<h2 class="settings-section-title" id="settingsDangerHeading"><button aria-controls="settingsDangerBody" aria-expanded="false" class="settings-section-toggle" id="settingsDangerToggle" type="button"><span>Danger Zone</span><span aria-hidden="true" class="settings-section-chevron"></span></button></h2>
+<div class="settings-section-body" hidden id="settingsDangerBody">
+<p class="settings-section-note">This action can remove your work.</p>
+<button class="settings-menu-button settings-danger-button app-button settings-tooltip-button" data-app-button="true" data-tooltip="Delete Wormholes data from this browser and connected folder when possible." id="clearAppDataBtn" type="button">Delete All Wormholes Data</button>
+</div>
+</section>
+</div>
+<p aria-atomic="true" aria-live="polite" class="settings-status" hidden="" id="settingsStatus" role="status"></p>
+</div>
+<div class="search-dock" id="searchDock">
+<button aria-controls="globalSearchModal" aria-haspopup="dialog" aria-label="Search Wormholes" class="global-search-button app-button" data-app-button="true" id="globalSearchBtn" title="Search Wormholes (Ctrl+K)" type="button">
+<svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.25"></circle><path d="m15.25 15.25 4.5 4.5"></path></svg>
+</button>
+</div>
+<div aria-describedby="globalSearchStatus" aria-labelledby="globalSearchTitle" aria-modal="true" class="modal-backdrop global-search-backdrop" id="globalSearchModal" role="dialog" data-escape-dismiss="closeGlobalSearchBtn" data-dialog-kind="search" data-backdrop-dismiss="same" data-dialog-initial-focus="globalSearchInput">
+<div class="modal global-search-modal">
+<div class="global-search-heading">
+<h2 id="globalSearchTitle">Search Wormholes</h2>
+<button aria-label="Close search" class="global-search-close app-button" data-app-button="true" id="closeGlobalSearchBtn" type="button">×</button>
+</div>
+<div class="global-search-controls">
+<label class="sr-only" for="globalSearchInput">Search titles, writing, tags, and notes</label>
+<input autocomplete="off" id="globalSearchInput" maxlength="500" placeholder="Search titles, writing, tags…" type="search"/>
+<label class="sr-only" for="globalSearchScope">Search scope</label>
+<select id="globalSearchScope">
+<option value="all">All universes</option>
+<option value="current">Current universe</option>
+</select>
+</div>
+<p aria-live="polite" class="global-search-status" id="globalSearchStatus">Search across your universes.</p>
+<div class="global-search-results" id="globalSearchResults"></div>
+</div>
+</div>
+<label class="sr-only" for="appDataImportInput">Import app data JSON file</label>
+<input accept="application/json,.json" hidden="" id="appDataImportInput" type="file"/>
+<div aria-describedby="appDataImportConfirmIntro appDataImportConfirmDetail" aria-labelledby="appDataImportConfirmTitle" aria-modal="true" class="modal-backdrop app-data-backup-modal-backdrop" id="appDataImportConfirmModal" role="dialog" data-escape-dismiss="cancelAppDataImportBtn" data-dialog-kind="confirmation" data-backdrop-dismiss="same" data-dialog-initial-focus="cancelAppDataImportBtn">
+<div class="modal app-data-import-confirm-modal">
+<h2 id="appDataImportConfirmTitle">Replace all current data?</h2>
+<p id="appDataImportConfirmIntro">This backup replaces all app data stored in this browser.</p>
+<p class="app-data-import-source" hidden="" id="appDataImportSourceName"></p>
+<div aria-label="Current data compared with selected backup" class="app-data-import-comparison" id="appDataImportComparison" role="group"></div>
+<p class="app-data-import-summary" id="appDataImportConfirmDetail">A restore point will be saved first. The data will not be merged.</p>
+<p class="app-data-import-warning" hidden="" id="appDataImportConfirmWarning"></p>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="cancelAppDataImportBtn" type="button">Keep Current Data</button>
+<button class="app-button danger-action" data-app-button="true" id="confirmAppDataImportBtn" type="button">Replace All Data</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="fileSizeLimitTitle" aria-modal="true" class="modal-backdrop app-data-backup-modal-backdrop" id="fileSizeLimitModal" role="dialog" data-escape-dismiss="closeFileSizeLimitBtn" data-dialog-kind="information" data-backdrop-dismiss="same" data-dialog-initial-focus="closeFileSizeLimitBtn">
+<div class="modal file-size-limit-modal">
+<h2 id="fileSizeLimitTitle">File is too large</h2>
+<p id="fileSizeLimitText">The selected file exceeds Wormholes’ import limit.</p>
+<p class="app-data-import-summary" id="fileSizeLimitDetail">Nothing was imported.</p>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="closeFileSizeLimitBtn" type="button">Close</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="entityLimitTitle" aria-modal="true" class="modal-backdrop app-data-backup-modal-backdrop" id="entityLimitModal" role="dialog" data-escape-dismiss="closeEntityLimitBtn" data-dialog-kind="information" data-backdrop-dismiss="same" data-dialog-initial-focus="closeEntityLimitBtn">
+<div class="modal entity-limit-modal">
+<h2 id="entityLimitTitle">Item limit reached</h2>
+<p id="entityLimitText">This action would exceed a supported Wormholes entity limit.</p>
+<p class="app-data-import-summary" id="entityLimitDetail">Nothing was added and existing work was preserved.</p>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="closeEntityLimitBtn" type="button">Close</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="duplicateIdTitle" aria-modal="true" class="modal-backdrop app-data-backup-modal-backdrop" id="duplicateIdModal" role="dialog" data-escape-dismiss="closeDuplicateIdBtn" data-dialog-kind="information" data-backdrop-dismiss="same" data-dialog-initial-focus="closeDuplicateIdBtn">
+<div class="modal duplicate-id-modal">
+<h2 id="duplicateIdTitle">Duplicate items found</h2>
+<p id="duplicateIdText">This backup contains repeated internal IDs.</p>
+<p class="app-data-import-summary" id="duplicateIdDetail">Nothing was imported and existing work was preserved.</p>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="closeDuplicateIdBtn" type="button">Close</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="referenceIntegrityTitle" aria-modal="true" class="modal-backdrop app-data-backup-modal-backdrop" id="referenceIntegrityModal" role="dialog" data-escape-dismiss="closeReferenceIntegrityBtn" data-dialog-kind="information" data-backdrop-dismiss="same" data-dialog-initial-focus="closeReferenceIntegrityBtn">
+<div class="modal reference-integrity-modal">
+<h2 id="referenceIntegrityTitle">Some linked items are missing</h2>
+<p id="referenceIntegrityText">This backup contains links that do not match the included items.</p>
+<p class="app-data-import-summary" id="referenceIntegrityDetail">Nothing was imported and existing work was preserved.</p>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="closeReferenceIntegrityBtn" type="button">Close</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="mediaLimitTitle" aria-modal="true" class="modal-backdrop app-data-backup-modal-backdrop" id="mediaLimitModal" role="dialog" data-escape-dismiss="closeMediaLimitBtn" data-dialog-kind="information" data-backdrop-dismiss="same" data-dialog-initial-focus="closeMediaLimitBtn">
+<div class="modal media-limit-modal">
+<h2 id="mediaLimitTitle">Embedded media is too large</h2>
+<p id="mediaLimitText">This portable media item exceeds a supported Wormholes limit.</p>
+<p class="app-data-import-summary" id="mediaLimitDetail">Nothing was imported and existing work was preserved.</p>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="closeMediaLimitBtn" type="button">Close</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="contentLimitTitle" aria-modal="true" class="modal-backdrop app-data-backup-modal-backdrop" id="contentLimitModal" role="dialog" data-escape-dismiss="closeContentLimitBtn" data-dialog-kind="information" data-backdrop-dismiss="same" data-dialog-initial-focus="closeContentLimitBtn">
+<div class="modal content-limit-modal">
+<h2 id="contentLimitTitle">Text is too long</h2>
+<p id="contentLimitText">This value exceeds a supported Wormholes content limit.</p>
+<p class="app-data-import-summary" id="contentLimitDetail">Nothing was saved and existing work was preserved.</p>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="closeContentLimitBtn" type="button">Close</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="urlSafetyTitle" aria-modal="true" class="modal-backdrop app-data-backup-modal-backdrop" id="urlSafetyModal" role="dialog" data-escape-dismiss="closeUrlSafetyBtn" data-dialog-kind="information" data-backdrop-dismiss="same" data-dialog-initial-focus="closeUrlSafetyBtn">
+<div class="modal url-safety-modal">
+<h2 id="urlSafetyTitle">This link cannot be used</h2>
+<p id="urlSafetyText">Use a standard http:// or https:// address.</p>
+<p class="app-data-import-summary" id="urlSafetyDetail">The link was not opened.</p>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="closeUrlSafetyBtn" type="button">Close</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="storageCapacityPreflightTitle" aria-modal="true" class="modal-backdrop app-data-backup-modal-backdrop" id="storageCapacityPreflightModal" role="dialog" data-escape-dismiss="cancelStorageCapacityBtn" data-dialog-kind="confirmation" data-backdrop-dismiss="same" data-dialog-initial-focus="cancelStorageCapacityBtn">
+<div class="modal storage-capacity-preflight-modal">
+<h2 id="storageCapacityPreflightTitle">Browser storage is running low</h2>
+<p id="storageCapacityPreflightText">Wormholes is checking whether this operation has enough browser storage.</p>
+<p class="app-data-import-summary" id="storageCapacityPreflightDetail">Nothing has been changed.</p>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="cancelStorageCapacityBtn" type="button">Cancel</button>
+<button class="app-button" data-app-button="true" id="continueStorageCapacityBtn" type="button">Continue</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="recoverySnapshotsTitle" aria-modal="true" class="modal-backdrop app-data-backup-modal-backdrop" id="recoverySnapshotsModal" role="dialog" data-escape-dismiss="closeRecoverySnapshotsBtn" data-dialog-kind="information" data-backdrop-dismiss="same" data-dialog-initial-focus="recoveryLocalDataHelpBtn">
+<div class="modal recovery-snapshots-modal">
+<h2 id="recoverySnapshotsTitle">Restore Points</h2>
+<p>Wormholes keeps up to five recent restore points. Automatic snapshots are spaced out to avoid excessive storage use, and emergency snapshots are preserved before risky data operations.</p>
+<div class="recovery-snapshots-list" id="recoverySnapshotsList"></div>
+<p class="app-data-import-summary local-data-context-note">Restore points are stored in this browser. Clearing all browser site data can still remove them. <button class="modal-text-button" data-app-button="true" id="recoveryLocalDataHelpBtn" type="button">Learn about local data</button></p>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="closeRecoverySnapshotsBtn" type="button">Done</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="localDataHelpTitle" aria-modal="true" class="modal-backdrop app-data-backup-modal-backdrop local-data-help-backdrop" id="localDataHelpModal" role="dialog" data-escape-dismiss="closeLocalDataHelpBtn" data-dialog-kind="information" data-backdrop-dismiss="same" data-dialog-initial-focus="closeLocalDataHelpBtn">
+<div class="modal local-data-help-modal">
+<h2 id="localDataHelpTitle">Data Safety</h2>
+<p class="local-data-help-intro">Wormholes keeps your projects on this device. It does not sync them to an account or send them to a Wormholes server.</p>
+<p class="app-data-import-summary local-data-privacy-note"><strong>Important:</strong> Wormholes does not encrypt your browser data, folder files, or backups. Someone with access to them may be able to read or change them.</p>
+<div class="local-data-help-grid">
+<section class="local-data-help-card" aria-labelledby="localDataProtectionTitle">
+<h3 id="localDataProtectionTitle">What Wormholes protects</h3>
+<p>Imports are checked before use. Saved writing is treated as content, not executable code. Supported builds block unexpected scripts and network access.</p>
+</section>
+<section class="local-data-help-card" aria-labelledby="localDataDeviceTitle">
+<h3 id="localDataDeviceTitle">What Wormholes relies on</h3>
+<p>Your browser, device, browser profile, extensions, and file permissions must be trustworthy. Wormholes cannot protect data after someone gains control of them.</p>
+</section>
+<section class="local-data-help-card" aria-labelledby="localDataRecoveryTitle">
+<h3 id="localDataRecoveryTitle">Restore point limits</h3>
+<p>Restore points help with recent mistakes, but they live in the browser. Clearing site data, private browsing, browser storage cleanup, or losing the device can remove them.</p>
+</section>
+<section class="local-data-help-card" aria-labelledby="localDataBackupTitle">
+<h3 id="localDataBackupTitle">Backups and folders</h3>
+<p>App Data exports and backup folders are separate protection only when saved outside the browser profile. Folder access follows your device permissions, and files can be changed outside Wormholes.</p>
+</section>
+<section class="local-data-help-card" aria-labelledby="localDataLinksTitle">
+<h3 id="localDataLinksTitle">Links and online services</h3>
+<p>External links open outside Wormholes. This build has no AI service or online sync.</p>
+</section>
+</div>
+<p class="app-data-import-summary local-data-help-summary"><strong>Recommended:</strong> keep regular App Data exports in a location you control.</p>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="closeLocalDataHelpBtn" type="button">Close</button>
+</div>
+</div>
+</div>
+<div aria-describedby="storageUsageDashboardStatus storageUsageFolderNote" aria-labelledby="storageUsageDashboardTitle" aria-modal="true" aria-busy="false" class="modal-backdrop app-data-backup-modal-backdrop storage-usage-dashboard-backdrop" id="storageUsageDashboardModal" role="dialog" data-escape-dismiss="closeStorageUsageDashboardBtn" data-dialog-kind="information" data-backdrop-dismiss="same" data-dialog-initial-focus="closeStorageUsageDashboardBtn">
+<div class="modal storage-usage-dashboard-modal">
+<h2 id="storageUsageDashboardTitle">Storage Usage</h2>
+<p class="storage-usage-intro">See where Wormholes content is stored and which areas are using the most space.</p>
+<p aria-live="polite" class="storage-usage-status" id="storageUsageDashboardStatus">Open the dashboard to calculate current usage.</p>
+<div class="storage-usage-summary-grid" aria-label="Storage totals">
+<section class="storage-usage-summary-card">
+<span>Content total</span>
+<strong id="storageUsageContentTotal">Calculating…</strong>
+</section>
+<section class="storage-usage-summary-card">
+<span>Browser content</span>
+<strong id="storageUsageBrowserTotal">Calculating…</strong>
+</section>
+<section class="storage-usage-summary-card">
+<span>Local folder</span>
+<strong id="storageUsageFolderTotal">Calculating…</strong>
+</section>
+</div>
+<section class="storage-usage-section" aria-labelledby="storageUsageBreakdownTitle">
+<h3 id="storageUsageBreakdownTitle">Content breakdown</h3>
+<div class="storage-usage-table" role="table" aria-label="Storage use by content type" tabindex="0">
+<div class="storage-usage-row storage-usage-row--header" role="row">
+<span role="columnheader">Content</span><span role="columnheader">Browser</span><span role="columnheader">Folder</span><span role="columnheader">Total</span>
+</div>
+<div class="storage-usage-row" role="row">
+<span role="rowheader">Creations &amp; connections</span><span id="storageUsageCreationsBrowser" role="cell">—</span><span id="storageUsageCreationsFolder" role="cell">—</span><span id="storageUsageCreationsTotal" role="cell">—</span>
+</div>
+<div class="storage-usage-row" role="row">
+<span role="rowheader">Literature</span><span id="storageUsageLiteratureBrowser" role="cell">—</span><span id="storageUsageLiteratureFolder" role="cell">—</span><span id="storageUsageLiteratureTotal" role="cell">—</span>
+</div>
+<div class="storage-usage-row" role="row">
+<span role="rowheader">Images</span><span id="storageUsageImagesBrowser" role="cell">—</span><span id="storageUsageImagesFolder" role="cell">—</span><span id="storageUsageImagesTotal" role="cell">—</span>
+</div>
+<div class="storage-usage-row" role="row">
+<span role="rowheader">Universes, drafts &amp; settings</span><span id="storageUsageOtherBrowser" role="cell">—</span><span id="storageUsageOtherFolder" role="cell">—</span><span id="storageUsageOtherTotal" role="cell">—</span>
+</div>
+</div>
+<p class="storage-usage-note" id="storageUsageFolderNote">Local-folder usage will appear when the folder is connected and readable.</p>
+</section>
+<div class="storage-usage-detail-grid">
+<section class="storage-usage-section storage-usage-detail-card" aria-labelledby="storageUsageSnapshotsTitle">
+<h3 id="storageUsageSnapshotsTitle">Restore points</h3>
+<strong class="storage-usage-detail-value" id="storageUsageSnapshotsValue">Calculating…</strong>
+<p id="storageUsageSnapshotsNote">Restore points are stored separately in this browser.</p>
+</section>
+<section class="storage-usage-section storage-usage-detail-card" aria-labelledby="storageUsageCapacityTitle">
+<h3 id="storageUsageCapacityTitle">Browser capacity</h3>
+<strong class="storage-usage-capacity-status" id="storageUsageCapacityStatus">Calculating…</strong>
+<progress id="storageUsageCapacityProgress" max="100" value="0" aria-label="Browser site storage used"></progress>
+<p id="storageUsageCapacityNote">Wormholes uses the browser's site-storage estimate.</p>
+</section>
+</div>
+<section class="storage-usage-section storage-usage-guidance" aria-labelledby="storageUsageGuidanceTitle">
+<h3 id="storageUsageGuidanceTitle">Keeping storage manageable</h3>
+<p>Images and long Literature documents usually use the most space. Remove items you no longer need, keep a portable App Data export before major cleanup, and reconnect the local folder when its values cannot be measured. Restore points are automatically limited to five.</p>
+</section>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="closeStorageUsageDashboardBtn" type="button">Close</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="activityLogTitle" aria-modal="true" class="modal-backdrop activity-log-backdrop" id="activityLogModal" role="dialog" data-escape-dismiss="closeActivityLogBtn" data-dialog-kind="information" data-backdrop-dismiss="same" data-dialog-initial-focus="closeActivityLogBtn">
+<div class="modal activity-log-modal">
+<h2 id="activityLogTitle">Recent Activity</h2>
+<p class="activity-log-intro">Recent notices and meaningful actions on this device.</p>
+<p class="activity-log-empty" id="activityLogEmpty">No activity has been recorded yet.</p>
+<div class="activity-log-list" id="activityLogList" aria-live="polite"></div>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="closeActivityLogBtn" type="button">Close</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="activityDetailTitle" aria-modal="true" class="modal-backdrop activity-detail-backdrop" id="activityDetailModal" role="dialog" data-escape-dismiss="closeActivityDetailBtn" data-dialog-kind="information" data-backdrop-dismiss="same" data-dialog-initial-focus="closeActivityDetailBtn">
+<div class="modal activity-detail-modal">
+<h2 id="activityDetailTitle">More information</h2>
+<div class="activity-detail-body" id="activityDetailBody"></div>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="closeActivityDetailBtn" type="button">Close</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="clearAppDataConfirmTitle" aria-modal="true" class="modal-backdrop app-data-backup-modal-backdrop" id="clearAppDataConfirmModal" role="dialog" data-escape-dismiss="cancelClearAppDataBtn" data-dialog-kind="confirmation" data-backdrop-dismiss="same" data-dialog-initial-focus="cancelClearAppDataBtn">
+<div class="modal app-data-clear-confirm-modal">
+<h2 id="clearAppDataConfirmTitle">Clear all app data?</h2>
+<p id="clearAppDataConfirmText">This removes every universe, creation, document, image, and draft from this browser.</p>
+<p class="app-data-import-summary" id="clearAppDataConfirmDetail">A restore point is saved first. Connected Wormholes folder files are also cleared when possible.</p>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="cancelClearAppDataBtn" type="button">Keep Data</button>
+<button class="app-button danger-action" data-app-button="true" id="confirmClearAppDataBtn" type="button">Continue</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="appDataExportSummaryTitle" aria-modal="true" class="modal-backdrop app-data-backup-modal-backdrop" id="appDataExportSummaryModal" role="dialog" data-escape-dismiss="closeAppDataExportSummaryBtn" data-dialog-kind="information" data-backdrop-dismiss="same" data-dialog-initial-focus="closeAppDataExportSummaryBtn">
+<div class="modal app-data-export-summary-modal">
+<h2 id="appDataExportSummaryTitle">Export complete</h2>
+<p>Your Wormholes app-data JSON backup was created.</p>
+<p class="app-data-import-summary" id="appDataExportSummaryText">Backup created.</p>
+<p class="app-data-export-filename" id="appDataExportFileName">Downloaded JSON created.</p>
+<p class="local-data-export-note">Keep this file somewhere outside the browser profile so it remains available if browser site data is cleared.</p>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="closeAppDataExportSummaryBtn" type="button">Done</button>
+</div>
+</div>
+</div>
+</main>
+<div aria-atomic="true" aria-label="Notification" aria-live="polite" class="saved-toast" id="savedToast" role="region"></div>
+<div aria-hidden="true" class="vision-enlarge-backdrop" id="visionEnlargeBackdrop"></div>
+<div aria-labelledby="themePickerTitle" aria-modal="true" class="modal-backdrop theme-picker-backdrop" id="themePickerModal" role="dialog" data-escape-dismiss="closeThemePickerBtn" data-dialog-kind="picker" data-backdrop-dismiss="none" data-dialog-initial-focus="closeThemePickerBtn">
+<div class="modal theme-picker-modal">
+<h2 id="themePickerTitle">Choose Themes</h2>
+<p>Select the themes used by Generate and Create. Each selected theme has an equal chance of being chosen.</p>
+<div class="theme-picker-list" id="themePickerList"></div>
+<div class="theme-picker-custom-actions">
+<button class="app-button" data-app-button="true" id="addCustomThemeBtn" type="button">Add Custom Theme</button>
+<button class="app-button" data-app-button="true" id="manageCustomThemesBtn" type="button">Manage Custom Themes</button>
+</div>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="closeThemePickerBtn" type="button">Done</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="themeManagerTitleHeading" aria-modal="true" class="modal-backdrop theme-manager-backdrop" id="themeManagerModal" role="dialog" data-escape-dismiss="closeThemeManagerBtn" data-dialog-kind="editor" data-backdrop-dismiss="none" data-dialog-initial-focus="themeManagerTitle">
+<div class="modal theme-manager-modal">
+<div class="theme-manager-header">
+<div>
+<h2 id="themeManagerTitleHeading">Custom Themes</h2>
+<p>Create and manage cards used by Generate and Create.</p>
+</div>
+<button class="app-button" data-app-button="true" id="closeThemeManagerBtn" type="button">Close</button>
+</div>
+<div class="theme-manager-toolbar">
+<label>
+<span>Custom Theme</span>
+<select id="themeManagerDeckSelect"><option value="">Choose a custom theme...</option></select>
+</label>
+<button class="app-button" data-app-button="true" id="newCustomThemeBtn" type="button">New Theme</button>
+<button class="app-button" data-app-button="true" id="importThemeBtn" type="button">Import Theme</button>
+<input accept="application/json,.json" class="sr-only" id="themeImportInput" type="file"/>
+</div>
+<div class="theme-manager-details">
+<label>
+<span>Theme Name</span>
+<input id="themeManagerTitle" maxlength="80" placeholder="Enter theme name" type="text"/>
+</label>
+<label>
+<span>Description <small>(optional)</small></span>
+<textarea id="themeManagerDescription" maxlength="500" placeholder="Briefly describe this theme"></textarea>
+</label>
+</div>
+<div aria-live="polite" class="theme-manager-counts" id="themeManagerCounts"></div>
+<section class="theme-card-add-panel" aria-labelledby="addThemeCardHeading">
+<h3 id="addThemeCardHeading">Add Card</h3>
+<div class="theme-card-add-row">
+<label>
+<span>Type</span>
+<select id="newThemeCardType"><option value="what">What</option><option value="attribute">Attribute</option><option value="story">Story</option></select>
+</label>
+<label class="theme-card-text-label">
+<span>Card Text</span>
+<input id="newThemeCardText" maxlength="200" placeholder="Enter card text" type="text"/>
+</label>
+<button class="app-button" data-app-button="true" id="addThemeCardBtn" type="button">Add Card</button>
+</div>
+<details class="theme-bulk-entry">
+<summary>Paste several cards</summary>
+<div class="theme-bulk-grid">
+<label>
+<span>Type</span>
+<select id="themeBulkType"><option value="what">What</option><option value="attribute">Attribute</option><option value="story">Story</option></select>
+</label>
+<label class="theme-card-text-label">
+<span>One card per line</span>
+<textarea id="themeBulkCards" placeholder="Enter one card per line"></textarea>
+</label>
+<button class="app-button" data-app-button="true" id="addThemeBulkBtn" type="button">Add Lines</button>
+</div>
+</details>
+</section>
+<div class="theme-card-list-tools">
+<label>
+<span>Show</span>
+<select id="themeManagerFilter"><option value="all">All cards</option><option value="what">What</option><option value="attribute">Attributes</option><option value="story">Story</option></select>
+</label>
+<label class="theme-card-search-label">
+<span>Search Cards</span>
+<input id="themeManagerSearch" placeholder="Search cards" type="search"/>
+</label>
+</div>
+<div aria-label="Custom theme cards" class="theme-manager-card-list" id="themeManagerCardList"></div>
+<div aria-live="polite" class="theme-manager-status" id="themeManagerStatus"></div>
+<div class="modal-actions theme-manager-actions">
+<button class="app-button" data-app-button="true" disabled id="deleteThemeBtn" type="button">Delete Theme</button>
+<button class="app-button" data-app-button="true" disabled id="duplicateThemeBtn" type="button">Duplicate Theme</button>
+<button class="app-button" data-app-button="true" disabled id="exportThemeBtn" type="button">Export Theme</button>
+<button class="app-button" data-app-button="true" id="saveThemeBtn" type="button">Save Theme</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="themeDeleteConfirmTitle" aria-modal="true" class="modal-backdrop" id="themeDeleteConfirmModal" role="dialog" data-escape-dismiss="cancelThemeDeleteBtn" data-dialog-kind="confirmation" data-backdrop-dismiss="same" data-dialog-initial-focus="cancelThemeDeleteBtn">
+<div class="modal">
+<h2 id="themeDeleteConfirmTitle">Delete custom theme?</h2>
+<p id="themeDeleteConfirmText">Delete this custom theme? This cannot be undone.</p>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="cancelThemeDeleteBtn" type="button">Cancel</button>
+<button class="app-button" data-app-button="true" id="confirmThemeDeleteBtn" type="button">Delete Theme</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="universeModalTitle" aria-modal="true" class="modal-backdrop" id="universeTitleModal" role="dialog" data-escape-dismiss="cancelUniverseTitleBtn" data-dialog-kind="editor" data-backdrop-dismiss="none" data-dialog-initial-focus="universeTitleInput">
+<div class="modal">
+<h2 id="universeModalTitle">Create Universe</h2>
+<p>Name this new universe.</p>
+<div aria-atomic="true" aria-live="assertive" class="error" data-error-for="universeTitleInput" id="universeTitleError" role="alert">A unique universe title is required.</div>
+<label class="sr-only" for="universeTitleInput">Universe title</label>
+<input id="universeTitleInput" maxlength="500" placeholder="Example: The Shattered Lantern Realms" type="text"/>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="cancelUniverseTitleBtn" type="button">Cancel</button>
+<button class="app-button" data-app-button="true" id="saveUniverseTitleBtn" type="button">Create Universe</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="universeArchiveTitle" aria-modal="true" class="modal-backdrop" id="universeArchiveModal" role="dialog" data-escape-dismiss="closeUniverseArchiveBtn" data-dialog-kind="chooser" data-backdrop-dismiss="same" data-dialog-initial-focus="createUniverseFromArchiveBtn">
+<div class="modal universe-archive-modal">
+<h2 id="universeArchiveTitle">Enter Universe</h2>
+<p>Choose a saved universe to enter, or create a new one.</p>
+<div class="universe-archive-list" id="universeArchiveList"></div>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="createUniverseFromArchiveBtn" type="button">Create Universe</button>
+<button class="app-button" data-app-button="true" id="closeUniverseArchiveBtn" type="button">Close</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="migrateModalTitle" aria-modal="true" class="modal-backdrop" id="migrateModal" role="dialog" data-escape-dismiss="cancelMigrateBtn" data-dialog-kind="picker" data-backdrop-dismiss="none" data-dialog-initial-focus="migrateToNewUniverseBtn">
+<div class="modal universe-archive-modal">
+<h2 id="migrateModalTitle">Move Creation</h2>
+<p id="migrateModalSubtitle">Choose a universe to move this archived creation into.</p>
+<div class="modal-actions bridge-top-actions">
+<button class="app-button" data-app-button="true" id="migrateToNewUniverseBtn" type="button">Move to New Universe</button>
+</div>
+<div class="universe-archive-list" id="migrateUniverseList"></div>
+<div class="modal-actions">
+<button aria-disabled="true" class="app-button" data-app-button="true" id="saveMigrateBtn" type="button">Move Creation</button>
+<button class="app-button" data-app-button="true" id="cancelMigrateBtn" type="button">Cancel</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="migrateNewUniverseTitle" aria-modal="true" class="modal-backdrop" id="migrateNewUniverseModal" role="dialog" data-escape-dismiss="cancelMigrateNewUniverseBtn" data-dialog-kind="editor" data-backdrop-dismiss="none" data-dialog-initial-focus="migrateNewUniverseInput">
+<div class="modal">
+<h2 id="migrateNewUniverseTitle">Move to New Universe</h2>
+<p>Name the new universe. This will create it and move the selected creation there.</p>
+<div aria-atomic="true" aria-live="assertive" class="error" data-error-for="migrateNewUniverseInput" id="migrateNewUniverseError" role="alert">A unique universe title is required.</div>
+<label class="sr-only" for="migrateNewUniverseInput">New universe title for moving</label>
+<input id="migrateNewUniverseInput" maxlength="500" placeholder="Example: The Mirror Orchard" type="text"/>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="cancelMigrateNewUniverseBtn" type="button">Cancel</button>
+<button class="app-button" data-app-button="true" id="saveMigrateNewUniverseBtn" type="button">Create &amp; Move</button>
+</div>
+</div>
+</div>
+
+<div aria-labelledby="copyToUniverseTitle" aria-modal="true" class="modal-backdrop" id="copyToUniverseModal" role="dialog" data-escape-dismiss="cancelCopyToUniverseBtn" data-dialog-kind="picker" data-backdrop-dismiss="none" data-dialog-initial-focus="copyToNewUniverseBtn">
+<div class="modal universe-archive-modal">
+<h2 id="copyToUniverseTitle">Copy to Universe</h2>
+<p id="copyToUniverseSubtitle">Choose a universe for this copy.</p>
+<div class="modal-actions bridge-top-actions">
+<button class="app-button" data-app-button="true" id="copyToNewUniverseBtn" type="button">Copy to New Universe</button>
+</div>
+<div class="universe-archive-list" id="copyToUniverseList"></div>
+<div class="modal-actions">
+<button aria-disabled="true" class="app-button" data-app-button="true" id="saveCopyToUniverseBtn" type="button">Copy</button>
+<button class="app-button" data-app-button="true" id="cancelCopyToUniverseBtn" type="button">Cancel</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="copyNewUniverseTitle" aria-modal="true" class="modal-backdrop" id="copyNewUniverseModal" role="dialog" data-escape-dismiss="cancelCopyNewUniverseBtn" data-dialog-kind="editor" data-backdrop-dismiss="none" data-dialog-initial-focus="copyNewUniverseInput">
+<div class="modal">
+<h2 id="copyNewUniverseTitle">Copy to New Universe</h2>
+<p>Name the new universe. The original item will stay where it is.</p>
+<div aria-atomic="true" aria-live="assertive" class="error" data-error-for="copyNewUniverseInput" id="copyNewUniverseError" role="alert">A unique universe title is required.</div>
+<label class="sr-only" for="copyNewUniverseInput">New universe title for copying</label>
+<input id="copyNewUniverseInput" maxlength="500" placeholder="Example: The Mirror Orchard" type="text"/>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="cancelCopyNewUniverseBtn" type="button">Cancel</button>
+<button class="app-button" data-app-button="true" id="saveCopyNewUniverseBtn" type="button">Create &amp; Copy</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="universeSummaryTitle" aria-modal="true" class="modal-backdrop" id="universeSummaryModal" role="dialog" data-escape-dismiss="cancelUniverseSummaryBtn" data-dialog-kind="editor" data-backdrop-dismiss="none" data-dialog-initial-focus="universeSummaryInput">
+<div class="modal">
+<h2 id="universeSummaryTitle">Add Universe Summary</h2>
+<p id="universeSummarySubtitle">Write a short summary for this universe.</p>
+<div aria-atomic="true" aria-live="assertive" class="error" data-error-for="universeSummaryInput" id="universeSummaryError" role="alert">Summary text is required.</div>
+<label class="sr-only" for="universeSummaryInput">Universe summary</label>
+<textarea class="connection-textarea" id="universeSummaryInput" maxlength="250000" placeholder="Write a short universe summary..."></textarea>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="cancelUniverseSummaryBtn" type="button">Cancel</button>
+<button class="app-button" data-app-button="true" id="saveUniverseSummaryBtn" type="button">Save Summary</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="universeEditTitle" aria-modal="true" class="modal-backdrop" id="universeEditModal" role="dialog" data-escape-dismiss="cancelUniverseEditBtn" data-dialog-kind="editor" data-backdrop-dismiss="none" data-dialog-initial-focus="universeEditTitleInput">
+<div class="modal">
+<h2 id="universeEditTitle">Edit Universe</h2>
+<p>Edit this universe title and summary.</p>
+<div aria-atomic="true" aria-live="assertive" class="error" data-error-for="universeEditTitleInput" id="universeEditError" role="alert">A unique universe title is required.</div>
+<label>
+      Universe Title
+      <input id="universeEditTitleInput" maxlength="500" placeholder="Universe title" type="text"/>
+</label>
+<label>
+      Summary
+      <textarea class="connection-textarea" id="universeEditSummaryInput" maxlength="250000" placeholder="Optional universe summary..."></textarea>
+</label>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="cancelUniverseEditBtn" type="button">Cancel</button>
+<button class="app-button" data-app-button="true" id="saveUniverseEditBtn" type="button">Save Changes</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="deleteEntryConfirmTitle" aria-modal="true" class="modal-backdrop" id="deleteEntryConfirmModal" role="dialog" data-escape-dismiss="cancelDeleteEntryBtn" data-dialog-kind="confirmation" data-backdrop-dismiss="same" data-dialog-initial-focus="cancelDeleteEntryBtn">
+<div class="modal">
+<h2 id="deleteEntryConfirmTitle">Delete creation?</h2>
+<p id="deleteEntryConfirmText">This removes the creation and its links. You can restore it from the notification or Recent Activity for two minutes.</p>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="cancelDeleteEntryBtn" type="button">Keep Creation</button>
+<button class="app-button danger-action" data-app-button="true" id="confirmDeleteEntryBtn" type="button">Delete Creation</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="literatureDeleteConfirmTitle" aria-modal="true" class="modal-backdrop" id="literatureDeleteConfirmModal" role="dialog" data-escape-dismiss="cancelLiteratureDeleteBtn" data-dialog-kind="confirmation" data-backdrop-dismiss="same" data-dialog-initial-focus="cancelLiteratureDeleteBtn">
+<div class="modal literature-delete-confirm-modal">
+<h2 id="literatureDeleteConfirmTitle">Delete Literature?</h2>
+<p id="literatureDeleteConfirmText">This removes the document and its tags. You can restore it from the notification or Recent Activity for two minutes.</p>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="cancelLiteratureDeleteBtn" type="button">Keep Document</button>
+<button class="app-button danger-action" data-app-button="true" id="confirmLiteratureDeleteBtn" type="button">Delete Document</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="clearMapConfirmTitle" aria-modal="true" class="modal-backdrop" id="clearMapConfirmModal" role="dialog" data-escape-dismiss="cancelClearMapBtn" data-dialog-kind="confirmation" data-backdrop-dismiss="same" data-dialog-initial-focus="cancelClearMapBtn">
+<div class="modal">
+<h2 id="clearMapConfirmTitle">Remove all connections from this map?</h2>
+<p id="clearMapConfirmText">You can restore the removed links from the notification or Recent Activity for two minutes.</p>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="cancelClearMapBtn" type="button">Keep Links</button>
+<button class="app-button danger-action" data-app-button="true" id="confirmClearMapBtn" type="button">Remove Connections</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="deleteUniverseTitle" aria-modal="true" class="modal-backdrop" id="deleteUniverseModal" role="dialog" data-escape-dismiss="cancelDeleteUniverseBtn" data-dialog-kind="confirmation" data-backdrop-dismiss="same" data-dialog-initial-focus="cancelDeleteUniverseBtn">
+<div class="modal">
+<h2 id="deleteUniverseTitle">Delete universe?</h2>
+<p id="deleteUniverseText">This removes the universe and everything saved inside it.</p>
+<p id="deleteUniverseMigratePrompt">Move its creations first, or delete everything. You can restore the universe from the notification or Recent Activity for two minutes.</p>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="cancelDeleteUniverseBtn" type="button">Keep Universe</button>
+<button class="app-button" data-app-button="true" id="migrateBeforeDeleteUniverseBtn" type="button">Move Creations First</button>
+<button class="app-button danger-action" data-app-button="true" id="confirmDeleteUniverseBtn" type="button">Delete Universe</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="deleteUniverseMigrateTitle" aria-modal="true" class="modal-backdrop" id="deleteUniverseMigrateModal" role="dialog" data-escape-dismiss="cancelDeleteUniverseMigrateBtn" data-dialog-kind="picker" data-backdrop-dismiss="none" data-dialog-initial-focus="backToDeleteUniverseBtn">
+<div class="modal universe-archive-modal">
+<h2 id="deleteUniverseMigrateTitle">Move creations before deleting?</h2>
+<p id="deleteUniverseMigrateSubtitle">Choose a universe for the creations. The source universe will then be deleted.</p>
+<div class="universe-archive-list" id="deleteUniverseMigrateList"></div>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="backToDeleteUniverseBtn" type="button">Back</button>
+<button class="app-button" data-app-button="true" id="cancelDeleteUniverseMigrateBtn" type="button">Keep Universe</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="bridgeModalTitle" aria-modal="true" class="modal-backdrop" id="bridgeModal" role="dialog" data-escape-dismiss="cancelBridgeBtn" data-dialog-kind="picker" data-backdrop-dismiss="none" data-dialog-initial-focus="bridgeToNewUniverseBtn">
+<div class="modal universe-archive-modal">
+<h2 id="bridgeModalTitle">Create Bridge</h2>
+<p id="bridgeModalSubtitle">Choose a universe, group, or creation outside this universe.</p>
+<div class="modal-actions bridge-top-actions">
+<button class="app-button" data-app-button="true" id="bridgeToNewUniverseBtn" type="button">Create New Universe</button>
+</div>
+<div class="universe-archive-list" id="bridgeUniverseList"></div>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="saveBridgeBtn" type="button">Save and Close</button>
+<button class="app-button" data-app-button="true" id="cancelBridgeBtn" type="button">Cancel</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="bridgeNewUniverseTitle" aria-modal="true" class="modal-backdrop" id="bridgeNewUniverseModal" role="dialog" data-escape-dismiss="cancelBridgeNewUniverseBtn" data-dialog-kind="editor" data-backdrop-dismiss="none" data-dialog-initial-focus="bridgeNewUniverseInput">
+<div class="modal">
+<h2 id="bridgeNewUniverseTitle">Create Universe and Bridge</h2>
+<p>Name the new universe. Wormholes will create it and link this item to it.</p>
+<div aria-atomic="true" aria-live="assertive" class="error" data-error-for="bridgeNewUniverseInput" id="bridgeNewUniverseError" role="alert">A unique universe title is required.</div>
+<label class="sr-only" for="bridgeNewUniverseInput">New universe title for bridge</label>
+<input id="bridgeNewUniverseInput" maxlength="500" placeholder="Example: The Mirror Orchard" type="text"/>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="cancelBridgeNewUniverseBtn" type="button">Cancel</button>
+<button class="app-button" data-app-button="true" id="saveBridgeNewUniverseBtn" type="button">Create Universe and Bridge</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="wormholesTitle" aria-modal="true" class="modal-backdrop wormholes-backdrop" id="wormholesModal" role="dialog" data-escape-dismiss="closeWormholesBtn" data-dialog-kind="viewer" data-backdrop-dismiss="same" data-dialog-initial-focus="closeWormholesBtn">
+<div class="modal wormholes-modal">
+<div class="archive-header">
+<h2 id="wormholesTitle">Manage Bridges</h2>
+<div class="archive-header-actions">
+<button class="small-archive-button danger-action app-button" data-app-button="true" id="clearBridgesBtn" type="button" hidden>Clear Bridges</button>
+<button class="small-archive-button app-button" data-app-button="true" id="closeWormholesBtn" type="button">Close</button>
+</div>
+</div>
+<div class="relationship-guide" data-relationship-guide="bridges">
+<div class="relationship-guide-summary">
+<p><strong>Bridges</strong> link items across universes.</p>
+<button aria-controls="bridgesHelpPanel" aria-expanded="false" class="relationship-help-toggle app-button" data-app-button="true" id="bridgesHelpBtn" type="button">What’s this?</button>
+</div>
+<div class="relationship-help-panel" id="bridgesHelpPanel" hidden>
+<p>Select a universe, group, or creation. Then select an item in another universe to add or remove a bridge. Select a bridge line to add notes.</p>
+<p>To link items inside one universe, use a Connection.</p>
+<button class="relationship-help-dismiss app-button" data-app-button="true" id="dismissBridgesHelpBtn" type="button">Got it</button>
+</div>
+</div>
+<div aria-atomic="true" aria-live="polite" class="connections-map-status" id="wormholesMapStatus" role="status"></div>
+<div class="connections-map-wrap" id="wormholesMapWrap"></div>
+</div>
+</div>
+<div aria-labelledby="modalTitle" aria-modal="true" class="modal-backdrop" id="titleModal" role="dialog" data-escape-dismiss="cancelArchiveBtn" data-dialog-kind="editor" data-backdrop-dismiss="none" data-dialog-initial-focus="creationTitleInput">
+<div class="modal">
+<h2 id="modalTitle">Name Your Creation</h2>
+<p>Give this creation a name before saving it to the archive.</p>
+<div aria-atomic="true" aria-live="assertive" class="error" data-error-for="creationTitleInput" id="titleError" role="alert">A title is required.</div>
+<label class="sr-only" for="creationTitleInput">Creation title</label>
+<input autocomplete="off" id="creationTitleInput" maxlength="500" placeholder="Example: The Brass Hollows" type="text"/>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="cancelArchiveBtn" type="button">Cancel</button>
+<button class="app-button" data-app-button="true" id="saveArchiveBtn" type="button">Save to Archive</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="connectionModalTitle" aria-modal="true" class="modal-backdrop" id="connectionModal" role="dialog" data-escape-dismiss="cancelConnectionTextBtn" data-dialog-kind="editor" data-backdrop-dismiss="none" data-dialog-initial-focus="connectionTextInput">
+<div class="modal">
+<h2 id="connectionModalTitle">Connection Details</h2>
+<p id="connectionModalSubtitle">Describe how these items are connected.</p>
+<div aria-atomic="true" aria-live="assertive" class="error" data-error-for="connectionTextInput" id="connectionError" role="alert">Connection details are required.</div>
+<label class="sr-only" for="connectionTextInput" id="connectionTextLabel">Connection details</label>
+<textarea class="connection-textarea" id="connectionTextInput" maxlength="250000" placeholder="Example: The Brass Hollows was built around the sleeping engine."></textarea>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="deleteConnectionTextBtn" type="button" hidden>Delete Connection Details</button>
+<button class="app-button" data-app-button="true" id="cancelConnectionTextBtn" type="button">Cancel</button>
+<button class="app-button" data-app-button="true" id="saveConnectionTextBtn" type="button">Save Details</button>
+</div>
+</div>
+</div>
+<div aria-describedby="relationshipRemovalConfirmText" aria-labelledby="relationshipRemovalConfirmTitle" aria-modal="true" class="modal-backdrop" id="relationshipRemovalConfirmModal" role="dialog" data-escape-dismiss="cancelRelationshipRemovalBtn" data-dialog-kind="confirmation" data-backdrop-dismiss="same" data-dialog-initial-focus="cancelRelationshipRemovalBtn">
+<div class="modal relationship-removal-confirm-modal">
+<h2 id="relationshipRemovalConfirmTitle">Remove Connection?</h2>
+<p id="relationshipRemovalConfirmText">This removes the link. The items will not be deleted.</p>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="cancelRelationshipRemovalBtn" type="button">Keep Connection</button>
+<button class="app-button danger-action" data-app-button="true" id="confirmRelationshipRemovalBtn" type="button">Remove Connection</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="summaryModalTitle" aria-modal="true" class="modal-backdrop" id="summaryModal" role="dialog" data-escape-dismiss="cancelSummaryBtn" data-dialog-kind="editor" data-backdrop-dismiss="none" data-dialog-initial-focus="summaryTextInput">
+<div class="modal">
+<h2 id="summaryModalTitle">Add Summary</h2>
+<p id="summaryModalSubtitle">Add or edit a story or creation summary.</p>
+<div aria-atomic="true" aria-live="assertive" class="error" data-error-for="summaryTextInput" id="summaryError" role="alert">Summary text is required.</div>
+<label class="sr-only" for="summaryTextInput">Creation summary</label>
+<textarea class="connection-textarea" id="summaryTextInput" maxlength="250000" placeholder="Write a short story, description, lore note, or creation summary..."></textarea>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="deleteSummaryBtn" type="button" hidden>Delete Summary</button>
+<button class="app-button" data-app-button="true" id="cancelSummaryBtn" type="button">Cancel</button>
+<button class="app-button" data-app-button="true" id="saveSummaryBtn" type="button">Save Summary</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="noteModalTitle" aria-modal="true" class="modal-backdrop" id="noteModal" role="dialog" data-escape-dismiss="cancelNoteBtn" data-dialog-kind="editor" data-backdrop-dismiss="none" data-dialog-initial-focus="noteTextInput">
+<div class="modal">
+<h2 id="noteModalTitle">Add Note</h2>
+<p id="noteModalSubtitle">Add a note to this creation.</p>
+<div aria-atomic="true" aria-live="assertive" class="error" data-error-for="noteTextInput" id="noteError" role="alert">Note text is required.</div>
+<label class="sr-only" for="noteTextInput">Creation note</label>
+<textarea class="connection-textarea" id="noteTextInput" maxlength="250000" placeholder="Write a note, idea, reminder, question, design detail, or lore fragment..."></textarea>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="cancelNoteBtn" type="button">Cancel</button>
+<button class="app-button" data-app-button="true" id="saveNoteBtn" type="button">Save Note</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="groupModalTitle" aria-modal="true" class="modal-backdrop" id="groupModal" role="dialog" data-escape-dismiss="cancelGroupBtn" data-dialog-kind="editor" data-backdrop-dismiss="none" data-dialog-initial-focus="groupTitleInput">
+<div class="modal">
+<h2 id="groupModalTitle">Group Creations</h2>
+<p id="groupModalSubtitle">Choose creations to gather under one title.</p>
+<div aria-atomic="true" aria-live="assertive" class="error" data-error-for="groupTitleInput" id="groupError" role="alert">Enter a group title and choose at least two creations.</div>
+<label>
+      Group Title
+      <input id="groupTitleInput" maxlength="500" placeholder="Example: The Brass Hollows Collection" type="text"/>
+</label>
+<div class="group-choice-list" id="groupCreationList"></div>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="cancelGroupBtn" type="button">Cancel</button>
+<button class="app-button" data-app-button="true" id="saveGroupBtn" type="button">Create Group</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="groupConnectionTitle" aria-modal="true" class="modal-backdrop" id="groupConnectionModal" role="dialog" data-escape-dismiss="cancelGroupConnectionBtn" data-dialog-kind="picker" data-backdrop-dismiss="none" data-dialog-initial-focus="cancelGroupConnectionBtn">
+<div class="modal">
+<h2 id="groupConnectionTitle">Choose Something to Connect</h2>
+<p id="groupConnectionSubtitle">Choose the group or one creation inside it.</p>
+<div class="group-choice-list" id="groupConnectionList"></div>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="cancelGroupConnectionBtn" type="button">Cancel</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="connectPickerTitle" aria-modal="true" class="modal-backdrop" id="connectPickerModal" role="dialog" data-escape-dismiss="cancelConnectPickerBtn" data-dialog-kind="picker" data-backdrop-dismiss="none" data-dialog-initial-focus="saveConnectPickerBtn">
+<div class="modal universe-archive-modal">
+<h2 id="connectPickerTitle">Add Connections</h2>
+<p id="connectPickerSubtitle">Choose groups or creations in this universe.</p>
+<div class="universe-archive-list nested-picker-list" id="connectPickerList"></div>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="saveConnectPickerBtn" type="button">Save and Close</button>
+<button class="app-button" data-app-button="true" id="cancelConnectPickerBtn" type="button">Cancel</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="literatureViewerTitle" aria-modal="true" class="modal-backdrop" id="literatureViewerModal" role="dialog" data-escape-dismiss="closeLiteratureViewerBtn" data-dialog-kind="viewer" data-backdrop-dismiss="same" data-dialog-initial-focus="editFromLiteratureViewerBtn">
+<div class="modal literature-viewer-modal">
+<h2 id="literatureViewerTitle">Literature</h2>
+<p id="literatureViewerMeta">Preview converted text.</p>
+<div class="literature-viewer-content" id="literatureViewerContent"></div>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="editFromLiteratureViewerBtn" type="button">Edit</button>
+<button class="app-button" data-app-button="true" id="closeLiteratureViewerBtn" type="button">Close</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="literatureUploadTitle" aria-modal="true" class="modal-backdrop" id="literatureUploadModal" role="dialog" data-escape-dismiss="cancelLiteratureUploadBtn" data-dialog-kind="chooser" data-backdrop-dismiss="same" data-dialog-initial-focus="chooseLiteratureFilesBtn">
+<div class="modal literature-upload-modal">
+<h2 id="literatureUploadTitle">Add Literature Files</h2>
+<p class="literature-upload-note">TXT, DOC, and DOCX up to 50 MB each; up to 200 MB per selection. DOC/DOCX imports text only, so formatting and images may not copy. PDFs are not supported.</p>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="chooseLiteratureFilesBtn" type="button">Choose Files</button>
+<button class="app-button" data-app-button="true" id="cancelLiteratureUploadBtn" type="button">Cancel</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="visionUploadTitle" aria-modal="true" class="modal-backdrop" id="visionUploadModal" role="dialog" data-escape-dismiss="cancelVisionUploadBtn" data-dialog-kind="chooser" data-backdrop-dismiss="same" data-dialog-initial-focus="chooseVisionFilesBtn">
+<div class="modal vision-upload-modal">
+<h2 id="visionUploadTitle">Add to Vision Board</h2>
+<p class="literature-upload-note">Accepts JPEG and PNG up to 75 MB each; up to 300 MB per selection. PDFs are not supported.</p>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="chooseVisionFilesBtn" type="button">Choose Files</button>
+<button class="app-button" data-app-button="true" id="cancelVisionUploadBtn" type="button">Cancel</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="quickStartTitle" aria-modal="true" class="modal-backdrop" id="quickStartModal" role="dialog" data-escape-dismiss="closeQuickStartBtn" data-dialog-kind="information" data-backdrop-dismiss="same" data-dialog-initial-focus="closeQuickStartBtn">
+<div class="modal quick-start-modal">
+<h2 id="quickStartTitle">Quick Start</h2>
+<div aria-label="Basic Wormholes steps" class="quick-start-grid">
+<div class="quick-start-card"><div class="quick-start-visual">①</div><h3>Create</h3><p>Create or enter a universe.</p></div>
+<div class="quick-start-card"><div class="quick-start-visual">②</div><h3>Generate</h3><p>Roll ideas, then archive the ones you like.</p></div>
+<div class="quick-start-card"><div class="quick-start-visual">③</div><h3>Edit</h3><p>In Archive, open an entry menu and choose Edit.</p></div>
+<div class="quick-start-card"><div class="quick-start-visual">④</div><h3>Add Summary</h3><p>In an entry menu, choose Add Summary to save a short summary.</p></div>
+<div class="quick-start-card"><div class="quick-start-visual">⑤</div><h3>Add</h3><p>Add literature and images for that universe.</p></div>
+<div class="quick-start-card"><div class="quick-start-visual">⑥</div><h3>Link</h3><p>Link related items when you are ready.</p></div>
+<div class="quick-start-card"><div class="quick-start-visual">⑦</div><h3>Back Up</h3><p>Use the gear menu to back up or restore files.</p></div>
+</div>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="closeQuickStartBtn" type="button">Close</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="buildDiagnosticsTitle" aria-modal="true" class="modal-backdrop" id="buildDiagnosticsModal" role="dialog" data-escape-dismiss="closeBuildDiagnosticsBtn" data-dialog-kind="information" data-backdrop-dismiss="same" data-dialog-initial-focus="copyBuildDiagnosticsBtn">
+<div class="modal build-diagnostics-modal">
+<h2 id="buildDiagnosticsTitle">About Wormholes</h2>
+<p class="build-diagnostics-intro">These details identify this copy of Wormholes. Include them when reporting a problem.</p>
+<dl class="build-diagnostics-list">
+<div class="build-diagnostics-row"><dt>Version</dt><dd id="buildDiagnosticsVersion">Loading…</dd></div>
+<div class="build-diagnostics-row"><dt>Layout</dt><dd id="buildDiagnosticsLayout">Desktop only — fluid window</dd></div>
+<div class="build-diagnostics-row"><dt>Build ID</dt><dd id="buildDiagnosticsId">Loading…</dd></div>
+<div class="build-diagnostics-row"><dt>Source</dt><dd id="buildDiagnosticsCommit">Loading…</dd></div>
+<div class="build-diagnostics-row"><dt>Built</dt><dd id="buildDiagnosticsTimestamp">Loading…</dd></div>
+</dl>
+<p aria-live="polite" class="build-diagnostics-status" id="buildDiagnosticsCopyStatus" role="status"></p>
+<div class="modal-actions build-diagnostics-actions">
+<button class="app-button" data-app-button="true" id="copyBuildDiagnosticsBtn" type="button">Copy build details</button>
+<button class="app-button" data-app-button="true" id="closeBuildDiagnosticsBtn" type="button">Close</button>
+</div>
+</div>
+</div>
+<div aria-describedby="supportReportPrivacy" aria-labelledby="supportReportTitle" aria-modal="true" class="modal-backdrop" id="supportReportModal" role="dialog" data-escape-dismiss="closeSupportReportBtn" data-dialog-kind="information" data-backdrop-dismiss="same" data-dialog-initial-focus="closeSupportReportBtn">
+<div class="modal support-report-modal">
+<h2 id="supportReportTitle">Support Report</h2>
+<p id="supportReportPrivacy">This report contains technical details that can help solve a problem. It does not include your creations, Literature, images, imported files, folder names, paths, or links.</p>
+<p aria-live="polite" class="support-report-status" id="supportReportStatus" role="status">Preparing report…</p>
+<pre aria-label="Support report preview" class="support-report-preview" id="supportReportPreview" tabindex="0">Preparing report…</pre>
+<div class="modal-actions support-report-actions">
+<button class="app-button" data-app-button="true" disabled id="downloadSupportReportBtn" type="button">Download report</button>
+<button class="app-button" data-app-button="true" id="closeSupportReportBtn" type="button">Close</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="localFolderDeletionWarningTitle" aria-modal="true" class="modal-backdrop" id="localFolderDeletionWarningModal" role="dialog" data-escape-dismiss="none" data-dialog-kind="required" data-backdrop-dismiss="none" data-dialog-initial-focus="understandLocalFolderWarningBtn">
+<div class="modal local-folder-warning-modal">
+<h2 id="localFolderDeletionWarningTitle">Local Folder Warning</h2>
+<p>Wormholes mirrors the app. Files or folders inside Wormholes that are not saved in the app may be deleted during sync.</p>
+<p>Backups can be created and restored from the ⚙ menu.</p>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="understandLocalFolderWarningBtn" type="button">I understand</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="localFolderSyncTitle" aria-modal="true" class="modal-backdrop" id="localFolderSyncModal" role="dialog" data-escape-dismiss="syncExistingLocalFilesNoBtn" data-dialog-kind="choice" data-backdrop-dismiss="none" data-dialog-initial-focus="syncExistingLocalFilesYesBtn">
+<div class="modal local-folder-sync-modal">
+<h2 id="localFolderSyncTitle">Do you want to sync existing Creations, Literature, and Images?</h2>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="syncExistingLocalFilesYesBtn" type="button">Sync Existing Files</button>
+<button class="app-button" data-app-button="true" id="syncExistingLocalFilesNoBtn" type="button">Skip Existing Files</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="localFolderNotFoundTitle" aria-modal="true" class="modal-backdrop" id="localFolderNotFoundModal" role="dialog" data-escape-dismiss="useAppOnlyLocalFolderBtn" data-dialog-kind="required" data-backdrop-dismiss="none" data-dialog-initial-focus="reconnectSavedLocalFolderBtn">
+<div class="modal local-folder-not-found-modal">
+<h2 id="localFolderNotFoundTitle">Local Folder Needs Permission</h2>
+<p id="localFolderNotFoundMessage">Reconnect your Wormholes folder, choose another folder, or use app-only mode.</p>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="reconnectSavedLocalFolderBtn" type="button">Reconnect Saved Folder</button>
+<button class="app-button" data-app-button="true" id="findLocalFolderBtn" type="button">Find Folder</button>
+<button class="app-button" data-app-button="true" id="useAppOnlyLocalFolderBtn" type="button">Use App Only</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="literatureLinksTitle" aria-modal="true" class="modal-backdrop" id="literatureLinksModal" role="dialog" data-escape-dismiss="closeLiteratureLinksBtn" data-dialog-kind="viewer" data-backdrop-dismiss="same" data-dialog-initial-focus="closeLiteratureLinksBtn">
+<div class="modal literature-links-modal">
+<h2 id="literatureLinksTitle">Linked Literature</h2>
+<p id="literatureLinksSubtitle">Documents tagged here.</p>
+<div class="literature-links-list" id="literatureLinksList"></div>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="closeLiteratureLinksBtn" type="button">Close</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="visionLinksTitle" aria-modal="true" class="modal-backdrop" id="visionLinksModal" role="dialog" data-escape-dismiss="closeVisionLinksBtn" data-dialog-kind="viewer" data-backdrop-dismiss="same" data-dialog-initial-focus="closeVisionLinksBtn">
+<div class="modal vision-links-modal">
+<h2 id="visionLinksTitle">Tagged Images</h2>
+<p id="visionLinksSubtitle">Images tagged here.</p>
+<div class="vision-links-list" id="visionLinksList"></div>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="closeVisionLinksBtn" type="button">Close</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="visionImageViewerTitle" aria-modal="true" class="modal-backdrop" id="visionImageViewerModal" role="dialog" data-escape-dismiss="returnVisionImageViewerBtn" data-dialog-kind="viewer" data-backdrop-dismiss="same" data-dialog-initial-focus="returnVisionImageViewerBtn">
+<div class="modal vision-image-viewer-modal">
+<div class="vision-image-viewer-header">
+<div>
+<h2 id="visionImageViewerTitle">Image Preview</h2>
+<p id="visionImageViewerSubtitle">Expanded tagged image.</p>
+</div>
+</div>
+<div class="vision-image-viewer-frame" id="visionImageViewerFrame">
+<p class="vision-image-viewer-status" id="visionImageViewerStatus">Loading image…</p>
+<img alt="" decoding="async" id="visionImageViewerImg"/>
+</div>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="returnVisionImageViewerBtn" type="button">Back</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="visionRenameTitle" aria-modal="true" class="modal-backdrop" id="visionRenameModal" role="dialog" data-escape-dismiss="cancelVisionRenameBtn" data-dialog-kind="editor" data-backdrop-dismiss="none" data-dialog-initial-focus="visionRenameInput">
+<div class="modal vision-rename-modal">
+<h2 id="visionRenameTitle">Rename Image</h2>
+<p id="visionRenameSubtitle">Change the Vision Board title.</p>
+<div aria-atomic="true" aria-live="assertive" class="error" data-error-for="visionRenameInput" id="visionRenameError" role="alert">A title is required.</div>
+<label>
+      Image name
+      <input id="visionRenameInput" maxlength="500" placeholder="Image title" type="text"/>
+</label>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="cancelVisionRenameBtn" type="button">Cancel</button>
+<button class="app-button" data-app-button="true" id="saveVisionRenameBtn" type="button">Save Name</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="visionDeleteConfirmTitle" aria-modal="true" class="modal-backdrop" id="visionDeleteConfirmModal" role="dialog" data-escape-dismiss="cancelVisionDeleteBtn" data-dialog-kind="confirmation" data-backdrop-dismiss="same" data-dialog-initial-focus="cancelVisionDeleteBtn">
+<div class="modal vision-delete-confirm-modal">
+<h2 id="visionDeleteConfirmTitle">Delete image?</h2>
+<p id="visionDeleteConfirmText">This removes the image and its tags. You can restore it from the notification or Recent Activity for two minutes.</p>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="cancelVisionDeleteBtn" type="button">Keep Image</button>
+<button class="app-button danger-action" data-app-button="true" id="confirmVisionDeleteBtn" type="button">Delete Image</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="visionTagGoTitle" aria-modal="true" class="modal-backdrop" id="visionTagGoModal" role="dialog" data-escape-dismiss="cancelVisionTagGoBtn" data-dialog-kind="confirmation" data-backdrop-dismiss="same" data-dialog-initial-focus="cancelVisionTagGoBtn">
+<div class="modal vision-tag-go-modal">
+<h2 id="visionTagGoTitle">Open the Linked Creation?</h2>
+<p id="visionTagGoText">Go to this tag?</p>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="cancelVisionTagGoBtn" type="button">Stay Here</button>
+<button class="app-button" data-app-button="true" id="confirmVisionTagGoBtn" type="button">Open Archive</button>
+</div>
+</div>
+</div>
+<div aria-describedby="duplicateCreationText duplicateCreationDetail" aria-labelledby="duplicateCreationTitle" aria-modal="true" class="modal-backdrop" id="duplicateCreationModal" role="dialog" data-escape-dismiss="cancelDuplicateCreationBtn" data-dialog-kind="confirmation" data-backdrop-dismiss="same" data-dialog-initial-focus="cancelDuplicateCreationBtn">
+<div class="modal duplicate-creation-modal">
+<h2 id="duplicateCreationTitle">A Similar Creation Already Exists</h2>
+<p id="duplicateCreationText">This creation is similar to one already saved.</p>
+<p class="duplicate-creation-detail" id="duplicateCreationDetail">Review the saved creation or continue anyway.</p>
+<div class="modal-actions duplicate-creation-actions">
+<button class="app-button" data-app-button="true" id="cancelDuplicateCreationBtn" type="button">Go Back</button>
+<button class="app-button" data-app-button="true" id="viewDuplicateCreationBtn" type="button">View Existing</button>
+<button class="app-button" data-app-button="true" id="saveDuplicateCreationBtn" type="button">Save Anyway</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="literatureTagTitle" aria-modal="true" class="modal-backdrop" id="literatureTagModal" role="dialog" data-escape-dismiss="closeLiteratureTagBtn" data-dialog-kind="picker" data-backdrop-dismiss="none" data-dialog-initial-focus="saveLiteratureTagBtn">
+<div class="modal universe-archive-modal literature-tag-modal">
+<h2 id="literatureTagTitle">Tag Literature</h2>
+<p id="literatureTagSubtitle">Choose universes, groups, or creations connected to this document.</p>
+<div class="universe-archive-list literature-tag-list" id="literatureTagList"></div>
+<div class="modal-actions">
+<button class="app-button" data-app-button="true" id="saveLiteratureTagBtn" type="button">Save and Close</button>
+<button class="app-button" data-app-button="true" id="closeLiteratureTagBtn" type="button">Cancel</button>
+</div>
+</div>
+</div>
+<div aria-labelledby="editModalTitle" aria-modal="true" class="modal-backdrop" id="editModal" role="dialog" data-escape-dismiss="cancelEditBtn" data-dialog-kind="editor" data-backdrop-dismiss="none" data-dialog-initial-focus="editTitle">
+<div class="modal edit-modal">
+<h2 id="editModalTitle">Edit Creation</h2>
+<p id="editModalSubtitle">Edit the saved creation details.</p>
+<div aria-atomic="true" aria-live="assertive" class="error" data-error-for="editTitle" id="editError" role="alert">A title and at least one creation field are required.</div>
+<div class="create-grid edit-grid">
+<label>
+        Title
+        <input id="editTitle" maxlength="500" placeholder="Creation title" type="text"/>
+</label>
+<label>
+        What
+        <select id="editWhat"></select>
+</label>
+<label class="sr-only" for="editWhatCustom">Custom what</label>
+<input class="custom-input" id="editWhatCustom" maxlength="200" placeholder="Custom what..." type="text"/>
+<label>
+        Attribute
+        <select id="editAttr1"></select>
+</label>
+<label class="sr-only" for="editAttr1Custom">Custom first attribute</label>
+<input class="custom-input" id="editAttr1Custom" maxlength="200" placeholder="Custom attribute..." type="text"/>
+<label>
+        Attribute
+        <select id="editAttr2"></select>
+</label>
+<label class="sr-only" for="editAttr2Custom">Custom second attribute</label>
+<input class="custom-input" id="editAttr2Custom" maxlength="200" placeholder="Custom attribute..." type="text"/>
+<label>
+        Story
+        <select id="editStory"></select>
+</label>
+<label class="sr-only" for="editStoryCustom">Custom story pressure</label>
+<input class="custom-input" id="editStoryCustom" maxlength="200" placeholder="Custom story pressure..." type="text"/>
+<label>
+        Summary
+        <textarea class="connection-textarea" id="editSummary" maxlength="250000" placeholder="Optional creation summary..."></textarea>
+</label>
+<div class="edit-notes-field">
+<div class="field-title">Notes</div>
+<div class="edit-notes-list" id="editNotesList"></div>
+<button class="add-edit-note-button app-button" data-app-button="true" id="addEditNoteBtn" type="button">Add Note</button>
+</div>
+</div>
+<div class="modal-actions edit-actions">
+<button class="app-button" data-app-button="true" id="cancelEditBtn" type="button">Cancel</button>
+<button class="app-button" data-app-button="true" id="saveEditBtn" type="button">Save Changes</button>
+</div>
+</div>
+</div>
+<script type="module" src="scripts/modules/served-entry.mjs"></script>
+</body>
+</html>

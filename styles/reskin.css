@@ -1,0 +1,3951 @@
+/*
+  Wormholes Reskin 4 — The Ancient Mind
+  Visual-only theme layer based on Wormholes_Beta_263.
+  No application logic or in-app copy has been changed.
+*/
+
+:root {
+  --mind-void: #161926;
+  --mind-deep: #1c2130;
+  --mind-deeper: #202636;
+  --mind-panel: #23293a;
+  --mind-panel-2: #2a3143;
+  --mist-lilac: #d6d1e6;
+  --mist-mauve: #b4abc9;
+  --mist-blue: #aab8d0;
+  --mist-sage: #a7c0bb;
+  --mist-glow: #dde4f3;
+  --stone-light: #ddd5c4;
+  --stone-mid: #b6ad9e;
+  --quiet-gold: #b7a88c;
+  --quiet-gold-soft: #cabda4;
+  --path-1: rgba(180, 171, 201, 0.34);
+  --path-2: rgba(167, 192, 187, 0.28);
+  --path-3: rgba(170, 184, 208, 0.28);
+  --line-soft: rgba(210, 207, 230, 0.24);
+  --line-strong: rgba(210, 207, 230, 0.36);
+  --focus-soft: rgba(167, 192, 187, 0.72);
+  --focus-glow: rgba(214, 209, 230, 0.16);
+  --ethereal-shadow: 0 24px 60px rgba(5, 8, 18, 0.38);
+
+  /* Token remap for existing components. */
+  --slate: #2e3548;
+  --slate-2: #394157;
+  --slate-3: #444f67;
+  --charcoal: #161926;
+  --charcoal-2: #1f2433;
+  --cream: #ddd5c4;
+  --cream-2: #c6beae;
+  --cream-3: #a7a094;
+  --brown: #84796b;
+  --brown-2: #9f9280;
+  --sky: #aab8d0;
+  --sky-2: #93a3bf;
+  --grey: #b6b2bc;
+  --line: #6f7186;
+  --ink: #ece7f4;
+  --muted: #c6c0d3;
+  --panel: #272e3f;
+  --panel-2: #1d2230;
+  --panel-3: #353d51;
+  --shadow: 0 18px 42px rgba(6, 9, 18, 0.34);
+}
+
+html {
+  background: var(--mind-void);
+}
+
+body {
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: "Segoe UI", "Trebuchet MS", "Gill Sans", Arial, sans-serif;
+  background:
+    radial-gradient(circle at 15% 18%, rgba(180, 171, 201, 0.13), transparent 28%),
+    radial-gradient(circle at 82% 14%, rgba(167, 192, 187, 0.12), transparent 24%),
+    radial-gradient(circle at 74% 78%, rgba(170, 184, 208, 0.11), transparent 26%),
+    radial-gradient(circle at 26% 82%, rgba(202, 189, 164, 0.08), transparent 22%),
+    linear-gradient(155deg, #151926 0%, #1b2030 38%, #1d2232 68%, #161a27 100%);
+  background-attachment: fixed;
+}
+
+body::before {
+  opacity: 1;
+  mix-blend-mode: screen;
+  background:
+    radial-gradient(circle at 10% 12%, rgba(236, 231, 244, 0.68) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 22% 28%, rgba(170, 184, 208, 0.56) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 42% 16%, rgba(214, 209, 230, 0.65) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 58% 64%, rgba(167, 192, 187, 0.55) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 76% 24%, rgba(214, 209, 230, 0.54) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 86% 68%, rgba(170, 184, 208, 0.52) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 18% 82%, rgba(214, 209, 230, 0.58) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 92% 82%, rgba(236, 231, 244, 0.58) 0 1px, transparent 1.8px),
+    radial-gradient(
+      circle at 50% 50%,
+      transparent 0 24%,
+      rgba(170, 184, 208, 0.04) 24.2% 24.7%,
+      transparent 25% 38%,
+      rgba(180, 171, 201, 0.035) 38.2% 38.6%,
+      transparent 39% 100%
+    ),
+    repeating-radial-gradient(
+      circle at 50% 50%,
+      transparent 0 92px,
+      rgba(214, 209, 230, 0.018) 94px 95px,
+      transparent 97px 162px
+    ),
+    linear-gradient(
+      28deg,
+      transparent 0 49.35%,
+      rgba(180, 171, 201, 0.024) 49.45% 49.7%,
+      transparent 49.8% 100%
+    ),
+    linear-gradient(
+      148deg,
+      transparent 0 49.35%,
+      rgba(167, 192, 187, 0.024) 49.45% 49.7%,
+      transparent 49.8% 100%
+    );
+  background-size:
+    220px 230px,
+    260px 310px,
+    320px 260px,
+    310px 320px,
+    360px 260px,
+    360px 330px,
+    300px 300px,
+    430px 380px,
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 100%;
+  filter: drop-shadow(0 0 4px rgba(214, 209, 230, 0.16));
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.1;
+  background:
+    repeating-linear-gradient(90deg, rgba(214, 209, 230, 0.04) 0 1px, transparent 1px 84px),
+    repeating-linear-gradient(0deg, rgba(214, 209, 230, 0.028) 0 1px, transparent 1px 84px),
+    radial-gradient(
+      circle at center,
+      transparent 0 34%,
+      rgba(170, 184, 208, 0.055) 34.3% 34.6%,
+      transparent 35% 48%,
+      rgba(167, 192, 187, 0.05) 48.3% 48.6%,
+      transparent 49%
+    );
+}
+
+::selection {
+  background: rgba(167, 192, 187, 0.32);
+  color: #fffdfd;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 1160px;
+  margin: clamp(18px, 4vh, 42px) auto;
+  padding: clamp(22px, 3.4vw, 44px);
+  border-radius: 34px;
+  border: 1px solid rgba(214, 209, 230, 0.18);
+  background:
+    radial-gradient(circle at 50% -4%, rgba(214, 209, 230, 0.09), transparent 26%),
+    radial-gradient(circle at 6% 100%, rgba(167, 192, 187, 0.08), transparent 22%),
+    radial-gradient(circle at 100% 18%, rgba(170, 184, 208, 0.08), transparent 22%),
+    linear-gradient(
+      180deg,
+      rgba(47, 55, 73, 0.28),
+      rgba(27, 33, 48, 0.12) 20%,
+      rgba(24, 28, 39, 0.96) 100%
+    );
+  box-shadow:
+    0 34px 92px rgba(6, 10, 18, 0.46),
+    0 0 0 1px rgba(214, 209, 230, 0.08) inset,
+    0 0 0 14px rgba(20, 24, 35, 0.62) inset,
+    0 0 80px rgba(180, 171, 201, 0.05);
+  overflow: hidden;
+  backdrop-filter: blur(12px) saturate(1.02);
+}
+
+main::before {
+  inset: 12px;
+  border-radius: 26px;
+  border: 1px solid rgba(214, 209, 230, 0.14);
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      transparent 0 24%,
+      rgba(170, 184, 208, 0.05) 24.3% 24.6%,
+      transparent 25% 42%,
+      rgba(167, 192, 187, 0.045) 42.3% 42.6%,
+      transparent 43%
+    ),
+    linear-gradient(
+      90deg,
+      transparent 0 8%,
+      rgba(180, 171, 201, 0.08) 8.15% 8.3%,
+      transparent 8.45% 91.55%,
+      rgba(180, 171, 201, 0.08) 91.7% 91.85%,
+      transparent 92%
+    ),
+    linear-gradient(
+      0deg,
+      transparent 0 8%,
+      rgba(167, 192, 187, 0.07) 8.15% 8.3%,
+      transparent 8.45% 91.55%,
+      rgba(167, 192, 187, 0.07) 91.7% 91.85%,
+      transparent 92%
+    );
+  box-shadow: inset 0 0 26px rgba(214, 209, 230, 0.03);
+}
+
+main::after {
+  inset: 0;
+  border-radius: 34px;
+  pointer-events: none;
+  opacity: 0.22;
+  background:
+    radial-gradient(circle at 8% 10%, rgba(236, 231, 244, 0.38) 0 1px, transparent 2px),
+    radial-gradient(circle at 92% 12%, rgba(167, 192, 187, 0.32) 0 1px, transparent 2px),
+    radial-gradient(circle at 14% 91%, rgba(170, 184, 208, 0.28) 0 1px, transparent 2px),
+    radial-gradient(circle at 90% 90%, rgba(236, 231, 244, 0.34) 0 1px, transparent 2px);
+}
+
+h1,
+h2,
+h3,
+.tab-button,
+.archive-count,
+.entry-title,
+.collection-card-title,
+.modal h2,
+.create-panel h2,
+.universe-label {
+  font-family: "Segoe UI", "Trebuchet MS", "Gill Sans", Arial, sans-serif;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
+#homeScreen .home-card {
+  max-width: 820px;
+  padding-top: 36px;
+}
+
+#homeScreen .header-wrap {
+  position: relative;
+  padding: 30px 24px 18px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(214, 209, 230, 0.1), transparent 34%),
+    linear-gradient(180deg, rgba(51, 58, 77, 0.5), rgba(34, 40, 55, 0.42)),
+    linear-gradient(180deg, rgba(39, 45, 61, 0.92), rgba(25, 30, 42, 0.96));
+  border: 1px solid rgba(214, 209, 230, 0.18);
+  box-shadow:
+    inset 0 1px 0 rgba(236, 231, 244, 0.05),
+    inset 0 0 0 1px rgba(167, 192, 187, 0.04),
+    0 18px 30px rgba(5, 8, 18, 0.18);
+}
+
+#homeScreen .header-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border-radius: 22px;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      transparent 0 28%,
+      rgba(170, 184, 208, 0.06) 28.2% 28.6%,
+      transparent 29% 45%,
+      rgba(180, 171, 201, 0.05) 45.2% 45.5%,
+      transparent 46%
+    ),
+    linear-gradient(
+      90deg,
+      transparent 0 7%,
+      rgba(214, 209, 230, 0.08) 7.1% 7.25%,
+      transparent 7.4% 92.6%,
+      rgba(214, 209, 230, 0.08) 92.75% 92.9%,
+      transparent 93%
+    );
+}
+
+#homeScreen .header-wrap::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 74%;
+  height: 74%;
+  transform: translate(-50%, -50%);
+  opacity: 0.12;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      0deg,
+      transparent 49.3%,
+      rgba(167, 192, 187, 0.28) 49.45% 49.6%,
+      transparent 49.75%
+    ),
+    linear-gradient(
+      90deg,
+      transparent 49.3%,
+      rgba(180, 171, 201, 0.28) 49.45% 49.6%,
+      transparent 49.75%
+    ),
+    radial-gradient(
+      circle at center,
+      transparent 0 18%,
+      rgba(214, 209, 230, 0.3) 18.3% 18.8%,
+      transparent 19% 36%,
+      rgba(170, 184, 208, 0.26) 36.3% 36.7%,
+      transparent 37%
+    );
+}
+
+#homeScreen h1,
+#homeScreen .subtitle,
+#homeScreen .home-hint {
+  position: relative;
+  z-index: 1;
+}
+
+#homeScreen h1 {
+  color: #ece7f4;
+  text-shadow: 0 0 16px rgba(214, 209, 230, 0.08);
+}
+
+#homeScreen .subtitle,
+#homeScreen .home-hint,
+.subtitle,
+.home-hint,
+.create-intro,
+.modal p,
+.create-panel p,
+.archive-storage-footnote,
+.literature-storage-footnote,
+#settingsBackupStatus,
+#settingsStatus,
+#connectionsMapStatus,
+#wormholesMapStatus,
+#visionBoardMessage,
+.settings-storage-footnote,
+.settings-status,
+.global-search-status,
+.roll-footnote,
+.archive-count,
+.literature-count,
+.vision-board-count,
+.universe-label,
+.archive-meta,
+.literature-meta,
+.vision-meta,
+.connection-node .node-subtitle,
+.wormhole-creation-subtitle,
+.wormhole-group-child-subtitle-line {
+  color: var(--mist-mauve) !important;
+}
+
+#homeScreen .ornament {
+  color: var(--mist-sage);
+  opacity: 0.86;
+}
+
+.app-button,
+.home-safe-control,
+.tab-button,
+.menu .app-button,
+.universe-entry-main,
+.universe-entry-button,
+.archive-utility-button,
+.archive-connections-button,
+.settings-menu-button,
+.settings-gear,
+.map-floating-actions .map-floating-button,
+.compact-map-controls .app-button,
+#connectionsMapStatus .app-button,
+#wormholesMapStatus .app-button {
+  position: relative;
+  color: var(--mist-glow);
+  border: 1px solid rgba(214, 209, 230, 0.22) !important;
+  border-radius: 999px !important;
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.05), rgba(236, 231, 244, 0.01)),
+    linear-gradient(180deg, rgba(54, 63, 85, 0.76), rgba(36, 43, 59, 0.88)) !important;
+  box-shadow:
+    0 2px 0 rgba(11, 13, 20, 0.42),
+    0 0 0 1px rgba(236, 231, 244, 0.03) inset,
+    0 0 18px rgba(180, 171, 201, 0.05);
+  text-shadow: none;
+  overflow: hidden;
+}
+
+.app-button::before,
+.home-safe-control::before,
+.tab-button::before,
+.settings-gear::before,
+.settings-menu-button::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.62;
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0 17%,
+      rgba(214, 209, 230, 0.06) 17.15% 17.45%,
+      transparent 17.6% 82.4%,
+      rgba(214, 209, 230, 0.06) 82.55% 82.85%,
+      transparent 83%
+    ),
+    radial-gradient(
+      circle at center,
+      transparent 0 42%,
+      rgba(167, 192, 187, 0.07) 42.3% 42.8%,
+      transparent 43%
+    );
+}
+
+.app-button:hover:not([disabled]):not([aria-disabled="true"]),
+.home-safe-control:hover,
+.tab-button:hover:not([disabled]):not([aria-disabled="true"]),
+.universe-entry-main:hover:not([disabled]),
+.archive-utility-button:hover:not([disabled]),
+.archive-connections-button:hover:not([disabled]),
+.settings-menu-button:hover:not([disabled]),
+.settings-gear:hover:not([disabled]) {
+  transform: translateY(-1px);
+  border-color: rgba(214, 209, 230, 0.3) !important;
+  box-shadow:
+    0 4px 0 rgba(11, 13, 20, 0.36),
+    0 0 0 1px rgba(236, 231, 244, 0.04) inset,
+    0 0 22px rgba(170, 184, 208, 0.08);
+  filter: none;
+}
+
+.app-button:active:not([disabled]):not([aria-disabled="true"]),
+.home-safe-control:active,
+.tab-button:active:not([disabled]):not([aria-disabled="true"]) {
+  transform: translateY(1px);
+  box-shadow:
+    0 1px 0 rgba(11, 13, 20, 0.4),
+    0 0 0 1px rgba(236, 231, 244, 0.03) inset;
+}
+
+.tab-button.active,
+.tab-button[aria-selected="true"],
+.archive-utility-button[aria-expanded="true"],
+.settings-gear[aria-expanded="true"],
+.map-floating-actions .map-floating-button.active {
+  color: #f2eef7;
+  border-color: rgba(167, 192, 187, 0.34) !important;
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.06), rgba(236, 231, 244, 0.02)),
+    linear-gradient(180deg, rgba(68, 82, 102, 0.86), rgba(48, 60, 76, 0.94)) !important;
+  box-shadow:
+    0 2px 0 rgba(12, 15, 21, 0.4),
+    0 0 0 1px rgba(236, 231, 244, 0.05) inset,
+    0 0 24px rgba(167, 192, 187, 0.09);
+}
+
+.tabs {
+  gap: 12px;
+  padding: 12px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(41, 48, 66, 0.88), rgba(29, 34, 47, 0.92));
+  border: 1px solid rgba(214, 209, 230, 0.14);
+  box-shadow:
+    inset 0 1px 0 rgba(236, 231, 244, 0.04),
+    0 10px 24px rgba(7, 11, 18, 0.14);
+}
+
+.controls,
+.bottom-controls,
+.roll-controls,
+.archive-header,
+.literature-header,
+.vision-header,
+.collection-toolbar,
+.archive-top-actions,
+.bridge-top-actions,
+.search-bar,
+.settings-dock,
+.settings-panel,
+.menu,
+.archive-filter-panel,
+.archive-sort-panel,
+.literature-filter-panel,
+.literature-sort-panel,
+.vision-filter-panel,
+.vision-sort-panel,
+.global-search-modal,
+.collection-card,
+.archive-item,
+.archive-entry,
+.universe-entry,
+.literature-entry,
+.vision-item,
+.modal,
+.create-panel,
+.edit-modal,
+.quick-start-modal,
+.app-data-import-confirm-modal,
+.app-data-export-summary-modal,
+.app-data-clear-confirm-modal,
+.literature-viewer-modal,
+.literature-links-modal,
+.vision-links-modal,
+.vision-rename-modal,
+.vision-delete-confirm-modal,
+.wormholes-modal,
+.connections-map-wrap,
+#connectionsMapWrap,
+#wormholesMapWrap,
+#result,
+#settingsPanel,
+[data-panel],
+.collection-empty-state,
+.archive-empty-state,
+.literature-empty-state,
+.vision-empty-state {
+  position: relative;
+  border-color: rgba(214, 209, 230, 0.14) !important;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 88% 8%, rgba(170, 184, 208, 0.06), transparent 22%),
+    radial-gradient(circle at 8% 100%, rgba(167, 192, 187, 0.055), transparent 18%),
+    linear-gradient(
+      180deg,
+      rgba(50, 59, 79, 0.28),
+      rgba(36, 42, 58, 0.18) 18%,
+      rgba(28, 33, 46, 0.95) 100%
+    ) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(236, 231, 244, 0.03),
+    inset 0 0 0 1px rgba(214, 209, 230, 0.025),
+    0 18px 34px rgba(8, 11, 18, 0.16);
+}
+
+.controls::before,
+.archive-item::before,
+.literature-entry::before,
+.vision-item::before,
+.collection-card::before,
+.modal::before,
+.create-panel::before,
+#result::before,
+#connectionsMapWrap::before,
+#wormholesMapWrap::before,
+.connections-map-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.14;
+  background:
+    linear-gradient(
+      30deg,
+      transparent 0 49.5%,
+      rgba(180, 171, 201, 0.08) 49.65% 49.82%,
+      transparent 49.98% 100%
+    ),
+    linear-gradient(
+      150deg,
+      transparent 0 49.5%,
+      rgba(167, 192, 187, 0.08) 49.65% 49.82%,
+      transparent 49.98% 100%
+    ),
+    radial-gradient(
+      circle at center,
+      transparent 0 28%,
+      rgba(214, 209, 230, 0.09) 28.25% 28.6%,
+      transparent 28.9%
+    );
+}
+
+label,
+.archive-filter-grid span,
+.literature-filter-grid span,
+.vision-filter-grid span,
+.modal label {
+  color: var(--mist-lilac);
+}
+
+input,
+select,
+textarea,
+.search-input,
+.global-search-input,
+.modal input,
+.modal textarea,
+.create-grid input,
+.create-grid select {
+  color: #f0ecf6;
+  border-color: rgba(214, 209, 230, 0.18) !important;
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.02), rgba(236, 231, 244, 0.01)),
+    linear-gradient(180deg, rgba(38, 45, 61, 0.95), rgba(28, 33, 45, 0.98)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(236, 231, 244, 0.025),
+    inset 0 0 0 1px rgba(214, 209, 230, 0.02);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #9b97a8;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus-visible,
+[role="button"]:focus-visible,
+.tab-button:focus-visible,
+.app-button:focus-visible {
+  outline: 2px solid rgba(167, 192, 187, 0.64) !important;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(167, 192, 187, 0.12);
+}
+
+input[type="checkbox"] {
+  border-color: rgba(214, 209, 230, 0.32);
+  border-radius: 5px;
+  background: linear-gradient(180deg, #d6d1e6, #aca5bf);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18),
+    0 0 0 1px rgba(20, 24, 35, 0.2);
+}
+
+input[type="checkbox"]:checked::after {
+  border-color: #2b3a3a;
+}
+
+input[type="range"] {
+  accent-color: #a7c0bb;
+}
+
+.modal-backdrop,
+.app-data-backup-modal-backdrop {
+  background: rgba(12, 15, 23, 0.74) !important;
+  backdrop-filter: blur(7px);
+}
+
+.settings-dock,
+.settings-panel {
+  background: linear-gradient(180deg, rgba(40, 46, 63, 0.95), rgba(29, 34, 48, 0.98)) !important;
+}
+
+.settings-gear::before {
+  color: var(--mist-lilac);
+}
+
+#connectionsMapWrap,
+#wormholesMapWrap,
+.connections-map-wrap {
+  --map-connection-string: #b6bfd2;
+  --map-connection-string-strong: #d6ddec;
+  --map-connection-string-glow: rgba(182, 191, 210, 0.17);
+  --map-bridge-string: #b5c8c3;
+  --map-bridge-string-strong: #d7e2df;
+  --map-bridge-string-glow: rgba(167, 192, 187, 0.16);
+  --map-group-fill: #31394b;
+  --map-group-stroke: rgba(214, 209, 230, 0.38);
+  --map-creation-fill: #394355;
+  --map-creation-stroke: rgba(170, 184, 208, 0.4);
+  --map-universe-fill: #474255;
+  --map-universe-stroke: rgba(221, 213, 196, 0.54);
+  --map-system-bg: rgba(167, 192, 187, 0.05);
+  --map-system-halo: rgba(214, 209, 230, 0.05);
+  --map-orbit-stroke: rgba(214, 209, 230, 0.12);
+  --map-soft-glow: rgba(214, 209, 230, 0.12);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at center, rgba(180, 171, 201, 0.05), transparent 34%),
+    radial-gradient(circle at 84% 16%, rgba(167, 192, 187, 0.07), transparent 18%),
+    linear-gradient(180deg, rgba(39, 46, 63, 0.96), rgba(25, 30, 41, 0.98)) !important;
+}
+
+#connectionsMapWrap::after,
+#wormholesMapWrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.2;
+  background:
+    radial-gradient(circle at 12% 15%, rgba(236, 231, 244, 0.72) 0 1px, transparent 2px),
+    radial-gradient(circle at 26% 33%, rgba(170, 184, 208, 0.56) 0 1px, transparent 2px),
+    radial-gradient(circle at 44% 20%, rgba(214, 209, 230, 0.62) 0 1px, transparent 2px),
+    radial-gradient(circle at 61% 71%, rgba(167, 192, 187, 0.56) 0 1px, transparent 2px),
+    radial-gradient(circle at 76% 28%, rgba(214, 209, 230, 0.58) 0 1px, transparent 2px),
+    radial-gradient(circle at 88% 61%, rgba(170, 184, 208, 0.54) 0 1px, transparent 2px),
+    radial-gradient(circle at 17% 82%, rgba(236, 231, 244, 0.56) 0 1px, transparent 2px),
+    linear-gradient(
+      90deg,
+      transparent 0 49.45%,
+      rgba(180, 171, 201, 0.1) 49.6% 49.8%,
+      transparent 49.95%
+    ),
+    linear-gradient(
+      0deg,
+      transparent 0 49.45%,
+      rgba(167, 192, 187, 0.09) 49.6% 49.8%,
+      transparent 49.95%
+    ),
+    radial-gradient(
+      circle at center,
+      transparent 0 22%,
+      rgba(170, 184, 208, 0.08) 22.25% 22.55%,
+      transparent 22.9% 38%,
+      rgba(214, 209, 230, 0.08) 38.25% 38.55%,
+      transparent 38.9%
+    );
+}
+
+.connections-map rect:first-of-type,
+#wormholesMapWrap svg rect:first-of-type,
+#connectionsMapWrap svg rect:first-of-type {
+  fill: rgba(25, 30, 41, 0.96) !important;
+}
+
+#connectionsMapWrap text,
+#wormholesMapWrap text {
+  fill: #ece7f4 !important;
+  font-family: "Segoe UI", "Trebuchet MS", "Gill Sans", Arial, sans-serif !important;
+  letter-spacing: 0.06em;
+}
+
+#connectionsMapWrap .connection-node rect,
+#connectionsMapWrap .external-creation-node rect,
+#connectionsMapWrap .connection-group-child-node rect,
+#wormholesMapWrap .wormhole-creation circle,
+#wormholesMapWrap .wormhole-group-child-node circle,
+#wormholesMapWrap .wormhole-cluster-title circle {
+  filter: drop-shadow(0 0 8px rgba(180, 171, 201, 0.07));
+}
+
+#connectionsMapWrap .connection-node.selected rect,
+#connectionsMapWrap .connection-node.connected rect,
+#wormholesMapWrap .wormhole-creation.connected circle,
+#wormholesMapWrap .wormhole-cluster-title.connected circle,
+#wormholesMapWrap .wormhole-creation.focus-member circle,
+#wormholesMapWrap .wormhole-cluster-title.bridge-source circle {
+  stroke: rgba(221, 213, 196, 0.76) !important;
+  filter: drop-shadow(0 0 12px rgba(167, 192, 187, 0.14));
+}
+
+#connectionsMapWrap .connection-edge,
+#connectionsMapWrap .bridge-edge,
+#connectionsMapWrap .connection-edge-glow,
+#connectionsMapWrap .bridge-edge-glow,
+#wormholesMapWrap .wormhole-internal-line,
+#wormholesMapWrap .wormhole-bridge-line,
+#wormholesMapWrap .wormhole-universe-bridge-line,
+#wormholesMapWrap .wormhole-bridge-glow,
+#wormholesMapWrap .wormhole-universe-bridge-glow {
+  stroke-linecap: round;
+}
+
+.archive-item,
+.literature-entry,
+.vision-item,
+.collection-card,
+.universe-entry {
+  border-radius: 22px;
+}
+
+.collection-card-title,
+.entry-title,
+.archive-item h3,
+.literature-entry h3,
+.vision-item h3,
+.create-panel h2,
+.modal h2 {
+  color: #ece7f4;
+}
+
+.badge,
+.count-badge,
+.collection-count,
+.archive-count,
+.literature-count,
+.vision-board-count,
+[data-badge] {
+  border-radius: 999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Wormholes Reskin 5 fixes: restore Settings launcher, unify list surfaces,
+   improve contrast, and make map backgrounds fill the full view. */
+
+.settings-dock {
+  position: absolute !important;
+  left: 24px !important;
+  bottom: 22px !important;
+  width: 48px !important;
+  height: 48px !important;
+  z-index: 30 !important;
+  display: block !important;
+  overflow: visible !important;
+  pointer-events: none !important;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.settings-gear {
+  position: absolute !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  min-height: 48px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  font-size: 0 !important;
+}
+
+.settings-gear::before {
+  content: "⚙" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: none !important;
+  opacity: 1 !important;
+  color: var(--mist-lilac) !important;
+  font-size: 1.65rem !important;
+  line-height: 1 !important;
+  text-shadow: 0 0 10px rgba(214, 209, 230, 0.14);
+}
+
+.settings-panel {
+  position: absolute !important;
+  left: 58px !important;
+  bottom: 0 !important;
+}
+
+/* Keep dark controls consistently light-on-dark. */
+.app-button,
+.app-button *,
+.home-safe-control,
+.home-safe-control *,
+.tab-button,
+.tab-button *,
+.controls .app-button,
+.controls .app-button *,
+.home-actions .app-button,
+.home-actions .app-button *,
+.roll-controls .app-button,
+.roll-controls .app-button *,
+.modal-actions .app-button,
+.modal-actions .app-button *,
+.settings-menu-button,
+.settings-menu-button *,
+.archive-utility-button,
+.archive-utility-button *,
+.archive-connections-button,
+.archive-connections-button *,
+.map-floating-actions .map-floating-button,
+.map-floating-actions .map-floating-button *,
+.compact-map-controls .app-button,
+.compact-map-controls .app-button * {
+  color: var(--mist-glow) !important;
+}
+
+/* Reskin the major list and card surfaces so they no longer fall back to the older parchment scheme. */
+#universeArchiveModal .universe-entry,
+#universeArchiveModal .universe-entry > .universe-entry-main,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu-button,
+.archive-item,
+.archive-item .entry-title,
+.archive-item .entry-top .menu-button,
+.literature-entry,
+.literature-entry .entry-title,
+.literature-entry .entry-top .menu-button,
+.vision-item,
+.vision-item .entry-title,
+.vision-item .entry-top .menu-button,
+.collection-card,
+.collection-card .entry-title,
+.collection-card .entry-top .menu-button {
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.045), rgba(236, 231, 244, 0.012)),
+    linear-gradient(180deg, rgba(53, 62, 84, 0.9), rgba(32, 39, 53, 0.98)) !important;
+  border-color: rgba(214, 209, 230, 0.18) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(236, 231, 244, 0.04),
+    inset 0 0 0 1px rgba(214, 209, 230, 0.025),
+    0 12px 24px rgba(8, 11, 18, 0.16) !important;
+}
+
+#universeArchiveModal .universe-entry-main,
+#universeArchiveModal .universe-entry-main *,
+#universeArchiveModal .universe-entry-title,
+#universeArchiveModal .universe-entry-summary,
+#universeArchiveModal .universe-entry-meta,
+.archive-item,
+.archive-item *,
+.literature-entry,
+.literature-entry *,
+.vision-item,
+.vision-item *,
+.collection-card,
+.collection-card *,
+.entry-title,
+.entry-title *,
+.universe-entry-main,
+.universe-entry-main * {
+  color: var(--mist-glow) !important;
+}
+
+#universeArchiveModal .universe-entry-summary,
+#universeArchiveModal .universe-entry-meta,
+.archive-item .entry-title-what,
+.archive-item .archive-meta,
+.literature-entry .entry-title-what,
+.literature-entry .literature-meta,
+.vision-item .vision-meta,
+.collection-card .entry-title-what,
+.collection-card .universe-entry-summary,
+.collection-card .universe-entry-meta {
+  color: var(--mist-mauve) !important;
+  opacity: 1 !important;
+}
+
+#universeArchiveModal .universe-entry > .menu-wrap > .menu-button,
+.archive-item .entry-top .menu-button,
+.literature-entry .entry-top .menu-button,
+.vision-item .entry-top .menu-button,
+.collection-card .entry-top .menu-button {
+  color: var(--mist-glow) !important;
+}
+
+/* Keep genuinely light chips/badges dark-on-light. */
+.badge-light,
+.storage-badge,
+.relationship-badge,
+.image-count-badge,
+.literature-count-badge,
+.vision-count-badge,
+#connectionsMapWrap .svg-literature-indicator,
+#connectionsMapWrap .svg-vision-indicator,
+#wormholesMapWrap .svg-literature-indicator,
+#wormholesMapWrap .svg-vision-indicator {
+  color: #1d2230 !important;
+  fill: #1d2230 !important;
+}
+
+/* Full-view map background: the wrapper provides the atmosphere, so remove the hard inner dark box. */
+#connectionsMapWrap,
+#wormholesMapWrap,
+.connections-map-wrap {
+  background:
+    radial-gradient(circle at center, rgba(180, 171, 201, 0.06), transparent 36%),
+    radial-gradient(circle at 84% 16%, rgba(167, 192, 187, 0.08), transparent 18%),
+    linear-gradient(180deg, rgba(39, 46, 63, 0.98), rgba(25, 30, 41, 0.99)) !important;
+}
+
+#connectionsMapWrap .connections-map,
+#wormholesMapWrap .wormholes-map,
+#connectionsMapWrap svg,
+#wormholesMapWrap svg {
+  background: transparent !important;
+}
+
+.connections-map rect:first-of-type,
+#wormholesMapWrap svg rect:first-of-type,
+#connectionsMapWrap svg rect:first-of-type {
+  fill: transparent !important;
+}
+
+#connectionsMapWrap .connections-map-stage,
+#wormholesMapWrap .wormholes-map-stage {
+  background: transparent !important;
+}
+
+/* Wormholes Reskin 6 fixes: resolve remaining dark button labels, fully reskin archive/literature/vision rows,
+   strengthen map badge visibility, and let map entities breathe more generously. */
+
+/* Default all interactive dark controls to light text unless specifically restyled below. */
+body button,
+body button *,
+body .app-button,
+body .app-button *,
+body .tab-button,
+body .tab-button *,
+body .menu-button,
+body .menu-button *,
+body .vision-pin-menu-button,
+body .vision-pin-menu-button *,
+body .settings-panel button,
+body .settings-panel button *,
+body .modal button,
+body .modal button *,
+body .modal-actions button,
+body .modal-actions button *,
+body .controls button,
+body .controls button *,
+body .home-actions button,
+body .home-actions button *,
+body .home-safe-control,
+body .home-safe-control * {
+  color: var(--mist-glow) !important;
+}
+
+/* Inputs keep the same serene palette. */
+input,
+textarea,
+select {
+  color: var(--mist-glow) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(236, 231, 244, 0.66) !important;
+}
+
+/* Archive/Literature/Enter Universe rows: no parchment fallback. */
+.ellipsis-row,
+#universeArchiveModal .universe-entry,
+#archiveListScreen .entry-top,
+#literatureListScreen .entry-top {
+  border-color: rgba(214, 209, 230, 0.18) !important;
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.05), rgba(236, 231, 244, 0.014)),
+    linear-gradient(180deg, rgba(53, 62, 84, 0.92), rgba(31, 38, 54, 0.99)) !important;
+  box-shadow:
+    0 10px 24px rgba(8, 11, 18, 0.18),
+    inset 0 1px 0 rgba(236, 231, 244, 0.05),
+    inset 0 0 0 1px rgba(214, 209, 230, 0.03) !important;
+}
+
+.ellipsis-row > .ellipsis-row-main,
+#universeArchiveModal .universe-entry > .universe-entry-main,
+#archiveListScreen .entry-top > .entry-title,
+#literatureListScreen .entry-top > .entry-title,
+.ellipsis-row > .ellipsis-row-main *,
+#universeArchiveModal .universe-entry > .universe-entry-main *,
+#archiveListScreen .entry-top > .entry-title *,
+#literatureListScreen .entry-top > .entry-title * {
+  color: var(--mist-glow) !important;
+}
+
+#archiveListScreen .entry-top > .entry-title .entry-title-what,
+#literatureListScreen .entry-top > .entry-title .entry-title-what,
+#universeArchiveModal .universe-entry > .universe-entry-main .universe-entry-summary,
+#universeArchiveModal .universe-entry > .universe-entry-main .universe-entry-meta,
+.ellipsis-row .entry-title-what,
+.ellipsis-row .universe-entry-summary,
+.ellipsis-row .universe-entry-meta {
+  color: var(--mist-mauve) !important;
+  opacity: 1 !important;
+}
+
+/* Ellipsis buttons and vision-board pin menus adopt the active skin too. */
+.ellipsis-row > .ellipsis-row-actions > .menu-button,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu-button,
+#archiveListScreen .entry-top > .menu-wrap > .menu-button,
+#literatureListScreen .entry-top > .menu-wrap > .menu-button,
+body .menu-wrap > .menu-button,
+body .vision-pin-menu-wrap > .vision-pin-menu-button {
+  color: var(--mist-glow) !important;
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.08), rgba(236, 231, 244, 0.02)),
+    linear-gradient(180deg, rgba(69, 80, 108, 0.98), rgba(45, 53, 73, 0.98)) !important;
+  background-color: rgba(45, 53, 73, 0.98) !important;
+  border-color: rgba(167, 192, 187, 0.3) !important;
+  border-left-color: rgba(167, 192, 187, 0.22) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(236, 231, 244, 0.08),
+    0 2px 7px rgba(0, 0, 0, 0.2) !important;
+  text-shadow: none !important;
+}
+
+.ellipsis-row > .ellipsis-row-actions > .menu-button:hover,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu-button:hover,
+#archiveListScreen .entry-top > .menu-wrap > .menu-button:hover,
+#literatureListScreen .entry-top > .menu-wrap > .menu-button:hover,
+body .menu-wrap > .menu-button:hover,
+body .vision-pin-menu-wrap > .vision-pin-menu-button:hover,
+.ellipsis-row > .ellipsis-row-actions > .menu-button:focus-visible,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu-button:focus-visible,
+#archiveListScreen .entry-top > .menu-wrap > .menu-button:focus-visible,
+#literatureListScreen .entry-top > .menu-wrap > .menu-button:focus-visible,
+body .menu-wrap > .menu-button:focus-visible,
+body .vision-pin-menu-wrap > .vision-pin-menu-button:focus-visible {
+  color: var(--mist-glow) !important;
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.12), rgba(236, 231, 244, 0.03)),
+    linear-gradient(180deg, rgba(84, 96, 126, 0.98), rgba(56, 65, 87, 0.99)) !important;
+  border-color: rgba(167, 192, 187, 0.42) !important;
+  transform: none !important;
+}
+
+.ellipsis-row > .ellipsis-row-actions > .menu-button:active,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu-button:active,
+#archiveListScreen .entry-top > .menu-wrap > .menu-button:active,
+#literatureListScreen .entry-top > .menu-wrap > .menu-button:active,
+body .menu-wrap > .menu-button:active,
+body .vision-pin-menu-wrap > .vision-pin-menu-button:active,
+body .menu-wrap > .menu-button[aria-expanded="true"],
+body .vision-pin-menu-wrap > .vision-pin-menu-button[aria-expanded="true"] {
+  color: var(--mist-glow) !important;
+  background: linear-gradient(180deg, rgba(69, 80, 108, 1), rgba(38, 45, 62, 1)) !important;
+  border-color: rgba(167, 192, 187, 0.5) !important;
+}
+
+/* Vision board menu buttons often bypass the shared list-row structure. */
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu-button {
+  color: var(--mist-glow) !important;
+}
+
+/* Map badges need stronger local contrast now that the entity shells are calmer. */
+.svg-literature-page {
+  fill: rgba(232, 225, 210, 0.98) !important;
+  stroke: rgba(29, 34, 48, 0.94) !important;
+  stroke-width: 1.6 !important;
+  filter: drop-shadow(0 2px 5px rgba(8, 11, 18, 0.28));
+}
+
+.svg-literature-fold {
+  stroke: rgba(29, 34, 48, 0.84) !important;
+}
+
+.svg-literature-indicator text,
+.literature-page-count {
+  fill: #1d2230 !important;
+  color: #1d2230 !important;
+  stroke: none !important;
+}
+
+.svg-vision-camera-body {
+  fill: rgba(111, 143, 156, 0.98) !important;
+  stroke: rgba(21, 28, 36, 0.94) !important;
+  stroke-width: 1.7 !important;
+  filter: drop-shadow(0 2px 5px rgba(8, 11, 18, 0.28));
+}
+
+.svg-vision-camera-lens {
+  stroke: rgba(240, 236, 228, 0.92) !important;
+  stroke-width: 1.55 !important;
+}
+
+.svg-vision-indicator text {
+  fill: #f4efe5 !important;
+  color: #f4efe5 !important;
+  stroke: rgba(20, 26, 34, 0.74) !important;
+  stroke-width: 0.75px !important;
+  paint-order: stroke fill !important;
+}
+
+/* Preserve light text inside dark map entity nodes. */
+#connectionsMapWrap .connection-node-title,
+#connectionsMapWrap .connection-node-title tspan,
+#connectionsMapWrap .node-subtitle,
+#connectionsMapWrap .node-subtitle tspan,
+#wormholesMapWrap .wormhole-creation-title-line,
+#wormholesMapWrap .wormhole-creation-subtitle-line,
+#wormholesMapWrap .wormhole-group-title-line,
+#wormholesMapWrap .wormhole-cluster-title text,
+#wormholesMapWrap .wormhole-group-text tspan,
+#wormholesMapWrap .wormhole-creation-text tspan {
+  fill: var(--mist-glow) !important;
+}
+
+#connectionsMapWrap .node-subtitle,
+#connectionsMapWrap .node-subtitle tspan,
+#wormholesMapWrap .wormhole-creation-subtitle-line {
+  fill: rgba(226, 221, 235, 0.92) !important;
+}
+
+/* Wormholes Reskin 7: keep zoomed-out map labels seated inside their parent bubbles.
+   Node text in both maps is left-padded and start-anchored, so semantic zoom
+   should expand from the left-center rather than the geometric center. This keeps
+   labels from spilling outside the bubble when the app counter-scales them for readability. */
+#connectionsMapWrap .connection-node > text,
+#connectionsMapWrap .connection-node-title,
+#connectionsMapWrap .node-subtitle,
+#wormholesMapWrap .wormhole-creation > text,
+#wormholesMapWrap .wormhole-group-shell > text,
+#wormholesMapWrap .wormhole-group-title-overlay > text,
+#wormholesMapWrap .wormhole-group-child-node > text,
+#wormholesMapWrap .wormhole-cluster-title > text {
+  transform-origin: left center !important;
+  -webkit-transform-origin: left center !important;
+}
+
+/* When a node is selected/connected at far zoom, keep its emphasis subtle so the
+   highlight doesn't outrun the bubble fit scaling. */
+#connectionsMapWrap .connections-map-stage.map-zoom-readable .connection-node.selected > text,
+#connectionsMapWrap .connections-map-stage.map-zoom-readable .connection-node.connected > text,
+#connectionsMapWrap .connections-map-stage.map-zoom-readable .connection-node.focus-member > text,
+#wormholesMapWrap .wormholes-map-stage.map-zoom-readable .wormhole-creation.selected > text,
+#wormholesMapWrap .wormholes-map-stage.map-zoom-readable .wormhole-creation.connected > text,
+#wormholesMapWrap .wormholes-map-stage.map-zoom-readable .wormhole-creation.focus-member > text,
+#wormholesMapWrap
+  .wormholes-map-stage.map-zoom-readable
+  .wormhole-cluster-title.bridge-source
+  > text,
+#wormholesMapWrap .wormholes-map-stage.map-zoom-readable .wormhole-cluster-title.connected > text,
+#wormholesMapWrap
+  .wormholes-map-stage.map-zoom-readable
+  .wormhole-cluster.focused
+  .wormhole-cluster-title
+  > text {
+  transform: scale(calc(var(--map-label-scale, 1) * 1.04)) !important;
+  -webkit-transform: scale(calc(var(--map-label-scale, 1) * 1.04)) !important;
+}
+
+/* Wormholes Reskin 8: universe-tinted translucent map bubbles.
+   Let each node inherit its universe hue, but keep the overall look airy. */
+#connectionsMapWrap .connection-node rect,
+#wormholesMapWrap .wormhole-node-shape {
+  fill-opacity: 1 !important;
+}
+
+#connectionsMapWrap .connection-node rect,
+#connectionsMapWrap .connection-group-node > rect,
+#connectionsMapWrap .connection-group-child-node rect,
+#connectionsMapWrap .external-universe-node rect,
+#connectionsMapWrap .external-creation-node rect,
+#connectionsMapWrap .current-universe-center-node rect,
+#wormholesMapWrap .wormhole-node-shape,
+#wormholesMapWrap .wormhole-group-shell > circle,
+#wormholesMapWrap .wormhole-group-child-node circle,
+#wormholesMapWrap .wormhole-creation circle,
+#wormholesMapWrap .wormhole-cluster-title circle {
+  filter: drop-shadow(0 0 10px rgba(180, 171, 201, 0.06));
+}
+
+/* Wormholes Reskin 9: clearer universe-tinted fills and a reskinned map filter panel. */
+#connectionsMapWrap .connection-node rect,
+#connectionsMapWrap .external-universe-node rect,
+#connectionsMapWrap .external-creation-node rect,
+#connectionsMapWrap .current-universe-center-node rect,
+#connectionsMapWrap .connection-group-node > rect,
+#connectionsMapWrap .connection-group-child-node rect,
+#wormholesMapWrap .wormhole-node-shape,
+#wormholesMapWrap .wormhole-group-shell > circle,
+#wormholesMapWrap .wormhole-group-child-node circle,
+#wormholesMapWrap .wormhole-creation circle,
+#wormholesMapWrap .wormhole-cluster-title circle {
+  fill-opacity: 1 !important;
+  stroke-opacity: 1 !important;
+}
+
+/* Slightly richer separation so the fill color is readable at a glance. */
+#connectionsMapWrap .connection-node rect,
+#connectionsMapWrap .external-universe-node rect,
+#connectionsMapWrap .external-creation-node rect,
+#connectionsMapWrap .current-universe-center-node rect,
+#connectionsMapWrap .connection-group-node > rect,
+#connectionsMapWrap .connection-group-child-node rect,
+#wormholesMapWrap .wormhole-node-shape,
+#wormholesMapWrap .wormhole-group-shell > circle,
+#wormholesMapWrap .wormhole-group-child-node circle,
+#wormholesMapWrap .wormhole-creation circle,
+#wormholesMapWrap .wormhole-cluster-title circle {
+  filter: drop-shadow(0 0 10px rgba(180, 171, 201, 0.05));
+}
+
+/* Map filter panel and list-view control. */
+.map-filter-panel {
+  background: linear-gradient(180deg, rgba(47, 56, 77, 0.84), rgba(25, 31, 43, 0.9)) !important;
+  border: 1px solid rgba(167, 192, 187, 0.26) !important;
+  box-shadow:
+    0 14px 28px rgba(8, 11, 18, 0.24),
+    inset 0 1px 0 rgba(236, 231, 244, 0.06),
+    inset 0 0 0 1px rgba(214, 209, 230, 0.025) !important;
+  backdrop-filter: blur(6px);
+}
+
+.map-filter-panel legend,
+.map-filter-panel .map-filter-heading,
+.map-filter-panel .map-filter-title,
+.map-filter-panel .map-filter-toggle,
+.map-filter-panel .map-filter-toggle span,
+.map-filter-panel .map-list-view-button {
+  color: var(--mist-glow) !important;
+}
+
+.map-filter-panel legend {
+  letter-spacing: 0.08em;
+  color: var(--mist-glow) !important;
+}
+
+.map-filter-panel .map-filter-toggle {
+  background: transparent !important;
+  border-radius: 12px !important;
+  padding: 4px 6px !important;
+}
+
+.map-filter-panel .map-filter-toggle:hover,
+.map-filter-panel .map-filter-toggle:focus-within {
+  background: rgba(236, 231, 244, 0.05) !important;
+}
+
+.map-filter-panel .map-filter-toggle.active {
+  background: rgba(167, 192, 187, 0.09) !important;
+}
+
+.map-filter-panel .map-filter-toggle input[type="checkbox"] {
+  border-color: rgba(167, 192, 187, 0.42) !important;
+  background: linear-gradient(180deg, rgba(31, 38, 53, 0.98), rgba(20, 25, 35, 0.98)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(236, 231, 244, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.25) !important;
+}
+
+.map-filter-panel .map-filter-toggle input[type="checkbox"]:checked {
+  background: linear-gradient(180deg, rgba(83, 104, 135, 0.98), rgba(59, 76, 103, 0.98)) !important;
+  border-color: rgba(167, 192, 187, 0.54) !important;
+}
+
+.map-filter-panel .map-filter-toggle input[type="checkbox"]:checked::after {
+  color: var(--mist-glow) !important;
+}
+
+.map-filter-panel .map-list-view-button {
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.08), rgba(236, 231, 244, 0.02)),
+    linear-gradient(180deg, rgba(69, 80, 108, 0.98), rgba(45, 53, 73, 0.98)) !important;
+  border-color: rgba(167, 192, 187, 0.3) !important;
+  color: var(--mist-glow) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(236, 231, 244, 0.08),
+    0 2px 7px rgba(0, 0, 0, 0.2) !important;
+}
+
+.map-filter-panel .map-list-view-button:hover,
+.map-filter-panel .map-list-view-button:focus-visible {
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.12), rgba(236, 231, 244, 0.03)),
+    linear-gradient(180deg, rgba(84, 96, 126, 0.98), rgba(56, 65, 87, 0.99)) !important;
+  border-color: rgba(167, 192, 187, 0.42) !important;
+}
+
+/* Wormholes Reskin 10: explicit per-universe map bubble fills.
+   Use the universe palette variables directly on the actual rendered node shapes so
+   children and group shells visibly carry their universe color, while staying softly translucent. */
+#connectionsMapWrap .connection-node.connection-group-node > rect,
+#connectionsMapWrap .connection-node.external-group-node > rect {
+  fill: var(--map-group-fill) !important;
+  stroke: var(--map-group-stroke) !important;
+}
+
+#connectionsMapWrap .connection-node.connection-group-child-node rect,
+#connectionsMapWrap .connection-node[data-type="creation"] rect,
+#connectionsMapWrap .connection-node[data-type="external"] rect {
+  fill: var(--map-creation-fill) !important;
+  stroke: var(--map-creation-stroke) !important;
+}
+
+#connectionsMapWrap .current-universe-center-node rect,
+#connectionsMapWrap .external-universe-node rect {
+  fill: var(--map-universe-fill) !important;
+  stroke: var(--map-universe-stroke) !important;
+}
+
+#wormholesMapWrap .wormhole-cluster-title .wormhole-node-shape {
+  fill: var(--map-universe-fill) !important;
+  stroke: var(--map-universe-stroke) !important;
+}
+
+#wormholesMapWrap .wormhole-group-shell .wormhole-node-shape {
+  fill: var(--map-group-fill) !important;
+  stroke: var(--map-group-stroke) !important;
+}
+
+#wormholesMapWrap .wormhole-creation .wormhole-node-shape,
+#wormholesMapWrap .wormhole-group-child-node .wormhole-node-shape {
+  fill: var(--map-creation-fill) !important;
+  stroke: var(--map-creation-stroke) !important;
+}
+
+/* Keep the large universe/system body colored too, but lighter and airy. */
+#wormholesMapWrap .wormhole-system-bg {
+  fill: var(--map-universe-fill) !important;
+}
+
+#wormholesMapWrap .wormhole-system-halo {
+  fill: var(--map-system-halo) !important;
+}
+
+/* Wormholes Reskin 11: soften the large system ovals and ensure external
+   Connections-map entities visibly use their own universe palette. */
+#wormholesMapWrap .wormhole-system-bg {
+  opacity: 0.72 !important;
+}
+
+#wormholesMapWrap .wormhole-system-halo {
+  opacity: 0.68 !important;
+}
+
+#wormholesMapWrap .wormhole-orbit {
+  opacity: 0.82 !important;
+}
+
+/* Explicitly preserve per-universe coloring for external items in Connections. */
+#connectionsMapWrap .connection-node.external-node[data-type="external"] rect,
+#connectionsMapWrap .connection-node.external-group-child-node rect {
+  fill: var(--map-creation-fill) !important;
+  stroke: var(--map-creation-stroke) !important;
+}
+
+#connectionsMapWrap .connection-node.external-group-node > rect {
+  fill: var(--map-group-fill) !important;
+  stroke: var(--map-group-stroke) !important;
+}
+
+#connectionsMapWrap .connection-node.external-universe-node rect {
+  fill: var(--map-universe-fill) !important;
+  stroke: var(--map-universe-stroke) !important;
+}
+
+/* Give external-universe content a touch more color presence so cross-universe
+   distinctions remain obvious inside the Connections modal. */
+#connectionsMapWrap .connection-node.external-node rect {
+  filter: drop-shadow(0 0 10px rgba(180, 171, 201, 0.04)) saturate(1.04) !important;
+}
+
+/* Wormholes Reskin 12 — application-wide color and contrast audit fixes. */
+:root {
+  --contrast-control-text: #f4f1fa;
+  --contrast-secondary-text: #c9c2d8;
+  --contrast-dark-text: #18202d;
+  --contrast-danger-text: #ffd5d1;
+  --contrast-link-text: #bcd8d3;
+}
+
+/* Older beta rules contain ID-level !important dark text. Use a deliberately
+   stronger selector so every dark-surface button keeps readable light text. */
+body button:not(#wormholes-contrast-sentinel-a):not(#wormholes-contrast-sentinel-b),
+body button:not(#wormholes-contrast-sentinel-a):not(#wormholes-contrast-sentinel-b) * {
+  color: var(--contrast-control-text) !important;
+  -webkit-text-fill-color: var(--contrast-control-text) !important;
+}
+
+/* Non-button interactive controls that visually use the same dark control surface. */
+body [role="button"]:not(#wormholes-contrast-sentinel-a):not(#wormholes-contrast-sentinel-b),
+body [role="button"]:not(#wormholes-contrast-sentinel-a):not(#wormholes-contrast-sentinel-b) * {
+  color: var(--contrast-control-text) !important;
+  -webkit-text-fill-color: var(--contrast-control-text) !important;
+}
+
+/* Menus and search results are dark surfaces in this reskin. */
+body .menu,
+body .menu *:not(.delete-action):not(.universe-delete-action),
+.map-search-panel,
+.map-search-panel .map-search-result-title,
+.map-search-panel .map-search-result-meta,
+.map-search-panel .map-search-status {
+  color: var(--contrast-control-text) !important;
+  -webkit-text-fill-color: var(--contrast-control-text) !important;
+}
+
+.map-search-panel .map-search-result-meta,
+.map-search-panel .map-search-status,
+.global-search-result-excerpt,
+.global-search-status,
+.storage-usage-status,
+.activity-log-action-status {
+  color: var(--contrast-secondary-text) !important;
+  -webkit-text-fill-color: var(--contrast-secondary-text) !important;
+}
+
+/* Search launcher had an old tan/dark scheme that could conflict with the audited text rule. */
+.map-search-toggle:not(#wormholes-contrast-sentinel-a):not(#wormholes-contrast-sentinel-b),
+.map-search-toggle:not(#wormholes-contrast-sentinel-a):not(#wormholes-contrast-sentinel-b):hover,
+.map-search-toggle:not(#wormholes-contrast-sentinel-a):not(
+    #wormholes-contrast-sentinel-b
+  ):focus-visible,
+.map-search-toggle:not(#wormholes-contrast-sentinel-a):not(
+    #wormholes-contrast-sentinel-b
+  )[aria-expanded="true"] {
+  color: var(--contrast-control-text) !important;
+  -webkit-text-fill-color: var(--contrast-control-text) !important;
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.1), rgba(236, 231, 244, 0.025)),
+    linear-gradient(180deg, rgba(69, 80, 108, 0.98), rgba(45, 53, 73, 0.98)) !important;
+  border-color: rgba(167, 192, 187, 0.34) !important;
+}
+
+.map-search-toggle svg {
+  stroke: currentColor !important;
+}
+
+/* Destructive actions stay distinct but readable on the dark menu surface. */
+body button.delete-action:not(#wormholes-contrast-sentinel-a):not(#wormholes-contrast-sentinel-b),
+body
+  button.universe-delete-action:not(#wormholes-contrast-sentinel-a):not(
+    #wormholes-contrast-sentinel-b
+  ),
+body .menu .delete-action,
+body .menu .universe-delete-action,
+body .menu .delete-action *,
+body .menu .universe-delete-action * {
+  color: var(--contrast-danger-text) !important;
+  -webkit-text-fill-color: var(--contrast-danger-text) !important;
+}
+
+/* Text-only modal links use a distinct cool accent rather than inheriting button chrome. */
+body .modal-text-button:not(#wormholes-contrast-sentinel-a):not(#wormholes-contrast-sentinel-b),
+body .modal-text-button:not(#wormholes-contrast-sentinel-a):not(#wormholes-contrast-sentinel-b) * {
+  color: var(--contrast-link-text) !important;
+  -webkit-text-fill-color: var(--contrast-link-text) !important;
+}
+
+/* The saved/action toast is intentionally light, so its text remains dark-on-light. */
+.saved-toast,
+.saved-toast * {
+  color: #24201b !important;
+  -webkit-text-fill-color: #24201b !important;
+}
+
+.saved-toast-more-button:not(#wormholes-contrast-sentinel-a):not(#wormholes-contrast-sentinel-b),
+.saved-toast-more-button:not(#wormholes-contrast-sentinel-a):not(#wormholes-contrast-sentinel-b) * {
+  color: #24201b !important;
+  -webkit-text-fill-color: #24201b !important;
+}
+
+.saved-toast-more-button:not(#wormholes-contrast-sentinel-a):not(
+    #wormholes-contrast-sentinel-b
+  ):hover,
+.saved-toast-more-button:not(#wormholes-contrast-sentinel-a):not(
+    #wormholes-contrast-sentinel-b
+  ):active {
+  color: #11100e !important;
+  -webkit-text-fill-color: #11100e !important;
+}
+
+/* Disabled controls were visually disappearing at 42% opacity. */
+button:disabled,
+.app-button[disabled],
+.app-button[aria-disabled="true"],
+.universe-entry-button:disabled,
+.pagination-button:disabled {
+  opacity: 0.62 !important;
+}
+
+/* Light page badge: dark-on-light. */
+.svg-literature-page {
+  fill: #ece5d7 !important;
+  stroke: #18202d !important;
+}
+
+.svg-literature-indicator text,
+.literature-page-count {
+  fill: #18202d !important;
+  color: #18202d !important;
+  -webkit-text-fill-color: #18202d !important;
+}
+
+/* Camera badge: darken its body enough for the small light count to pass contrast. */
+.svg-vision-camera-body {
+  fill: #405967 !important;
+  stroke: #141c26 !important;
+}
+
+.svg-vision-indicator text {
+  fill: #f4efe5 !important;
+  color: #f4efe5 !important;
+  -webkit-text-fill-color: #f4efe5 !important;
+  stroke: rgba(15, 20, 29, 0.82) !important;
+}
+
+/* Count/tag badge remains intentionally light with dark text. */
+.vision-tag-count-badge,
+.badge-light {
+  color: var(--contrast-dark-text) !important;
+  -webkit-text-fill-color: var(--contrast-dark-text) !important;
+}
+
+/* Aggregate map clusters were still using an old tan badge scheme. */
+#connectionsMapWrap .map-aggregate-cluster-halo,
+#wormholesMapWrap .map-aggregate-cluster-halo {
+  fill: rgba(167, 192, 187, 0.12) !important;
+  stroke: rgba(214, 209, 230, 0.28) !important;
+}
+
+#connectionsMapWrap .map-aggregate-cluster-shape,
+#wormholesMapWrap .map-aggregate-cluster-shape {
+  fill: rgba(57, 67, 89, 0.96) !important;
+  stroke: rgba(167, 192, 187, 0.58) !important;
+}
+
+#connectionsMapWrap .map-aggregate-cluster-count,
+#connectionsMapWrap .map-aggregate-cluster-label,
+#wormholesMapWrap .map-aggregate-cluster-label,
+#wormholesMapWrap .map-aggregate-cluster-title {
+  fill: var(--contrast-control-text) !important;
+}
+
+#connectionsMapWrap .map-aggregate-cluster:hover .map-aggregate-cluster-shape,
+#wormholesMapWrap .map-aggregate-cluster:hover .map-aggregate-cluster-shape,
+#connectionsMapWrap .map-aggregate-cluster:focus .map-aggregate-cluster-shape,
+#wormholesMapWrap .map-aggregate-cluster:focus .map-aggregate-cluster-shape {
+  fill: rgba(72, 84, 110, 0.98) !important;
+  stroke: rgba(214, 209, 230, 0.72) !important;
+}
+
+/* Maintain strong text contrast inside all per-universe map bubbles. */
+#connectionsMapWrap .connection-node-title,
+#connectionsMapWrap .connection-node-title tspan,
+#connectionsMapWrap .node-subtitle,
+#connectionsMapWrap .node-subtitle tspan,
+#wormholesMapWrap .wormhole-node-left-text,
+#wormholesMapWrap .wormhole-node-left-text tspan,
+#wormholesMapWrap .wormhole-group-text-top-layer,
+#wormholesMapWrap .wormhole-group-text-top-layer tspan,
+#wormholesMapWrap .wormhole-creation-title-line,
+#wormholesMapWrap .wormhole-creation-subtitle-line,
+#wormholesMapWrap .wormhole-group-title-line,
+#wormholesMapWrap .wormhole-group-child-subtitle-line {
+  fill: var(--contrast-control-text) !important;
+}
+
+#connectionsMapWrap .node-subtitle,
+#connectionsMapWrap .node-subtitle tspan,
+#wormholesMapWrap .wormhole-creation-subtitle-line,
+#wormholesMapWrap .wormhole-group-child-subtitle-line {
+  fill: var(--contrast-secondary-text) !important;
+}
+
+/* Wormholes Reskin 13: finish menu, toast, and badge skin alignment. */
+
+/* Non-Vision three-dot menus should keep the active dark chrome and open from the dot button
+   without falling back to the older parchment look. */
+body .menu-wrap:not(.vision-pin-menu-wrap) {
+  position: relative !important;
+}
+
+body .menu-wrap:not(.vision-pin-menu-wrap).menu-wrap-active,
+.entry.menu-active .menu-wrap:not(.vision-pin-menu-wrap),
+.universe-entry.menu-active .menu-wrap:not(.vision-pin-menu-wrap) {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body .menu-wrap:not(.vision-pin-menu-wrap) > .menu-button[aria-expanded="true"],
+body .menu-wrap:not(.vision-pin-menu-wrap) > .menu-button:active,
+body .menu-wrap:not(.vision-pin-menu-wrap) > .menu-button:focus-visible {
+  color: var(--mist-glow) !important;
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.12), rgba(236, 231, 244, 0.03)),
+    linear-gradient(180deg, rgba(84, 96, 126, 0.98), rgba(56, 65, 87, 0.99)) !important;
+  background-color: rgba(56, 65, 87, 0.99) !important;
+  border-color: rgba(167, 192, 187, 0.42) !important;
+  border-left-color: rgba(167, 192, 187, 0.34) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(236, 231, 244, 0.1),
+    0 4px 12px rgba(0, 0, 0, 0.22) !important;
+}
+
+body .menu-wrap:not(.vision-pin-menu-wrap) > .menu,
+body .menu-wrap:not(.vision-pin-menu-wrap) > .menu.open,
+body .menu-wrap:not(.vision-pin-menu-wrap) > .menu.open-left {
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.05), rgba(236, 231, 244, 0.015)),
+    linear-gradient(180deg, rgba(53, 62, 84, 0.98), rgba(31, 38, 54, 0.995)) !important;
+  background-color: rgba(31, 38, 54, 0.995) !important;
+  border: 1px solid rgba(214, 209, 230, 0.28) !important;
+  border-radius: 18px !important;
+  box-shadow:
+    0 18px 30px rgba(8, 11, 18, 0.34),
+    inset 0 1px 0 rgba(236, 231, 244, 0.05) !important;
+  overflow: hidden !important;
+  min-width: 164px !important;
+}
+
+body .menu-wrap:not(.vision-pin-menu-wrap) > .menu.open-left {
+  top: 0 !important;
+  right: calc(100% + 8px) !important;
+  bottom: auto !important;
+  margin-top: 0 !important;
+  margin-right: 0 !important;
+  transform: none !important;
+}
+
+body .menu-wrap:not(.vision-pin-menu-wrap) > .menu button,
+body .menu-wrap:not(.vision-pin-menu-wrap) > .menu .app-button,
+body .menu-wrap:not(.vision-pin-menu-wrap) > .menu button *,
+body .menu-wrap:not(.vision-pin-menu-wrap) > .menu .app-button * {
+  color: var(--mist-glow) !important;
+  -webkit-text-fill-color: var(--mist-glow) !important;
+  background: transparent !important;
+  text-shadow: none !important;
+}
+
+body .menu-wrap:not(.vision-pin-menu-wrap) > .menu button,
+body .menu-wrap:not(.vision-pin-menu-wrap) > .menu .app-button {
+  min-height: 42px !important;
+  padding: 10px 16px !important;
+  border-bottom: 1px solid rgba(214, 209, 230, 0.14) !important;
+}
+
+body .menu-wrap:not(.vision-pin-menu-wrap) > .menu button:last-child,
+body .menu-wrap:not(.vision-pin-menu-wrap) > .menu .app-button:last-child {
+  border-bottom: 0 !important;
+}
+
+body .menu-wrap:not(.vision-pin-menu-wrap) > .menu button:hover,
+body .menu-wrap:not(.vision-pin-menu-wrap) > .menu .app-button:hover,
+body .menu-wrap:not(.vision-pin-menu-wrap) > .menu button:focus-visible,
+body .menu-wrap:not(.vision-pin-menu-wrap) > .menu .app-button:focus-visible {
+  background: rgba(236, 231, 244, 0.08) !important;
+}
+
+body .menu-wrap:not(.vision-pin-menu-wrap) > .menu .danger,
+body .menu-wrap:not(.vision-pin-menu-wrap) > .menu .danger * {
+  color: #ffd6d8 !important;
+  -webkit-text-fill-color: #ffd6d8 !important;
+}
+
+/* Toasts should match the dark reskin instead of the older cream notification style. */
+.saved-toast,
+.saved-toast.undo-toast,
+.saved-toast.action-toast {
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.06), rgba(236, 231, 244, 0.015)),
+    linear-gradient(180deg, rgba(53, 62, 84, 0.98), rgba(31, 38, 54, 0.995)) !important;
+  background-color: rgba(31, 38, 54, 0.995) !important;
+  border-color: rgba(214, 209, 230, 0.26) !important;
+  box-shadow:
+    0 18px 30px rgba(8, 11, 18, 0.34),
+    inset 0 1px 0 rgba(236, 231, 244, 0.05) !important;
+}
+
+.saved-toast,
+.saved-toast *,
+.undo-toast-message,
+.saved-toast-message {
+  color: var(--mist-glow) !important;
+  -webkit-text-fill-color: var(--mist-glow) !important;
+}
+
+.undo-toast-button,
+.saved-toast-more-button {
+  color: var(--mist-glow) !important;
+  -webkit-text-fill-color: var(--mist-glow) !important;
+}
+
+.undo-toast-button {
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.08), rgba(236, 231, 244, 0.02)),
+    linear-gradient(180deg, rgba(69, 80, 108, 0.98), rgba(45, 53, 73, 0.98)) !important;
+  border: 1px solid rgba(167, 192, 187, 0.32) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(236, 231, 244, 0.08),
+    0 3px 10px rgba(0, 0, 0, 0.22) !important;
+}
+
+.saved-toast-more-button {
+  background: transparent !important;
+}
+
+.saved-toast-more-button:hover,
+.saved-toast-more-button:active {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.undo-toast-progress {
+  background: rgba(236, 231, 244, 0.16) !important;
+}
+
+/* Page badges need explicit dark numerals on the light paper badge. */
+.literature-link-indicator .literature-page-count,
+.group-literature-badge-stack .literature-page-count,
+.svg-literature-indicator text,
+.svg-literature-indicator .literature-page-count,
+.literature-page-count {
+  color: #18202d !important;
+  fill: #18202d !important;
+  -webkit-text-fill-color: #18202d !important;
+  stroke: none !important;
+  text-shadow: none !important;
+}
+
+/* Camera badges in map views should be darker so the small light count is easier to read. */
+#connectionsMapWrap .svg-vision-camera-body,
+#wormholesMapWrap .svg-vision-camera-body,
+.svg-vision-indicator .svg-vision-camera-body {
+  fill: #263548 !important;
+  stroke: #0f1721 !important;
+}
+
+#connectionsMapWrap .svg-vision-camera-lens,
+#wormholesMapWrap .svg-vision-camera-lens,
+.svg-vision-indicator .svg-vision-camera-lens {
+  stroke: #f3eee3 !important;
+}
+
+#connectionsMapWrap .svg-vision-indicator text,
+#wormholesMapWrap .svg-vision-indicator text,
+.svg-vision-indicator text {
+  fill: #f3eee3 !important;
+  color: #f3eee3 !important;
+  -webkit-text-fill-color: #f3eee3 !important;
+  stroke: rgba(10, 14, 20, 0.9) !important;
+}
+
+/* Wormholes Reskin 14: structural ellipsis-menu overlay fix and hardened map badge counts. */
+
+/* The base theme's broad .menu surface rule made shared menus position:relative.
+   Restore actual popup behavior so opening a menu never changes row/card height. */
+#archiveListScreen .entry-top > .menu-wrap > .menu,
+#literatureListScreen .entry-top > .menu-wrap > .menu,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu,
+.ellipsis-row > .ellipsis-row-actions > .menu {
+  position: absolute !important;
+  display: none !important;
+  z-index: 1002 !important;
+  width: max-content !important;
+  min-width: 164px !important;
+  max-width: min(290px, calc(100vw - 32px)) !important;
+}
+
+#archiveListScreen .entry-top > .menu-wrap > .menu.open,
+#literatureListScreen .entry-top > .menu-wrap > .menu.open,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu.open,
+.ellipsis-row > .ellipsis-row-actions > .menu.open {
+  display: block !important;
+}
+
+/* openPositionedMenu() uses open-left by default. Anchor the popup to the ellipsis
+   segment itself, without translating or moving the trigger. */
+#archiveListScreen .entry-top > .menu-wrap > .menu.open-left,
+#literatureListScreen .entry-top > .menu-wrap > .menu.open-left,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu.open-left,
+.ellipsis-row > .ellipsis-row-actions > .menu.open-left {
+  top: 0 !important;
+  right: calc(100% + 8px) !important;
+  bottom: auto !important;
+  left: auto !important;
+  margin: 0 !important;
+  transform: none !important;
+}
+
+/* Keep the row and trigger geometry fixed while the popup is open. */
+#archiveListScreen .entry.menu-active .entry-top,
+#literatureListScreen .entry.menu-active .entry-top,
+#universeArchiveModal .universe-entry.menu-active,
+.ellipsis-row.menu-active {
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+#archiveListScreen .entry-top > .menu-wrap,
+#literatureListScreen .entry-top > .menu-wrap,
+#universeArchiveModal .universe-entry > .menu-wrap,
+.ellipsis-row > .ellipsis-row-actions {
+  position: relative !important;
+  flex: 0 0 auto !important;
+  align-self: stretch !important;
+  overflow: visible !important;
+}
+
+/* The original split-row selectors use IDs and !important, so explicitly outrank
+   them to keep the three-dot segment in the reskin's active dark color. */
+#archiveListScreen .entry-top > .menu-wrap > .menu-button[aria-expanded="true"],
+#literatureListScreen .entry-top > .menu-wrap > .menu-button[aria-expanded="true"],
+#universeArchiveModal .universe-entry > .menu-wrap > .menu-button[aria-expanded="true"],
+#archiveListScreen .entry-top > .menu-wrap > .menu-button:active,
+#literatureListScreen .entry-top > .menu-wrap > .menu-button:active,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu-button:active,
+.ellipsis-row > .ellipsis-row-actions > .menu-button[aria-expanded="true"] {
+  color: var(--mist-glow) !important;
+  -webkit-text-fill-color: var(--mist-glow) !important;
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.12), rgba(236, 231, 244, 0.03)),
+    linear-gradient(180deg, rgba(84, 96, 126, 0.99), rgba(56, 65, 87, 0.995)) !important;
+  background-color: rgba(56, 65, 87, 0.995) !important;
+  background-image:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.12), rgba(236, 231, 244, 0.03)),
+    linear-gradient(180deg, rgba(84, 96, 126, 0.99), rgba(56, 65, 87, 0.995)) !important;
+  border-left-color: rgba(167, 192, 187, 0.42) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(236, 231, 244, 0.1),
+    0 0 0 1px rgba(167, 192, 187, 0.12) inset !important;
+  text-shadow: none !important;
+  transform: none !important;
+}
+
+/* Keep popup menu chrome entirely in the current skin. */
+#archiveListScreen .entry-top > .menu-wrap > .menu.open,
+#literatureListScreen .entry-top > .menu-wrap > .menu.open,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu.open,
+.ellipsis-row > .ellipsis-row-actions > .menu.open {
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.05), rgba(236, 231, 244, 0.015)),
+    linear-gradient(180deg, rgba(53, 62, 84, 0.99), rgba(31, 38, 54, 0.998)) !important;
+  background-color: rgba(31, 38, 54, 0.998) !important;
+  border: 1px solid rgba(214, 209, 230, 0.3) !important;
+  border-radius: 18px !important;
+  box-shadow:
+    0 18px 30px rgba(8, 11, 18, 0.38),
+    inset 0 1px 0 rgba(236, 231, 244, 0.05) !important;
+  overflow: hidden !important;
+}
+
+/* Reskin 12's global dark-surface button rule uses two ID selectors inside :not().
+   Match that specificity and add badge-specific selectors so page counts stay dark and bold. */
+body
+  button.literature-link-indicator:not(#wormholes-contrast-sentinel-a):not(
+    #wormholes-contrast-sentinel-b
+  )
+  .literature-page-count,
+body
+  .group-literature-badge-stack:not(#wormholes-contrast-sentinel-a):not(
+    #wormholes-contrast-sentinel-b
+  )
+  .literature-page-count,
+body
+  .svg-literature-indicator:not(#wormholes-contrast-sentinel-a):not(#wormholes-contrast-sentinel-b)
+  text {
+  color: #18202d !important;
+  fill: #18202d !important;
+  -webkit-text-fill-color: #18202d !important;
+  stroke: none !important;
+  text-shadow: none !important;
+  font-weight: 900 !important;
+}
+
+/* Camera badge count stays light and bold against the darker camera body. */
+body
+  .svg-vision-indicator:not(#wormholes-contrast-sentinel-a):not(#wormholes-contrast-sentinel-b)
+  text {
+  color: #f7f3e9 !important;
+  fill: #f7f3e9 !important;
+  -webkit-text-fill-color: #f7f3e9 !important;
+  stroke: rgba(10, 14, 20, 0.92) !important;
+  stroke-width: 0.8px !important;
+  paint-order: stroke fill !important;
+  font-weight: 900 !important;
+}
+
+/* Wormholes Reskin 15: make Vision Board ellipsis menus visually identical to
+   the shared Archive/Literature/Enter Universe menu system while preserving the
+   Vision Board's already-correct absolute overlay positioning. */
+
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu-button[aria-expanded="true"],
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu-button:active,
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu-button:focus-visible {
+  color: var(--mist-glow) !important;
+  -webkit-text-fill-color: var(--mist-glow) !important;
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.12), rgba(236, 231, 244, 0.03)),
+    linear-gradient(180deg, rgba(84, 96, 126, 0.99), rgba(56, 65, 87, 0.995)) !important;
+  background-color: rgba(56, 65, 87, 0.995) !important;
+  border-color: rgba(167, 192, 187, 0.42) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(236, 231, 244, 0.1),
+    0 0 0 1px rgba(167, 192, 187, 0.12) inset,
+    0 4px 12px rgba(0, 0, 0, 0.22) !important;
+  text-shadow: none !important;
+  transform: none !important;
+}
+
+#visionTab .vision-pin-menu-wrap > .menu,
+#visionTab .vision-pin-menu-wrap > .menu.open,
+#visionTab .vision-pin-menu-wrap > .menu.open-left,
+#visionTab .vision-pin.menu-active .vision-pin-menu-wrap > .menu.open,
+#visionTab .vision-pin.menu-active .vision-pin-menu-wrap > .menu.open-left {
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.05), rgba(236, 231, 244, 0.015)),
+    linear-gradient(180deg, rgba(53, 62, 84, 0.99), rgba(31, 38, 54, 0.998)) !important;
+  background-color: rgba(31, 38, 54, 0.998) !important;
+  border: 1px solid rgba(214, 209, 230, 0.3) !important;
+  border-radius: 18px !important;
+  box-shadow:
+    0 18px 30px rgba(8, 11, 18, 0.38),
+    inset 0 1px 0 rgba(236, 231, 244, 0.05) !important;
+  overflow: hidden !important;
+  min-width: 164px !important;
+  max-width: min(290px, calc(100vw - 32px)) !important;
+}
+
+/* Preserve the working Vision Board overlay placement. */
+#visionTab .vision-pin.menu-active .vision-pin-menu-wrap {
+  position: absolute !important;
+  top: 7px !important;
+  right: 7px !important;
+  z-index: 1001 !important;
+}
+
+#visionTab .vision-pin-menu-wrap > .menu.open,
+#visionTab .vision-pin-menu-wrap > .menu.open-left,
+#visionTab .vision-pin.menu-active .vision-pin-menu-wrap > .menu.open,
+#visionTab .vision-pin.menu-active .vision-pin-menu-wrap > .menu.open-left {
+  position: absolute !important;
+  left: calc(100% + 8px) !important;
+  right: auto !important;
+  top: 0 !important;
+  bottom: auto !important;
+  margin: 0 !important;
+  transform: none !important;
+}
+
+#visionTab .vision-pin-menu-wrap > .menu button,
+#visionTab .vision-pin-menu-wrap > .menu .app-button,
+#visionTab .vision-pin-menu-wrap > .menu button *,
+#visionTab .vision-pin-menu-wrap > .menu .app-button * {
+  color: var(--mist-glow) !important;
+  -webkit-text-fill-color: var(--mist-glow) !important;
+  background: transparent !important;
+  text-shadow: none !important;
+}
+
+#visionTab .vision-pin-menu-wrap > .menu button,
+#visionTab .vision-pin-menu-wrap > .menu .app-button {
+  display: block !important;
+  width: 100% !important;
+  min-height: 42px !important;
+  padding: 10px 16px !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(214, 209, 230, 0.14) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-align: left !important;
+}
+
+#visionTab .vision-pin-menu-wrap > .menu button:last-child,
+#visionTab .vision-pin-menu-wrap > .menu .app-button:last-child {
+  border-bottom: 0 !important;
+}
+
+#visionTab .vision-pin-menu-wrap > .menu button:hover,
+#visionTab .vision-pin-menu-wrap > .menu .app-button:hover,
+#visionTab .vision-pin-menu-wrap > .menu button:focus-visible,
+#visionTab .vision-pin-menu-wrap > .menu .app-button:focus-visible {
+  background: rgba(236, 231, 244, 0.08) !important;
+}
+
+#visionTab .vision-pin-menu-wrap > .menu .danger,
+#visionTab .vision-pin-menu-wrap > .menu .danger *,
+#visionTab .vision-pin-menu-wrap > .menu [data-vision-delete],
+#visionTab .vision-pin-menu-wrap > .menu [data-vision-delete] * {
+  color: #ffd6d8 !important;
+  -webkit-text-fill-color: #ffd6d8 !important;
+}
+
+/* Wormholes Reskin 16: unify Vision Board ellipsis menus with the rounded
+   bubble-in-frame style used by the other ellipsis menus. Keep the working overlay
+   placement, but make each item a rounded blue capsule inside the shared rounded shell. */
+#visionTab .vision-pin-menu-wrap > .menu,
+#visionTab .vision-pin-menu-wrap > .menu.open,
+#visionTab .vision-pin-menu-wrap > .menu.open-left,
+#visionTab .vision-pin.menu-active .vision-pin-menu-wrap > .menu.open,
+#visionTab .vision-pin.menu-active .vision-pin-menu-wrap > .menu.open-left {
+  padding: 6px !important;
+  border-radius: 22px !important;
+  min-width: 210px !important;
+  max-width: min(320px, calc(100vw - 32px)) !important;
+}
+
+#visionTab .vision-pin-menu-wrap > .menu button,
+#visionTab .vision-pin-menu-wrap > .menu .app-button {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  min-height: 52px !important;
+  padding: 12px 16px !important;
+  margin: 0 0 4px 0 !important;
+  border: 1px solid rgba(214, 209, 230, 0.18) !important;
+  border-radius: 999px !important;
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.045), rgba(236, 231, 244, 0.012)),
+    linear-gradient(180deg, rgba(70, 81, 108, 0.88), rgba(43, 52, 74, 0.96)) !important;
+  background-color: rgba(43, 52, 74, 0.96) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(236, 231, 244, 0.06),
+    inset 0 -1px 0 rgba(15, 21, 31, 0.18) !important;
+  text-align: left !important;
+}
+
+#visionTab .vision-pin-menu-wrap > .menu button:last-child,
+#visionTab .vision-pin-menu-wrap > .menu .app-button:last-child {
+  margin-bottom: 0 !important;
+}
+
+#visionTab .vision-pin-menu-wrap > .menu button:hover,
+#visionTab .vision-pin-menu-wrap > .menu .app-button:hover,
+#visionTab .vision-pin-menu-wrap > .menu button:focus-visible,
+#visionTab .vision-pin-menu-wrap > .menu .app-button:focus-visible {
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.07), rgba(236, 231, 244, 0.02)),
+    linear-gradient(180deg, rgba(79, 90, 119, 0.92), rgba(50, 60, 82, 0.98)) !important;
+  background-color: rgba(50, 60, 82, 0.98) !important;
+}
+
+#visionTab .vision-pin-menu-wrap > .menu .danger,
+#visionTab .vision-pin-menu-wrap > .menu .danger *,
+#visionTab .vision-pin-menu-wrap > .menu [data-vision-delete],
+#visionTab .vision-pin-menu-wrap > .menu [data-vision-delete] * {
+  color: #ffd6d8 !important;
+  -webkit-text-fill-color: #ffd6d8 !important;
+}
+
+/* Wormholes Reskin 17: match Vision Board menu size and spacing to the shared
+   ellipsis-menu system while preserving the rounded bubble-in-frame structure. */
+#visionTab .vision-pin-menu-wrap > .menu,
+#visionTab .vision-pin-menu-wrap > .menu.open,
+#visionTab .vision-pin-menu-wrap > .menu.open-left,
+#visionTab .vision-pin.menu-active .vision-pin-menu-wrap > .menu.open,
+#visionTab .vision-pin.menu-active .vision-pin-menu-wrap > .menu.open-left {
+  padding: 3px !important;
+  border-radius: 18px !important;
+  min-width: 164px !important;
+  width: max-content !important;
+  max-width: min(260px, calc(100vw - 32px)) !important;
+}
+
+#visionTab .vision-pin-menu-wrap > .menu button,
+#visionTab .vision-pin-menu-wrap > .menu .app-button {
+  min-height: 42px !important;
+  padding: 10px 16px !important;
+  margin: 0 0 2px 0 !important;
+  font-size: 1rem !important;
+  line-height: 1.2 !important;
+  border-radius: 999px !important;
+}
+
+#visionTab .vision-pin-menu-wrap > .menu button:last-child,
+#visionTab .vision-pin-menu-wrap > .menu .app-button:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Wormholes Reskin 18: make Vision Board ellipsis menus match the shared
+   ellipsis menu system in size, spacing, and item construction. Preserve only the
+   Vision Board-specific overlay positioning beside the image. */
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu,
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu.open,
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu.open-left,
+#visionTab .vision-pin.menu-active .vision-pin-menu-wrap > .vision-pin-menu.menu.open,
+#visionTab .vision-pin.menu-active .vision-pin-menu-wrap > .vision-pin-menu.menu.open-left {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  padding: 2px !important;
+  border-radius: 18px !important;
+  min-width: 164px !important;
+  width: auto !important;
+  max-width: min(240px, calc(100vw - 32px)) !important;
+}
+
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu > button.app-button {
+  display: block !important;
+  width: 100% !important;
+  min-height: 42px !important;
+  padding: 10px 16px !important;
+  margin: 0 !important;
+  border: 1px solid rgba(214, 209, 230, 0.18) !important;
+  border-bottom: 1px solid rgba(214, 209, 230, 0.18) !important;
+  border-radius: 999px !important;
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.045), rgba(236, 231, 244, 0.012)),
+    linear-gradient(180deg, rgba(70, 81, 108, 0.88), rgba(43, 52, 74, 0.96)) !important;
+  background-color: rgba(43, 52, 74, 0.96) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(236, 231, 244, 0.06),
+    inset 0 -1px 0 rgba(15, 21, 31, 0.18) !important;
+  text-align: left !important;
+  line-height: 1.2 !important;
+  font-size: 1rem !important;
+}
+
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu > button.app-button:hover,
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu > button.app-button:focus-visible {
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.07), rgba(236, 231, 244, 0.02)),
+    linear-gradient(180deg, rgba(79, 90, 119, 0.92), rgba(50, 60, 82, 0.98)) !important;
+  background-color: rgba(50, 60, 82, 0.98) !important;
+}
+
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu > .vision-delete-action,
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu > .vision-delete-action * {
+  color: #ffd6d8 !important;
+  -webkit-text-fill-color: #ffd6d8 !important;
+}
+
+/* Wormholes Reskin 19: ONE ellipsis-menu system for every app area.
+   All ellipsis menus share the exact same shell, item geometry, color, type,
+   spacing, hover behavior, and active-trigger state. Only popup direction differs. */
+
+/* Shared trigger active state. */
+#archiveListScreen .entry-top > .menu-wrap > .menu-button[aria-expanded="true"],
+#literatureListScreen .entry-top > .menu-wrap > .menu-button[aria-expanded="true"],
+#universeArchiveModal .universe-entry > .menu-wrap > .menu-button[aria-expanded="true"],
+.ellipsis-row > .ellipsis-row-actions > .menu-button[aria-expanded="true"],
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu-button[aria-expanded="true"] {
+  color: var(--mist-glow) !important;
+  -webkit-text-fill-color: var(--mist-glow) !important;
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.12), rgba(236, 231, 244, 0.03)),
+    linear-gradient(180deg, rgba(84, 96, 126, 0.99), rgba(56, 65, 87, 0.995)) !important;
+  background-color: rgba(56, 65, 87, 0.995) !important;
+  border-color: rgba(167, 192, 187, 0.42) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(236, 231, 244, 0.1),
+    0 0 0 1px rgba(167, 192, 187, 0.12) inset,
+    0 4px 12px rgba(0, 0, 0, 0.22) !important;
+  text-shadow: none !important;
+  transform: none !important;
+}
+
+/* Shared popup shell — closed by default. */
+#archiveListScreen .entry-top > .menu-wrap > .menu,
+#literatureListScreen .entry-top > .menu-wrap > .menu,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu,
+.ellipsis-row > .ellipsis-row-actions > .menu,
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu {
+  position: absolute !important;
+  display: none !important;
+  z-index: 1002 !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  width: max-content !important;
+  min-width: 164px !important;
+  max-width: min(290px, calc(100vw - 32px)) !important;
+  padding: 2px !important;
+  margin: 0 !important;
+  border: 1px solid rgba(214, 209, 230, 0.3) !important;
+  border-radius: 18px !important;
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.05), rgba(236, 231, 244, 0.015)),
+    linear-gradient(180deg, rgba(53, 62, 84, 0.99), rgba(31, 38, 54, 0.998)) !important;
+  background-color: rgba(31, 38, 54, 0.998) !important;
+  box-shadow:
+    0 18px 30px rgba(8, 11, 18, 0.38),
+    inset 0 1px 0 rgba(236, 231, 244, 0.05) !important;
+  overflow: hidden !important;
+  transform: none !important;
+}
+
+/* Shared open state. */
+#archiveListScreen .entry-top > .menu-wrap > .menu.open,
+#literatureListScreen .entry-top > .menu-wrap > .menu.open,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu.open,
+.ellipsis-row > .ellipsis-row-actions > .menu.open,
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu.open {
+  display: flex !important;
+}
+
+/* Archive/Literature/Universe open to the left of their fixed ellipsis segment. */
+#archiveListScreen .entry-top > .menu-wrap > .menu.open-left,
+#literatureListScreen .entry-top > .menu-wrap > .menu.open-left,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu.open-left,
+.ellipsis-row > .ellipsis-row-actions > .menu.open-left {
+  top: 0 !important;
+  right: calc(100% + 8px) !important;
+  bottom: auto !important;
+  left: auto !important;
+}
+
+/* Vision Board uses the same popup, opening to the right so the image remains visible. */
+#visionTab .vision-pin.menu-active .vision-pin-menu-wrap {
+  position: absolute !important;
+  top: 7px !important;
+  right: 7px !important;
+  z-index: 1001 !important;
+}
+
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu.open,
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu.open-left {
+  top: 0 !important;
+  left: calc(100% + 8px) !important;
+  right: auto !important;
+  bottom: auto !important;
+}
+
+/* EXACT shared menu item construction. */
+#archiveListScreen .entry-top > .menu-wrap > .menu > button,
+#literatureListScreen .entry-top > .menu-wrap > .menu > button,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu > button,
+.ellipsis-row > .ellipsis-row-actions > .menu > button,
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu > button {
+  display: block !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 42px !important;
+  height: auto !important;
+  padding: 10px 16px !important;
+  margin: 0 !important;
+  border: 1px solid rgba(214, 209, 230, 0.18) !important;
+  border-radius: 999px !important;
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.045), rgba(236, 231, 244, 0.012)),
+    linear-gradient(180deg, rgba(70, 81, 108, 0.88), rgba(43, 52, 74, 0.96)) !important;
+  background-color: rgba(43, 52, 74, 0.96) !important;
+  color: var(--mist-glow) !important;
+  -webkit-text-fill-color: var(--mist-glow) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(236, 231, 244, 0.06),
+    inset 0 -1px 0 rgba(15, 21, 31, 0.18) !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0 !important;
+  text-align: left !important;
+  white-space: nowrap !important;
+  text-shadow: none !important;
+  transform: none !important;
+}
+
+/* Shared hover/focus. */
+#archiveListScreen .entry-top > .menu-wrap > .menu > button:hover,
+#literatureListScreen .entry-top > .menu-wrap > .menu > button:hover,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu > button:hover,
+.ellipsis-row > .ellipsis-row-actions > .menu > button:hover,
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu > button:hover,
+#archiveListScreen .entry-top > .menu-wrap > .menu > button:focus-visible,
+#literatureListScreen .entry-top > .menu-wrap > .menu > button:focus-visible,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu > button:focus-visible,
+.ellipsis-row > .ellipsis-row-actions > .menu > button:focus-visible,
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu > button:focus-visible {
+  background:
+    linear-gradient(180deg, rgba(236, 231, 244, 0.07), rgba(236, 231, 244, 0.02)),
+    linear-gradient(180deg, rgba(79, 90, 119, 0.92), rgba(50, 60, 82, 0.98)) !important;
+  background-color: rgba(50, 60, 82, 0.98) !important;
+}
+
+/* Shared destructive-action treatment. */
+#archiveListScreen .entry-top > .menu-wrap > .menu > .delete-action,
+#archiveListScreen .entry-top > .menu-wrap > .menu > .delete-action *,
+#literatureListScreen .entry-top > .menu-wrap > .menu > .delete-action,
+#literatureListScreen .entry-top > .menu-wrap > .menu > .delete-action *,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu > .universe-delete-action,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu > .universe-delete-action *,
+.ellipsis-row > .ellipsis-row-actions > .menu > .delete-action,
+.ellipsis-row > .ellipsis-row-actions > .menu > .delete-action *,
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu > .vision-delete-action,
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu > .vision-delete-action * {
+  color: #ffd6d8 !important;
+  -webkit-text-fill-color: #ffd6d8 !important;
+}
+
+/* Wormholes Reskin 20: tighten all ellipsis menu sizing and make selected
+   checkbox checkmarks light across the app. */
+
+/* Smaller shared ellipsis menu shells across all screens, including Vision Board. */
+#archiveListScreen .entry-top > .menu-wrap > .menu,
+#literatureListScreen .entry-top > .menu-wrap > .menu,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu,
+.ellipsis-row > .ellipsis-row-actions > .menu,
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu {
+  min-width: 148px !important;
+  max-width: min(250px, calc(100vw - 32px)) !important;
+  padding: 1px !important;
+  gap: 1px !important;
+  border-radius: 16px !important;
+}
+
+#archiveListScreen .entry-top > .menu-wrap > .menu > button,
+#literatureListScreen .entry-top > .menu-wrap > .menu > button,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu > button,
+.ellipsis-row > .ellipsis-row-actions > .menu > button,
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu > button {
+  min-height: 36px !important;
+  padding: 8px 14px !important;
+  font-size: 0.94rem !important;
+  line-height: 1.15 !important;
+}
+
+/* Slightly smaller shared three-dot trigger size so menus feel tighter overall. */
+.ellipsis-row > .ellipsis-row-actions > .menu-button,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu-button,
+#archiveListScreen .entry-top > .menu-wrap > .menu-button,
+#literatureListScreen .entry-top > .menu-wrap > .menu-button,
+body .menu-wrap > .menu-button,
+body .vision-pin-menu-wrap > .vision-pin-menu-button {
+  min-width: 48px !important;
+  width: 48px !important;
+  min-height: 48px !important;
+  height: 48px !important;
+  border-radius: 16px !important;
+}
+
+/* Selected checkbox checkmarks must always read as light on darker selected states. */
+input[type="checkbox"]:checked {
+  background: linear-gradient(180deg, rgba(83, 104, 135, 0.98), rgba(59, 76, 103, 0.98)) !important;
+  border-color: rgba(167, 192, 187, 0.56) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(236, 231, 244, 0.08),
+    0 0 0 1px rgba(20, 24, 35, 0.24) !important;
+}
+
+input[type="checkbox"]:checked::after,
+.map-filter-panel .map-filter-toggle input[type="checkbox"]:checked::after {
+  border-color: #f5f2ea !important;
+  color: #f5f2ea !important;
+  opacity: 1 !important;
+}
+
+/* Extra specificity for storage/settings toggles and map filters. */
+.storage-toggle input[type="checkbox"]:checked::after,
+.storage-row input[type="checkbox"]:checked::after,
+.map-filter-toggle input[type="checkbox"]:checked::after,
+label:has(> input[type="checkbox"]:checked) input[type="checkbox"]:checked::after {
+  border-color: #f5f2ea !important;
+}
+
+/* Wormholes Reskin 21: make every ellipsis menu distinctly compact. */
+#archiveListScreen .entry-top > .menu-wrap > .menu,
+#literatureListScreen .entry-top > .menu-wrap > .menu,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu,
+.ellipsis-row > .ellipsis-row-actions > .menu,
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu {
+  min-width: 118px !important;
+  width: max-content !important;
+  max-width: min(210px, calc(100vw - 24px)) !important;
+  padding: 1px !important;
+  gap: 0 !important;
+  border-radius: 12px !important;
+}
+
+#archiveListScreen .entry-top > .menu-wrap > .menu > button,
+#literatureListScreen .entry-top > .menu-wrap > .menu > button,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu > button,
+.ellipsis-row > .ellipsis-row-actions > .menu > button,
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu > button {
+  min-height: 30px !important;
+  height: auto !important;
+  padding: 5px 10px !important;
+  margin: 0 !important;
+  border-radius: 10px !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  line-height: 1.08 !important;
+  white-space: nowrap !important;
+}
+
+.ellipsis-row > .ellipsis-row-actions > .menu-button,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu-button,
+#archiveListScreen .entry-top > .menu-wrap > .menu-button,
+#literatureListScreen .entry-top > .menu-wrap > .menu-button,
+body .menu-wrap > .menu-button,
+body .vision-pin-menu-wrap > .vision-pin-menu-button {
+  min-width: 38px !important;
+  width: 38px !important;
+  min-height: 38px !important;
+  height: 38px !important;
+  padding: 4px 6px !important;
+  border-radius: 12px !important;
+  font-size: 1rem !important;
+  line-height: 1 !important;
+}
+
+/* Keep long action labels compact without inflating every menu. */
+#archiveListScreen .entry-top > .menu-wrap > .menu > button,
+#literatureListScreen .entry-top > .menu-wrap > .menu > button,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu > button,
+.ellipsis-row > .ellipsis-row-actions > .menu > button,
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu > button {
+  max-width: 210px !important;
+}
+
+/* Wormholes Reskin 22: restore full-height list ellipsis triggers outside Vision Board,
+   while shrinking the Vision Board expanded popup to match the other compact ellipsis menus. */
+
+/* 1) Restore the non-Vision three-dot buttons to full row height and original presence. */
+.ellipsis-row > .ellipsis-row-actions > .menu-button,
+#universeArchiveModal .universe-entry > .menu-wrap > .menu-button,
+#archiveListScreen .entry-top > .menu-wrap > .menu-button,
+#literatureListScreen .entry-top > .menu-wrap > .menu-button {
+  align-self: stretch !important;
+  width: 44px !important;
+  min-width: 44px !important;
+  height: auto !important;
+  min-height: 100% !important;
+  padding: 8px 10px !important;
+  border-radius: 0 calc(var(--ellipsis-row-local-radius) - 1px)
+    calc(var(--ellipsis-row-local-radius) - 1px) 0 !important;
+  font-size: 1.08rem !important;
+  line-height: 1 !important;
+}
+
+/* 2) Vision Board popup must match the compact popup size of the other ellipsis menus. */
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu,
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu.open,
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu.open-left {
+  min-width: 118px !important;
+  width: max-content !important;
+  max-width: min(210px, calc(100vw - 24px)) !important;
+  padding: 1px !important;
+  gap: 0 !important;
+  border-radius: 12px !important;
+}
+
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu > button.app-button,
+#visionTab .vision-pin-menu-wrap > .vision-pin-menu.menu > button {
+  min-height: 30px !important;
+  height: auto !important;
+  padding: 5px 10px !important;
+  margin: 0 !important;
+  border-radius: 10px !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  line-height: 1.08 !important;
+  white-space: nowrap !important;
+  max-width: 210px !important;
+}
+
+/* Wormholes Reskin 23: stronger visual hierarchy for universes inside Manage Bridges
+   and Connections maps. Orbit/system graphics are the darkest and dimmest, universe
+   title nodes are the lightest/most opaque, and ordinary universe entities sit between. */
+#wormholesMapWrap .wormhole-system-bg {
+  fill: var(--map-system-bg) !important;
+  opacity: 0.98 !important;
+}
+
+#wormholesMapWrap .wormhole-system-halo {
+  fill: var(--map-system-halo) !important;
+  opacity: 0.92 !important;
+}
+
+#wormholesMapWrap .wormhole-orbit,
+#connectionsMapWrap .connections-orbit-guides ellipse {
+  stroke: var(--map-orbit-stroke) !important;
+  opacity: 0.9 !important;
+}
+
+#connectionsMapWrap .connection-node.connection-group-node > rect,
+#connectionsMapWrap .connection-node.external-group-node > rect,
+#connectionsMapWrap .connection-node.connection-group-child-node rect,
+#connectionsMapWrap .connection-node[data-type="creation"] rect,
+#connectionsMapWrap .connection-node[data-type="external"] rect,
+#wormholesMapWrap .wormhole-group-shell .wormhole-node-shape,
+#wormholesMapWrap .wormhole-creation .wormhole-node-shape,
+#wormholesMapWrap .wormhole-group-child-node .wormhole-node-shape {
+  opacity: 1 !important;
+}
+
+#connectionsMapWrap .current-universe-center-node rect,
+#connectionsMapWrap .external-universe-node rect,
+#wormholesMapWrap .wormhole-cluster-title .wormhole-node-shape {
+  opacity: 1 !important;
+  filter: saturate(1.08) brightness(1.03) !important;
+}
+
+/* Wormholes Reskin 24: make universe title nodes a lighter tier across all maps. */
+#connectionsMapWrap .current-universe-center-node rect,
+#connectionsMapWrap .external-universe-node rect,
+#wormholesMapWrap .wormhole-cluster-title .wormhole-node-shape {
+  filter: saturate(1.06) brightness(1.1) !important;
+}
+
+/* Wormholes Reskin 25: make universe title nodes a bit lighter and switch their
+   text to a darker ink where needed so the lighter parent bubble keeps contrast. */
+#connectionsMapWrap .current-universe-center-node .connection-node-title,
+#connectionsMapWrap .current-universe-center-node .connection-node-title tspan,
+#connectionsMapWrap .current-universe-center-node .node-subtitle,
+#connectionsMapWrap .current-universe-center-node .node-subtitle tspan,
+#connectionsMapWrap .external-universe-node .connection-node-title,
+#connectionsMapWrap .external-universe-node .connection-node-title tspan,
+#connectionsMapWrap .external-universe-node .node-subtitle,
+#connectionsMapWrap .external-universe-node .node-subtitle tspan,
+#wormholesMapWrap .wormhole-cluster-title text,
+#wormholesMapWrap .wormhole-cluster-title tspan,
+#wormholesMapWrap .wormhole-cluster-title .wormhole-creation-title-line,
+#wormholesMapWrap .wormhole-cluster-title .wormhole-creation-subtitle-line {
+  fill: rgba(17, 23, 34, 0.94) !important;
+}
+
+#wormholesMapWrap .wormhole-cluster-title.bridge-source > text,
+#wormholesMapWrap .wormhole-cluster-title.connected > text,
+#wormholesMapWrap .wormhole-cluster.focused .wormhole-cluster-title > text,
+#connectionsMapWrap .current-universe-center-node.selected .connection-node-title,
+#connectionsMapWrap .current-universe-center-node.selected .connection-node-title tspan,
+#connectionsMapWrap .current-universe-center-node.selected .node-subtitle,
+#connectionsMapWrap .current-universe-center-node.selected .node-subtitle tspan,
+#connectionsMapWrap .external-universe-node.selected .connection-node-title,
+#connectionsMapWrap .external-universe-node.selected .connection-node-title tspan,
+#connectionsMapWrap .external-universe-node.selected .node-subtitle,
+#connectionsMapWrap .external-universe-node.selected .node-subtitle tspan {
+  fill: rgba(14, 19, 28, 0.96) !important;
+}
+
+/* Wormholes Reskin 26: restore light universe-title text and turn universe-title
+   bubbles into outlined shells that use the current universe color as a thick border. */
+#connectionsMapWrap .current-universe-center-node rect,
+#connectionsMapWrap .external-universe-node rect,
+#wormholesMapWrap .wormhole-cluster-title .wormhole-node-shape {
+  fill: transparent !important;
+  stroke: var(--map-universe-fill) !important;
+  stroke-width: 4px !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+#connectionsMapWrap .current-universe-center-node .connection-node-title,
+#connectionsMapWrap .current-universe-center-node .connection-node-title tspan,
+#connectionsMapWrap .current-universe-center-node .node-subtitle,
+#connectionsMapWrap .current-universe-center-node .node-subtitle tspan,
+#connectionsMapWrap .external-universe-node .connection-node-title,
+#connectionsMapWrap .external-universe-node .connection-node-title tspan,
+#connectionsMapWrap .external-universe-node .node-subtitle,
+#connectionsMapWrap .external-universe-node .node-subtitle tspan,
+#wormholesMapWrap .wormhole-cluster-title text,
+#wormholesMapWrap .wormhole-cluster-title tspan,
+#wormholesMapWrap .wormhole-cluster-title .wormhole-creation-title-line,
+#wormholesMapWrap .wormhole-cluster-title .wormhole-creation-subtitle-line,
+#wormholesMapWrap .wormhole-cluster-title.bridge-source > text,
+#wormholesMapWrap .wormhole-cluster-title.connected > text,
+#wormholesMapWrap .wormhole-cluster.focused .wormhole-cluster-title > text {
+  fill: var(--mist-glow) !important;
+}
+
+#connectionsMapWrap .current-universe-center-node.selected rect,
+#connectionsMapWrap .external-universe-node.selected rect,
+#wormholesMapWrap .wormhole-cluster-title.connected .wormhole-node-shape,
+#wormholesMapWrap .wormhole-cluster-title.bridge-source .wormhole-node-shape,
+#wormholesMapWrap .wormhole-cluster.focused .wormhole-cluster-title .wormhole-node-shape {
+  stroke-width: 4.5px !important;
+}
+
+/* Wormholes Reskin 27: in the Connections modal, make cross-universe link targets
+   read as three clear tiers so it is obvious whether a bridge points to a universe title
+   or to an entity inside that universe. Universe titles use the shell treatment, universe
+   entities use a softer filled treatment, and orbit graphics remain the dimmest tier. */
+#connectionsMapWrap .connections-orbit-guides ellipse {
+  stroke: var(--map-orbit-stroke) !important;
+  stroke-opacity: 0.3 !important;
+  fill: none !important;
+}
+
+#connectionsMapWrap .connection-node.external-universe-node rect,
+#connectionsMapWrap .current-universe-center-node rect {
+  fill: transparent !important;
+  fill-opacity: 0 !important;
+  stroke: var(--map-universe-fill) !important;
+  stroke-opacity: 0.98 !important;
+  stroke-width: 4px !important;
+}
+
+#connectionsMapWrap .connection-node.external-group-node > rect,
+#connectionsMapWrap .connection-node.connection-group-node > rect {
+  fill: var(--map-group-fill) !important;
+  fill-opacity: 0.72 !important;
+  stroke: var(--map-group-stroke) !important;
+  stroke-opacity: 0.95 !important;
+  stroke-width: 2.4px !important;
+}
+
+#connectionsMapWrap .connection-node.external-creation-node rect,
+#connectionsMapWrap .connection-node.connection-group-child-node rect,
+#connectionsMapWrap .connection-node[data-type="creation"] rect,
+#connectionsMapWrap .connection-node[data-type="external"] rect {
+  fill: var(--map-creation-fill) !important;
+  fill-opacity: 0.58 !important;
+  stroke: var(--map-creation-stroke) !important;
+  stroke-opacity: 0.92 !important;
+  stroke-width: 2px !important;
+}
+
+/* Re-apply the shell style after the generic external/data-type rules above so universe
+   titles remain visually distinct from ordinary external entities. */
+#connectionsMapWrap .connection-node.external-universe-node rect {
+  fill: transparent !important;
+  fill-opacity: 0 !important;
+  stroke: var(--map-universe-fill) !important;
+  stroke-opacity: 0.98 !important;
+  stroke-width: 4px !important;
+}
+
+#connectionsMapWrap .current-universe-center-node .connection-node-title,
+#connectionsMapWrap .current-universe-center-node .connection-node-title tspan,
+#connectionsMapWrap .current-universe-center-node .node-subtitle,
+#connectionsMapWrap .current-universe-center-node .node-subtitle tspan,
+#connectionsMapWrap .external-universe-node .connection-node-title,
+#connectionsMapWrap .external-universe-node .connection-node-title tspan,
+#connectionsMapWrap .external-universe-node .node-subtitle,
+#connectionsMapWrap .external-universe-node .node-subtitle tspan {
+  fill: var(--mist-glow) !important;
+}
+
+#connectionsMapWrap .connection-node.external-group-node .connection-node-title,
+#connectionsMapWrap .connection-node.external-group-node .connection-node-title tspan,
+#connectionsMapWrap .connection-node.external-group-node .node-subtitle,
+#connectionsMapWrap .connection-node.external-group-node .node-subtitle tspan,
+#connectionsMapWrap .connection-node.external-creation-node .connection-node-title,
+#connectionsMapWrap .connection-node.external-creation-node .connection-node-title tspan,
+#connectionsMapWrap .connection-node.external-group-child-node .connection-node-title,
+#connectionsMapWrap .connection-node.external-group-child-node .connection-node-title tspan,
+#connectionsMapWrap .connection-node.external-group-child-node .node-subtitle,
+#connectionsMapWrap .connection-node.external-group-child-node .node-subtitle tspan {
+  fill: rgba(246, 243, 251, 0.96) !important;
+}
+
+/* Wormholes Reskin 28: deepen the cosmic atmosphere in Manage Bridges and
+   Connections map views by increasing the density and tonal variation of background stars. */
+#connectionsMapWrap::after,
+#wormholesMapWrap::after {
+  opacity: 0.28 !important;
+  background:
+    radial-gradient(circle at 5% 9%, rgba(236, 231, 244, 0.78) 0 1.2px, transparent 1.9px),
+    radial-gradient(circle at 12% 15%, rgba(236, 231, 244, 0.82) 0 1.1px, transparent 1.8px),
+    radial-gradient(circle at 18% 24%, rgba(170, 184, 208, 0.38) 0 0.8px, transparent 1.5px),
+    radial-gradient(circle at 26% 33%, rgba(170, 184, 208, 0.62) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 31% 12%, rgba(214, 209, 230, 0.34) 0 0.7px, transparent 1.3px),
+    radial-gradient(circle at 37% 47%, rgba(236, 231, 244, 0.54) 0 0.95px, transparent 1.7px),
+    radial-gradient(circle at 44% 20%, rgba(214, 209, 230, 0.72) 0 1.1px, transparent 1.8px),
+    radial-gradient(circle at 49% 68%, rgba(167, 192, 187, 0.34) 0 0.7px, transparent 1.35px),
+    radial-gradient(circle at 54% 26%, rgba(170, 184, 208, 0.28) 0 0.65px, transparent 1.25px),
+    radial-gradient(circle at 61% 71%, rgba(167, 192, 187, 0.62) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 66% 14%, rgba(236, 231, 244, 0.44) 0 0.85px, transparent 1.55px),
+    radial-gradient(circle at 72% 51%, rgba(214, 209, 230, 0.3) 0 0.65px, transparent 1.3px),
+    radial-gradient(circle at 76% 28%, rgba(214, 209, 230, 0.68) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 81% 86%, rgba(167, 192, 187, 0.26) 0 0.6px, transparent 1.2px),
+    radial-gradient(circle at 88% 61%, rgba(170, 184, 208, 0.62) 0 1px, transparent 1.75px),
+    radial-gradient(circle at 92% 22%, rgba(236, 231, 244, 0.36) 0 0.75px, transparent 1.45px),
+    radial-gradient(circle at 17% 82%, rgba(236, 231, 244, 0.66) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 23% 74%, rgba(170, 184, 208, 0.3) 0 0.65px, transparent 1.25px),
+    radial-gradient(circle at 34% 88%, rgba(214, 209, 230, 0.42) 0 0.8px, transparent 1.45px),
+    radial-gradient(circle at 43% 79%, rgba(167, 192, 187, 0.24) 0 0.6px, transparent 1.2px),
+    radial-gradient(circle at 58% 90%, rgba(236, 231, 244, 0.38) 0 0.8px, transparent 1.5px),
+    radial-gradient(circle at 69% 78%, rgba(170, 184, 208, 0.28) 0 0.6px, transparent 1.2px),
+    radial-gradient(circle at 79% 72%, rgba(214, 209, 230, 0.32) 0 0.65px, transparent 1.3px),
+    radial-gradient(circle at 90% 84%, rgba(236, 231, 244, 0.3) 0 0.7px, transparent 1.35px),
+    linear-gradient(
+      90deg,
+      transparent 0 49.45%,
+      rgba(180, 171, 201, 0.08) 49.6% 49.8%,
+      transparent 49.95%
+    ),
+    linear-gradient(
+      0deg,
+      transparent 0 49.45%,
+      rgba(167, 192, 187, 0.07) 49.6% 49.8%,
+      transparent 49.95%
+    ),
+    radial-gradient(
+      circle at center,
+      transparent 0 22%,
+      rgba(170, 184, 208, 0.07) 22.25% 22.55%,
+      transparent 22.9% 38%,
+      rgba(214, 209, 230, 0.07) 38.25% 38.55%,
+      transparent 38.9%
+    ) !important;
+}
+
+/* Wormholes Reskin 29: add an even denser star field to both map views while
+   keeping stars soft enough to sit behind the node system. */
+#connectionsMapWrap::after,
+#wormholesMapWrap::after {
+  opacity: 0.34 !important;
+  background:
+    radial-gradient(circle at 3% 7%, rgba(236, 231, 244, 0.34) 0 0.55px, transparent 1.05px),
+    radial-gradient(circle at 5% 9%, rgba(236, 231, 244, 0.82) 0 1.2px, transparent 1.9px),
+    radial-gradient(circle at 7% 42%, rgba(170, 184, 208, 0.24) 0 0.5px, transparent 1px),
+    radial-gradient(circle at 10% 68%, rgba(214, 209, 230, 0.22) 0 0.48px, transparent 0.95px),
+    radial-gradient(circle at 12% 15%, rgba(236, 231, 244, 0.86) 0 1.1px, transparent 1.8px),
+    radial-gradient(circle at 14% 56%, rgba(236, 231, 244, 0.28) 0 0.6px, transparent 1.1px),
+    radial-gradient(circle at 16% 91%, rgba(167, 192, 187, 0.18) 0 0.45px, transparent 0.95px),
+    radial-gradient(circle at 18% 24%, rgba(170, 184, 208, 0.42) 0 0.8px, transparent 1.5px),
+    radial-gradient(circle at 20% 39%, rgba(214, 209, 230, 0.22) 0 0.52px, transparent 1px),
+    radial-gradient(circle at 23% 74%, rgba(170, 184, 208, 0.34) 0 0.65px, transparent 1.25px),
+    radial-gradient(circle at 26% 33%, rgba(170, 184, 208, 0.68) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 28% 61%, rgba(236, 231, 244, 0.24) 0 0.5px, transparent 1px),
+    radial-gradient(circle at 31% 12%, rgba(214, 209, 230, 0.4) 0 0.7px, transparent 1.3px),
+    radial-gradient(circle at 34% 88%, rgba(214, 209, 230, 0.5) 0 0.8px, transparent 1.45px),
+    radial-gradient(circle at 37% 47%, rgba(236, 231, 244, 0.6) 0 0.95px, transparent 1.7px),
+    radial-gradient(circle at 39% 17%, rgba(167, 192, 187, 0.2) 0 0.5px, transparent 1px),
+    radial-gradient(circle at 43% 79%, rgba(167, 192, 187, 0.3) 0 0.6px, transparent 1.2px),
+    radial-gradient(circle at 44% 20%, rgba(214, 209, 230, 0.76) 0 1.1px, transparent 1.8px),
+    radial-gradient(circle at 46% 59%, rgba(236, 231, 244, 0.22) 0 0.48px, transparent 0.95px),
+    radial-gradient(circle at 49% 68%, rgba(167, 192, 187, 0.4) 0 0.7px, transparent 1.35px),
+    radial-gradient(circle at 52% 11%, rgba(170, 184, 208, 0.18) 0 0.45px, transparent 0.9px),
+    radial-gradient(circle at 54% 26%, rgba(170, 184, 208, 0.34) 0 0.65px, transparent 1.25px),
+    radial-gradient(circle at 58% 90%, rgba(236, 231, 244, 0.44) 0 0.8px, transparent 1.5px),
+    radial-gradient(circle at 61% 71%, rgba(167, 192, 187, 0.66) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 63% 37%, rgba(214, 209, 230, 0.22) 0 0.5px, transparent 1px),
+    radial-gradient(circle at 66% 14%, rgba(236, 231, 244, 0.5) 0 0.85px, transparent 1.55px),
+    radial-gradient(circle at 69% 78%, rgba(170, 184, 208, 0.34) 0 0.6px, transparent 1.2px),
+    radial-gradient(circle at 72% 51%, rgba(214, 209, 230, 0.36) 0 0.65px, transparent 1.3px),
+    radial-gradient(circle at 74% 9%, rgba(236, 231, 244, 0.18) 0 0.46px, transparent 0.92px),
+    radial-gradient(circle at 76% 28%, rgba(214, 209, 230, 0.72) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 79% 72%, rgba(214, 209, 230, 0.38) 0 0.65px, transparent 1.3px),
+    radial-gradient(circle at 81% 86%, rgba(167, 192, 187, 0.3) 0 0.6px, transparent 1.2px),
+    radial-gradient(circle at 84% 46%, rgba(170, 184, 208, 0.2) 0 0.48px, transparent 0.96px),
+    radial-gradient(circle at 88% 61%, rgba(170, 184, 208, 0.68) 0 1px, transparent 1.75px),
+    radial-gradient(circle at 90% 84%, rgba(236, 231, 244, 0.36) 0 0.7px, transparent 1.35px),
+    radial-gradient(circle at 92% 22%, rgba(236, 231, 244, 0.42) 0 0.75px, transparent 1.45px),
+    radial-gradient(circle at 95% 57%, rgba(214, 209, 230, 0.2) 0 0.48px, transparent 0.96px),
+    radial-gradient(circle at 97% 13%, rgba(167, 192, 187, 0.16) 0 0.42px, transparent 0.9px),
+    radial-gradient(circle at 17% 82%, rgba(236, 231, 244, 0.7) 0 1px, transparent 1.8px),
+    linear-gradient(
+      90deg,
+      transparent 0 49.45%,
+      rgba(180, 171, 201, 0.07) 49.6% 49.8%,
+      transparent 49.95%
+    ),
+    linear-gradient(
+      0deg,
+      transparent 0 49.45%,
+      rgba(167, 192, 187, 0.06) 49.6% 49.8%,
+      transparent 49.95%
+    ),
+    radial-gradient(
+      circle at center,
+      transparent 0 22%,
+      rgba(170, 184, 208, 0.06) 22.25% 22.55%,
+      transparent 22.9% 38%,
+      rgba(214, 209, 230, 0.06) 38.25% 38.55%,
+      transparent 38.9%
+    ) !important;
+}
+
+/* Wormholes Reskin 30: shift the home title toward a more spacefaring,
+   geometric wordmark inspired by futuristic display fonts, while staying
+   readable and tonally consistent with the app. */
+#homeScreen h1,
+.home-screen h1,
+.home h1 {
+  font-family:
+    "Avenir Next", "Segoe UI", "Trebuchet MS", "Arial Rounded MT Bold", sans-serif !important;
+  font-weight: 700 !important;
+  font-size: clamp(2.35rem, 6.6vw, 4.35rem) !important;
+  line-height: 0.95 !important;
+  letter-spacing: clamp(0.11em, 1.25vw, 0.22em) !important;
+  text-indent: clamp(0.11em, 1.25vw, 0.22em) !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  color: #e7ebf4 !important;
+  background: linear-gradient(
+    180deg,
+    #f4f7ff 0%,
+    #e9edf8 34%,
+    #cfd9ec 72%,
+    #b4c4df 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 1px rgba(211, 223, 242, 0.2) !important;
+  text-shadow:
+    0 0 14px rgba(214, 225, 244, 0.16),
+    0 0 34px rgba(137, 175, 210, 0.11),
+    0 2px 10px rgba(8, 12, 24, 0.35) !important;
+  filter: drop-shadow(0 3px 10px rgba(7, 12, 24, 0.28));
+  transform: scaleX(1.03) !important;
+  margin-bottom: 10px !important;
+}
+
+#homeScreen .header-wrap {
+  padding-inline: 14px !important;
+}
+
+#homeScreen .subtitle {
+  letter-spacing: 0.1em !important;
+}
+
+/* Wormholes Reskin 31: nudge the home title slightly lower and give the
+   WORMHOLES wordmark a brighter-edge / deeper-center cosmic gradient. */
+#homeScreen .header-wrap {
+  padding-top: 8px !important;
+}
+
+#homeScreen h1,
+.home-screen h1,
+.home h1 {
+  margin-top: 6px !important;
+  margin-bottom: 10px !important;
+  background: linear-gradient(
+    90deg,
+    #f6f8ff 0%,
+    #eef4ff 16%,
+    #dce5f7 31%,
+    #8fa2c1 50%,
+    #dce5f7 69%,
+    #eef4ff 84%,
+    #f6f8ff 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  text-shadow:
+    0 0 16px rgba(220, 232, 251, 0.18),
+    0 0 36px rgba(153, 186, 219, 0.12),
+    0 3px 12px rgba(8, 12, 24, 0.36) !important;
+}
+
+/* Wormholes Reskin 32: remove the home-title gradient and use a solid title
+   with a thicker translucent stroke around the WORMHOLES letters. */
+#homeScreen h1,
+.home-screen h1,
+.home h1 {
+  color: #e9edf7 !important;
+  background: none !important;
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+  -webkit-text-fill-color: #e9edf7 !important;
+  -webkit-text-stroke: 3px rgba(205, 220, 242, 0.22) !important;
+  paint-order: stroke fill !important;
+  text-shadow:
+    0 0 12px rgba(220, 232, 251, 0.12),
+    0 0 26px rgba(153, 186, 219, 0.08),
+    0 3px 12px rgba(8, 12, 24, 0.36) !important;
+}
+
+/* Wormholes Reskin 33: keep the thicker title outline, but make it a dark
+   semi-transparent stroke so it stands out while blending into the background. */
+#homeScreen h1,
+.home-screen h1,
+.home h1 {
+  -webkit-text-stroke: 3px rgba(18, 24, 38, 0.46) !important;
+  text-shadow:
+    0 0 10px rgba(220, 232, 251, 0.08),
+    0 0 22px rgba(153, 186, 219, 0.05),
+    0 3px 12px rgba(7, 10, 18, 0.42) !important;
+}
+
+/* Wormholes Beta 279: improve Settings readability while keeping a soft translucent surface. */
+#settingsDock > #settingsPanel {
+  background:
+    radial-gradient(circle at 88% 8%, rgba(170, 184, 208, 0.045), transparent 24%),
+    linear-gradient(180deg, rgba(38, 44, 60, 0.985), rgba(24, 29, 41, 0.995)) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(0.92);
+  backdrop-filter: blur(14px) saturate(0.92);
+  box-shadow:
+    0 0 0 100vmax rgba(7, 10, 18, 0.12),
+    0 22px 46px rgba(5, 8, 14, 0.48),
+    inset 0 1px 0 rgba(236, 231, 244, 0.08),
+    inset 0 0 0 1px rgba(214, 209, 230, 0.04) !important;
+}
+
+/* Wormholes Beta 301: concise, inline guidance for Connections and Bridges. */
+.relationship-guide {
+  margin: 0 0 12px;
+  padding: 9px 11px;
+  border: 1px solid rgba(214, 209, 230, 0.16);
+  border-radius: 13px;
+  background: rgba(18, 23, 34, 0.7);
+  box-shadow: inset 0 1px 0 rgba(242, 231, 208, 0.035);
+}
+
+.relationship-guide-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.relationship-guide-summary p,
+.relationship-help-panel p {
+  margin: 0;
+  color: var(--cream-2);
+  line-height: 1.42;
+}
+
+.relationship-guide-summary strong {
+  color: var(--cream);
+}
+
+.relationship-help-toggle,
+.relationship-help-dismiss {
+  min-width: 0;
+  width: auto;
+  min-height: 28px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  line-height: 1.15;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+.relationship-help-panel {
+  margin-top: 9px;
+  padding-top: 9px;
+  border-top: 1px solid rgba(214, 209, 230, 0.12);
+}
+
+.relationship-help-panel p + p {
+  margin-top: 6px;
+}
+
+.relationship-help-dismiss {
+  margin-top: 9px;
+}
+
+/* Wormholes Beta 301: fluid desktop-window layout contract.
+   The full desktop interface remains available while narrow browser windows
+   reflow instead of creating page-level horizontal scrolling. */
+html,
+body {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+main {
+  width: min(960px, calc(100% - 32px));
+  min-width: 0;
+  max-width: 960px;
+}
+
+main > *,
+.home-screen,
+.app-screen,
+.tab-pane,
+.archive,
+.create-panel,
+.literature-panel,
+.vision-board-panel {
+  min-width: 0;
+  max-width: 100%;
+}
+
+img,
+video,
+canvas,
+svg,
+input,
+select,
+textarea {
+  max-width: 100%;
+}
+
+p,
+li,
+dd,
+dt,
+label,
+button,
+input,
+select,
+textarea,
+.entry-title,
+.universe-label {
+  overflow-wrap: anywhere;
+}
+
+.archive,
+.create-panel,
+.literature-panel,
+.vision-board-panel,
+.modal,
+.settings-panel,
+.global-search-modal {
+  overflow-x: hidden;
+}
+
+.tabs,
+.controls,
+.home-actions,
+.modal-actions,
+.archive-header,
+.collection-list-header,
+.archive-filter-footer,
+.archive-sort-panel,
+.collection-pagination,
+.relationship-guide-summary,
+.contextual-onboarding-footer,
+.contextual-onboarding-actions,
+.map-selection-help-actions {
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+  main {
+    width: calc(100% - 16px);
+    margin: 8px auto;
+    padding: clamp(16px, 3vw, 24px);
+  }
+
+  .tabs {
+    align-items: stretch;
+    gap: 7px;
+  }
+
+  .tabs .tab-button {
+    flex: 1 1 150px;
+    max-width: none;
+    white-space: normal;
+  }
+
+  .archive-header,
+  .collection-list-header {
+    align-items: flex-start;
+  }
+
+  .storage-usage-summary-grid,
+  .storage-usage-detail-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .storage-usage-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .storage-usage-row > span:not(:first-child) {
+    text-align: left;
+  }
+}
+
+@media (max-width: 700px) {
+  main {
+    width: 100%;
+    margin: 0;
+    padding: 16px;
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+  }
+
+  main::before,
+  main::after {
+    border-radius: 0;
+  }
+
+  h1 {
+    font-size: clamp(1.65rem, 8vw, 2.15rem);
+    letter-spacing: 0.08em;
+  }
+
+  .app-screen {
+    padding-top: 0;
+  }
+
+  .universe-topbar {
+    position: relative;
+    inset: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
+  .universe-label {
+    flex: 1 1 auto;
+    max-width: none;
+    text-align: right;
+  }
+
+  .generate-bottom-controls {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .creation-action-buttons,
+  .skip-roll-toggle {
+    grid-column: 1;
+    justify-self: center;
+  }
+
+  .archive-filter-grid,
+  .literature-filter-grid,
+  .vision-filter-grid,
+  .global-search-controls,
+  .local-data-help-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .archive-filter-status {
+    grid-column: auto;
+  }
+
+  .archive-sort-panel,
+  .collection-sort-panel,
+  .archive-filter-footer,
+  .collection-pagination,
+  .contextual-onboarding-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .archive-sort-field,
+  .collection-sort-field {
+    width: 100%;
+    max-width: none;
+  }
+
+  .archive-sort-actions,
+  .collection-sort-actions,
+  .archive-filter-actions,
+  .collection-filter-actions,
+  .pagination-pages,
+  .contextual-onboarding-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .archive-sort-actions .small-archive-button,
+  .collection-sort-actions .small-archive-button,
+  .archive-filter-actions .small-archive-button,
+  .collection-filter-actions .small-archive-button {
+    flex: 1 1 120px;
+  }
+
+  .pagination-status {
+    white-space: normal;
+    text-align: center;
+  }
+
+  .pagination-pages {
+    justify-content: center;
+  }
+
+  .global-search-backdrop,
+  .modal-backdrop {
+    padding: 10px;
+  }
+
+  .global-search-modal,
+  .modal {
+    width: min(100%, calc(100vw - 20px));
+    max-height: calc(100vh - 20px);
+    padding: 15px;
+  }
+
+  #settingsDock > #settingsPanel,
+  .settings-panel {
+    width: min(380px, calc(100vw - 80px)) !important;
+    max-height: calc(100vh - 24px);
+    overflow-y: auto !important;
+  }
+
+  .settings-tooltip-button::after {
+    left: 0;
+    right: auto;
+    top: auto;
+    bottom: calc(100% + 6px);
+    width: min(260px, calc(100vw - 48px));
+    min-width: 0;
+    transform: none;
+  }
+
+  .map-search-panel {
+    width: min(330px, calc(100vw - 48px));
+    max-height: min(390px, calc(100vh - 150px));
+  }
+
+  .connections-map-controls,
+  .wormholes-map-controls {
+    max-width: calc(100% - 20px);
+    flex-wrap: wrap;
+  }
+
+  .connections-zoom-slider,
+  .wormholes-zoom-slider {
+    width: min(140px, 34vw);
+  }
+
+  .vision-pin.expanded {
+    width: min(92vw, 920px) !important;
+    height: min(76vh, 720px) !important;
+    min-height: min(380px, calc(100vh - 24px)) !important;
+  }
+
+  .storage-usage-summary-grid,
+  .storage-usage-detail-grid,
+  .storage-usage-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .storage-usage-row--header {
+    display: none;
+  }
+
+  .activity-log-item-header,
+  .recovery-snapshot-row,
+  .saved-toast.action-toast {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .activity-detail-technical dl {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  main {
+    padding: 12px;
+  }
+
+  .tabs .tab-button {
+    flex-basis: 125px;
+    min-height: 42px;
+    padding: 7px 6px;
+    font-size: 0.76rem;
+  }
+
+  .home-card,
+  #homeScreen .home-card {
+    padding-inline: 4px;
+  }
+
+  .home-actions .app-button,
+  .home-actions button,
+  .home-actions .home-safe-control {
+    flex: 1 1 180px;
+    min-width: 0;
+  }
+
+  #archiveListScreen .archive-list-header,
+  .collection-list-header,
+  .relationship-guide-summary {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  #archiveListScreen .archive-primary-actions,
+  .collection-primary-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  #archiveListScreen .archive-connections-button,
+  .collection-primary-actions .app-button {
+    max-width: 100%;
+  }
+
+  .archive-filter-status label {
+    display: flex;
+    margin-right: 0;
+    white-space: normal;
+  }
+
+  .contextual-onboarding-actions,
+  .map-selection-help-actions,
+  .support-report-actions,
+  .duplicate-creation-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .contextual-onboarding-hide,
+  .map-selection-help-hide,
+  .support-report-actions .app-button,
+  .duplicate-creation-actions .app-button {
+    width: 100%;
+  }
+
+  .saved-toast,
+  .saved-toast.undo-toast,
+  .saved-toast.action-toast {
+    width: calc(100vw - 24px);
+    max-width: calc(100vw - 24px);
+    white-space: normal;
+  }
+
+  .app-data-import-comparison-row,
+  .build-diagnostics-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .vision-image-viewer-modal {
+    width: calc(100vw - 20px);
+  }
+}
+
+@media (max-width: 360px) {
+  main {
+    padding: 10px;
+  }
+
+  .tabs {
+    gap: 5px;
+  }
+
+  .tabs .tab-button {
+    flex-basis: 108px;
+    padding-inline: 4px;
+    font-size: 0.7rem;
+  }
+
+  .home-return-button {
+    padding-inline: 8px;
+    font-size: 0.8rem;
+  }
+
+  .universe-label {
+    font-size: 0.78rem;
+  }
+}
+
+/* Wormholes Beta 301: compact per-field generator controls. */
+#result .generation-result-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+#result .generation-result-copy {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+#result .generation-field-actions {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+}
+
+#result .generation-field-button {
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  min-height: 30px;
+  padding: 0;
+  border: 1px solid rgba(214, 209, 230, 0.32);
+  border-radius: 8px;
+  background: rgba(242, 231, 208, 0.92);
+  color: #12355b;
+  box-shadow:
+    0 2px 0 rgba(91, 82, 70, 0.82),
+    inset 0 1px 0 rgba(255, 255, 255, 0.38);
+  line-height: 1;
+}
+
+body
+  button.generation-field-button:not(#wormholes-contrast-sentinel-a):not(
+    #wormholes-contrast-sentinel-b
+  ),
+body
+  button.generation-field-button:not(#wormholes-contrast-sentinel-a):not(
+    #wormholes-contrast-sentinel-b
+  )
+  .generation-reroll-icon,
+body
+  button.generation-field-button:not(#wormholes-contrast-sentinel-a):not(
+    #wormholes-contrast-sentinel-b
+  )
+  .generation-lock-icon {
+  color: #12355b !important;
+  -webkit-text-fill-color: #12355b !important;
+}
+
+#result .generation-field-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+#result .generation-field-button:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 rgba(91, 82, 70, 0.72);
+}
+
+#result .generation-field-button:focus-visible {
+  outline: 3px solid var(--sky);
+  outline-offset: 2px;
+}
+
+#result .generation-lock-button.is-locked {
+  border-color: rgba(143, 186, 208, 0.9);
+  background: var(--sky);
+  box-shadow:
+    0 2px 0 rgba(58, 83, 96, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+
+#result .generation-reroll-icon {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1;
+  transform: translateY(-0.5px);
+}
+
+#result .generation-lock-icon {
+  display: block;
+  width: 19px;
+  height: 19px;
+  margin: auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#result .generation-lock-icon rect {
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+/* The global button contrast rule targets every button descendant directly.
+   Set the padlock shapes themselves so they match the reroll arrow instead of
+   falling back to the light button-text color. */
+body
+  button.generation-field-button:not(#wormholes-contrast-sentinel-a):not(
+    #wormholes-contrast-sentinel-b
+  )
+  .generation-lock-icon
+  path {
+  color: #12355b !important;
+  fill: none !important;
+  stroke: #12355b !important;
+  -webkit-text-fill-color: #12355b !important;
+}
+
+body
+  button.generation-field-button:not(#wormholes-contrast-sentinel-a):not(
+    #wormholes-contrast-sentinel-b
+  )
+  .generation-lock-icon
+  rect {
+  color: #12355b !important;
+  fill: #12355b !important;
+  stroke: #12355b !important;
+  -webkit-text-fill-color: #12355b !important;
+}
+
+@media (max-width: 520px) {
+  #result .generation-result-row {
+    gap: 7px;
+  }
+
+  #result .generation-field-actions {
+    gap: 4px;
+  }
+}
+
+/* Beta 301 Theme Deck controls */
+.theme-bar {
+  margin: 10px auto 14px;
+  padding: 10px 12px;
+  width: min(100%, 1080px);
+  border: 1px solid rgba(170, 184, 208, 0.28);
+  border-radius: 12px;
+  background: rgba(29, 34, 48, 0.68);
+  box-sizing: border-box;
+}
+
+.theme-bar-create {
+  margin-top: 12px;
+  margin-bottom: 18px;
+}
+
+.theme-bar-main {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.theme-bar-label {
+  flex: 0 0 auto;
+  font-weight: 800;
+  color: var(--mist-lilac);
+  letter-spacing: 0.02em;
+}
+
+.theme-chip-list {
+  display: flex;
+  flex: 1 1 320px;
+  min-width: 0;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+body button.theme-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 28px;
+  padding: 3px 8px 3px 10px;
+  border: 1px solid rgba(170, 184, 208, 0.52);
+  border-radius: 999px;
+  background: rgba(68, 79, 103, 0.92);
+  color: var(--mist-glow);
+  font: inherit;
+  font-size: 0.82rem;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+body button.theme-chip:hover {
+  border-color: var(--mist-sage);
+  background: rgba(78, 91, 116, 0.96);
+}
+
+body button.theme-chip:focus-visible {
+  outline: 3px solid var(--focus-soft);
+  outline-offset: 2px;
+}
+
+.theme-chip-remove {
+  display: inline-grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.theme-choose-button {
+  flex: 0 0 auto;
+  min-height: 32px;
+  padding: 5px 11px;
+  font-size: 0.84rem;
+}
+
+.theme-bar-note {
+  margin: 7px 0 0;
+  color: var(--mist-mauve);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.theme-picker-modal {
+  width: min(920px, calc(100vw - 36px));
+  max-height: min(84vh, 860px);
+  overflow: auto;
+}
+
+.theme-picker-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.theme-picker-section {
+  min-width: 0;
+}
+
+.theme-picker-section h3 {
+  margin: 0 0 8px;
+  color: var(--mist-lilac);
+}
+
+.theme-picker-option {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 9px;
+  align-items: start;
+  margin: 0 0 8px;
+  padding: 10px;
+  border: 1px solid rgba(170, 184, 208, 0.24);
+  border-radius: 10px;
+  background: rgba(35, 41, 58, 0.72);
+  cursor: pointer;
+}
+
+.theme-picker-option:hover {
+  border-color: rgba(167, 192, 187, 0.6);
+}
+
+.theme-picker-option.is-disabled {
+  opacity: 0.58;
+  cursor: default;
+}
+
+.theme-picker-option input {
+  margin-top: 3px;
+}
+
+.theme-picker-copy {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.theme-picker-copy strong {
+  color: var(--mist-glow);
+}
+
+.theme-picker-copy span,
+.theme-picker-copy small,
+.theme-picker-empty {
+  color: var(--mist-mauve);
+}
+
+.theme-picker-copy span {
+  line-height: 1.35;
+}
+
+.theme-picker-custom-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(170, 184, 208, 0.22);
+}
+
+.theme-manager-modal {
+  width: min(1180px, calc(100vw - 28px));
+  max-height: calc(100vh - 28px);
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.theme-manager-header,
+.theme-manager-toolbar,
+.theme-card-add-row,
+.theme-bulk-grid,
+.theme-card-list-tools,
+.theme-manager-actions {
+  display: flex;
+  align-items: end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.theme-manager-header {
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.theme-manager-header h2,
+.theme-manager-header p {
+  margin-top: 0;
+}
+
+.theme-manager-toolbar {
+  margin: 16px 0;
+}
+
+.theme-manager-toolbar label,
+.theme-card-list-tools label,
+.theme-card-add-row label,
+.theme-bulk-grid label {
+  display: grid;
+  gap: 5px;
+}
+
+.theme-manager-toolbar label {
+  flex: 1 1 280px;
+}
+
+.theme-manager-details {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.65fr) minmax(300px, 1.35fr);
+  gap: 12px;
+}
+
+.theme-manager-details label {
+  display: grid;
+  gap: 5px;
+}
+
+.theme-manager-details textarea {
+  min-height: 78px;
+  resize: vertical;
+}
+
+.theme-manager-counts,
+.theme-manager-status {
+  margin: 10px 0;
+  min-height: 1.35em;
+  color: var(--mist-sage);
+  font-size: 0.86rem;
+}
+
+.theme-manager-status[data-state="error"] {
+  color: #ffd5d1;
+}
+
+.theme-card-add-panel {
+  margin: 14px 0;
+  padding: 13px;
+  border: 1px solid rgba(170, 184, 208, 0.24);
+  border-radius: 12px;
+  background: rgba(29, 34, 48, 0.58);
+}
+
+.theme-card-add-panel h3 {
+  margin: 0 0 10px;
+}
+
+.theme-card-text-label,
+.theme-card-search-label {
+  flex: 1 1 360px;
+}
+
+.theme-bulk-entry {
+  margin-top: 12px;
+}
+
+.theme-bulk-entry summary {
+  color: var(--mist-lilac);
+  cursor: pointer;
+}
+
+.theme-bulk-grid {
+  margin-top: 10px;
+}
+
+.theme-bulk-grid textarea {
+  min-height: 92px;
+  resize: vertical;
+}
+
+.theme-card-list-tools {
+  margin: 14px 0 8px;
+}
+
+.theme-manager-card-list {
+  display: grid;
+  gap: 7px;
+  max-height: 380px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.theme-card-row {
+  display: grid;
+  grid-template-columns: minmax(108px, 0.28fr) minmax(220px, 1fr) auto auto;
+  gap: 7px;
+  align-items: center;
+  min-width: 0;
+}
+
+.theme-card-row input,
+.theme-card-row select {
+  min-width: 0;
+  width: 100%;
+}
+
+.theme-card-small-button {
+  min-height: 34px;
+  padding: 5px 9px;
+  font-size: 0.78rem;
+}
+
+@media (max-width: 860px) {
+  .theme-picker-list,
+  .theme-manager-details {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-card-row {
+    grid-template-columns: minmax(100px, 0.3fr) minmax(180px, 1fr);
+  }
+
+  .theme-card-row .theme-card-small-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 580px) {
+  .theme-bar-main,
+  .theme-manager-header,
+  .theme-manager-toolbar,
+  .theme-card-add-row,
+  .theme-bulk-grid,
+  .theme-card-list-tools {
+    align-items: stretch;
+  }
+
+  .theme-choose-button,
+  .theme-manager-toolbar > button,
+  .theme-card-add-row > button,
+  .theme-bulk-grid > button {
+    width: 100%;
+  }
+
+  .theme-card-row {
+    grid-template-columns: 1fr;
+    padding: 8px;
+    border: 1px solid rgba(170, 184, 208, 0.2);
+    border-radius: 9px;
+  }
+}
+
+/* Theme picker scroll isolation
+   Keep the picker responsive even when the Create tab contains large suggestion menus. */
+html.theme-picker-open,
+html.theme-picker-open body {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+}
+
+.theme-picker-backdrop {
+  background: rgba(12, 15, 23, 0.92) !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  contain: strict;
+}
+
+.theme-picker-modal {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  contain: layout paint style;
+  isolation: isolate;
+}
+
+.theme-picker-list {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-right: 6px;
+  scrollbar-gutter: stable;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+  contain: layout paint;
+  will-change: scroll-position;
+  transform: translateZ(0);
+}
+
+.theme-picker-option {
+  contain: layout paint style;
+  background: rgb(35, 41, 58);
+}
+
+.theme-picker-copy small {
+  position: static;
+  z-index: auto;
+  margin: 0;
+  text-align: left;
+  line-height: 1.3;
+}
+
+.theme-picker-custom-actions,
+.theme-picker-modal > .modal-actions,
+.theme-picker-modal > h2,
+.theme-picker-modal > p {
+  flex: 0 0 auto;
+}
+
+/* The four large Create suggestion controls do not need to be painted or
+   laid out while this fixed modal is covering them. Their state is retained. */
+html.theme-picker-from-create #createTab .create-grid {
+  content-visibility: hidden;
+  contain-intrinsic-size: auto 620px;
+}
+
+html.theme-picker-from-create #createTab .create-panel::before {
+  display: none;
+}

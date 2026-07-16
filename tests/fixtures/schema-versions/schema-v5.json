@@ -1,0 +1,57 @@
+{
+  "format": "Wormholes App Data Export",
+  "schemaVersion": 5,
+  "appVersion": "Beta 289",
+  "currentUniverseId": "v5-u1",
+  "universes": [
+    {
+      "id": "v5-u1",
+      "title": "Version Five Realm",
+      "summary": "A current-schema control fixture.",
+      "bridges": [],
+      "createdAt": "2026-07-12T00:00:00.000Z",
+      "diskFolderName": "Version Five Realm -- v5-u1"
+    }
+  ],
+  "bridgeNotes": {},
+  "universeData": {
+    "v5-u1": {
+      "archive": [
+        {
+          "id": "v5-a1",
+          "title": "Current Beacon",
+          "what": {"val": "Artifact"},
+          "attr1": {"val": "Bright"},
+          "attr2": {"val": "Patient"},
+          "pressure": {"val": "It must remain visible."},
+          "connections": [],
+          "bridges": [],
+          "createdAt": "2026-07-12T00:01:00.000Z"
+        }
+      ],
+      "connectionNotes": {},
+      "literature": [
+        {
+          "id": "v5-l1",
+          "kind": "",
+          "title": "Current Record",
+          "content": "<p>Version five retained text.</p>",
+          "sourceName": "",
+          "fileType": "text",
+          "mimeType": "text/html",
+          "fileData": "",
+          "fileSize": 0,
+          "convertedFrom": "",
+          "storage": "",
+          "folderFileName": "",
+          "contentStoreKey": "literature:v5-u1:v5-l1:content",
+          "contentStored": "",
+          "tags": {"universes": [], "entries": []},
+          "createdAt": "2026-07-12T00:02:00.000Z",
+          "updatedAt": "2026-07-12T00:02:00.000Z"
+        }
+      ],
+      "vision": []
+    }
+  }
+}
