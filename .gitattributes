@@ -1,4 +1,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 
-Wormholes_Beta_*.html export-subs
+Wormholes_Beta_*.html export-subst
