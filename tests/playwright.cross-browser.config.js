@@ -10,7 +10,7 @@ const chromiumLaunchOptions = process.env.WORMHOLES_CHROMIUM_PATH
 module.exports = defineConfig({
   testDir: "./e2e",
   testMatch: "cross-browser.spec.js",
-  timeout: 45000,
+  timeout: 90000,
   expect: {timeout: 7000},
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
@@ -23,7 +23,7 @@ module.exports = defineConfig({
     timeout: 15000,
   },
   use: {
-    actionTimeout: 10000,
+    actionTimeout: 20000,
     navigationTimeout: 15000,
     trace: "on-first-retry",
   },

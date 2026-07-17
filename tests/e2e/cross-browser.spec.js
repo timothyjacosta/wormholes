@@ -28,6 +28,14 @@ test.describe("critical cross-browser workflows", () => {
     );
 
     await page.reload({waitUntil: "domcontentloaded"});
+    await expect(page.locator("#homeScreen")).toBeVisible();
+    await page.locator("#enterUniverseBtn").click();
+    await expect(page.locator("#universeArchiveModal")).toHaveClass(/open/);
+    const savedUniverse = page
+      .locator("#universeArchiveList .universe-entry")
+      .filter({hasText: universeTitle});
+    await expect(savedUniverse).toHaveCount(1);
+    await savedUniverse.locator(".universe-entry-main").click();
     await expect(page.locator("#appScreen")).toBeVisible();
     await expect(page.locator("#currentUniverseLabel")).toHaveText(universeTitle);
     await page.locator("#archiveTabBtn").click();

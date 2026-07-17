@@ -8,9 +8,28 @@
   const FALLBACK_LEASE_MS = 8000;
   const FALLBACK_HEARTBEAT_MS = 2000;
   const FALLBACK_SETTLE_MS = 180;
+  const TAB_ID_KEY = "wormholesSingleTabId";
+  const BROWSER_LOCK_RETRY_MS = 100;
+  const BROWSER_LOCK_RETRY_LIMIT = 20;
   const DUPLICATE_MESSAGE =
     "Wormholes is already open in another tab. To prevent lost work, return to the existing Wormholes tab.";
-  const tabId = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+  function createTabId() {
+    return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+  }
+
+  function getOrCreateTabId() {
+    try {
+      const existing = sessionStorage.getItem(TAB_ID_KEY);
+      if (existing) return existing;
+      const created = createTabId();
+      sessionStorage.setItem(TAB_ID_KEY, created);
+      return created;
+    } catch (error) {
+      return createTabId();
+    }
+  }
+
+  const tabId = getOrCreateTabId();
 
   let state = "checking";
   let releaseBrowserLock = null;
@@ -225,19 +244,27 @@
     }, FALLBACK_SETTLE_MS);
   }
 
-  function acquireBrowserLock() {
-    let release;
-    const held = new Promise((resolve) => {
-      release = resolve;
-    });
-    releaseBrowserLock = release;
-
+  function acquireBrowserLock(attempt = 0) {
     navigator.locks
       .request(LOCK_NAME, {mode: "exclusive", ifAvailable: true}, async (lock) => {
         if (!lock) {
+          const lease = readFallbackLease();
+          const liveOtherTab = lease && lease.tabId !== tabId && lease.expiresAt > Date.now();
+
+          if (!liveOtherTab && attempt < BROWSER_LOCK_RETRY_LIMIT) {
+            setTimeout(() => acquireBrowserLock(attempt + 1), BROWSER_LOCK_RETRY_MS);
+            return;
+          }
+
           becomeDuplicate();
           return;
         }
+
+        let release;
+        const held = new Promise((resolve) => {
+          release = resolve;
+        });
+        releaseBrowserLock = release;
 
         // Require the storage lease as a second, independent check. This matters
         // for local-file builds, where browser origin handling can vary.
