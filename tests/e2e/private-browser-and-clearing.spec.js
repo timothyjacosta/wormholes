@@ -68,13 +68,17 @@ async function clearBrowserSiteData(context, options = {}) {
     cacheStorage: clearCacheStorage = true,
   } = options;
 
-  for (const page of context.pages()) {
+  const existingPages = context.pages();
+  let before =
+    existingPages.length > 0 ? await listStorageState(existingPages[0]) : null;
+
+  for (const page of existingPages) {
     await page.close();
   }
 
   const clearingPage = await context.newPage();
   await clearingPage.goto(storageOriginUrl, {waitUntil: "domcontentloaded"});
-  const before = await listStorageState(clearingPage);
+  if (!before) before = await listStorageState(clearingPage);
 
   await clearingPage.evaluate(
     async ({clearLocalStorage, clearSessionStorage, clearIndexedDb, clearCacheStorage}) => {
@@ -153,8 +157,8 @@ test.describe("private browser and browser clearing", () => {
     const privateTitle = await createUniverse(privatePage, uniqueTitle("Private Context Universe"));
 
     await regularPage.reload({waitUntil: "domcontentloaded"});
-    await expect(regularPage.locator("#appScreen")).toBeVisible();
-    await expect(regularPage.locator("#currentUniverseLabel")).toHaveText(regularTitle);
+    await expect(regularPage.locator("#homeScreen")).toBeVisible();
+    await enterSavedUniverse(regularPage, regularTitle);
     expect(
       await regularPage.evaluate(
         (title) => universes.some((universe) => universe.title === title),
