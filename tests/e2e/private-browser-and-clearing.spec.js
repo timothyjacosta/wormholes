@@ -279,7 +279,9 @@ test.describe("private browser and browser clearing", () => {
     });
     expect(cleared.before.localStorageKeys.length).toBeGreaterThan(0);
     expect(cleared.before.databaseNames.some((name) => /wormholes/i.test(name))).toBe(true);
-    expect(cleared.after.localStorageKeys).toEqual(cleared.before.localStorageKeys);
+    expect(cleared.after.localStorageKeys).toEqual(
+  cleared.before.localStorageKeys.filter((key) => key !== "wormholesSingleTabLease"),
+);
     expect(cleared.after.databaseNames).toEqual([]);
 
     page = await context.newPage();
