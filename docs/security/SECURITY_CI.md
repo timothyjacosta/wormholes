@@ -5,7 +5,7 @@
 The stable GitHub check name is:
 
 ```text
-Security CI / Required security
+Required security
 ```
 
 It installs the locked dependencies and Chromium, then runs six separate required steps:

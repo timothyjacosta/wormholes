@@ -26,8 +26,8 @@ const rule = payload.rules.find((item) => item.type === "required_status_checks"
 assert.ok(rule, "ruleset should require status checks");
 assert.strictEqual(rule.parameters.strict_required_status_checks_policy, true);
 assert.deepStrictEqual(rule.parameters.required_status_checks.map((item) => item.context), [
-  "Baseline CI / Required baseline",
-  "Security CI / Required security",
+  "Required baseline",
+  "Required security",
 ]);
 
 const docs = fs.readFileSync(docsPath, "utf8");

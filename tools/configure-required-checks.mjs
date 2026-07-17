@@ -2,8 +2,8 @@
 const API_VERSION = "2026-03-10";
 const RULESET_NAME = "Wormholes required checks";
 const REQUIRED_CONTEXTS = Object.freeze([
-  "Baseline CI / Required baseline",
-  "Security CI / Required security",
+  "Required baseline",
+  "Required security",
 ]);
 
 function valueAfter(flag) {

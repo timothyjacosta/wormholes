@@ -80,7 +80,7 @@ assert.match(release, /Run security gates against the packaged artifact[\s\S]*np
 assert.match(release, /Run security gates against the packaged artifact[\s\S]*WORMHOLES_CSP_NAVIGATION: served/);
 assert.doesNotMatch(release, /continue-on-error\s*:\s*true/);
 
-assert.match(docs, /Security CI \/ Required security/);
+assert.match(docs, /Required security/);
 assert.match(docs, /served Content Security Policy/i);
 assert.match(docs, /XSS/i);
 assert.match(docs, /malicious input/i);
