@@ -19,7 +19,7 @@ test("schema failures show a format message, not a storage-full message", async 
       fallback: () => [],
       context: "Could not save test Literature",
     });
-    return repo.save(null, [{id: "incomplete"}]);
+    return repo.save(null, [{id: "incomplete", fileSize: "not-a-number"}]);
   });
 
   expect(result.ok).toBe(false);
