@@ -28,7 +28,7 @@ test("Support Report previews and downloads technical details without creative c
 
   const preview = await page.locator("#supportReportPreview").textContent();
   expect(preview).toContain('"creativeContentIncluded": false');
-  expect(preview).toContain('"version": "Wormholes Beta 279"');
+  expect(preview).toContain('"version": "Wormholes Beta 301"');
   expect(preview).toContain('"browser"');
   expect(preview).toContain('"activeMode"');
   expect(preview).toContain('"schemas"');
@@ -43,7 +43,7 @@ test("Support Report previews and downloads technical details without creative c
   const downloadPath = await download.path();
   const data = JSON.parse(await fs.readFile(downloadPath, "utf8"));
   expect(data.privacy.creativeContentIncluded).toBe(false);
-  expect(data.build.version).toBe("Wormholes Beta 279");
+  expect(data.build.version).toBe("Wormholes Beta 301");
   expect(JSON.stringify(data)).not.toContain(secret);
   expect(JSON.stringify(data)).not.toContain("/private/path.txt");
   await expect(page.locator("#supportReportStatus")).toHaveText("Support report downloaded.");
