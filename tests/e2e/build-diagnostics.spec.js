@@ -22,10 +22,10 @@ test("About Wormholes shows and copies build details", async ({page}) => {
 
   await expect(page.locator("#buildDiagnosticsModal")).toHaveClass(/open/);
   await expect(page.locator("#buildDiagnosticsTitle")).toHaveText("About Wormholes");
-  await expect(page.locator("#buildDiagnosticsVersion")).toHaveText("Wormholes Beta 279");
+  await expect(page.locator("#buildDiagnosticsVersion")).toHaveText("Wormholes Beta 301");
 
   if (EXPECT_RELEASE_METADATA) {
-    await expect(page.locator("#buildDiagnosticsId")).toHaveText(/^beta-276-[0-9a-f]{7,40}$/);
+    await expect(page.locator("#buildDiagnosticsId")).toHaveText(/^beta-297-[0-9a-f]{7,40}$/);
     await expect(page.locator("#buildDiagnosticsCommit")).toHaveText(/^[0-9a-f]{40}$/);
     await expect(page.locator("#buildDiagnosticsTimestamp")).not.toHaveText("Local copy");
   }
@@ -33,7 +33,7 @@ test("About Wormholes shows and copies build details", async ({page}) => {
   await page.locator("#copyBuildDiagnosticsBtn").click();
   await expect(page.locator("#buildDiagnosticsCopyStatus")).toHaveText("Build details copied.");
   const copied = await page.evaluate(() => window.__copiedWormholesBuildDetails || "");
-  expect(copied).toContain("Version: Wormholes Beta 279");
+  expect(copied).toContain("Version: Wormholes Beta 301");
   expect(copied).toContain("Build ID:");
   expect(copied).toContain("Source commit:");
   expect(copied).toContain("Built:");
