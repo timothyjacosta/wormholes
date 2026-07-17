@@ -250,8 +250,7 @@
       .request(LOCK_NAME, {mode: "exclusive", ifAvailable: true}, async (lock) => {
         if (!lock) {
           const lease = readFallbackLease();
-          const liveOtherTab =
-            lease && lease.tabId !== tabId && lease.expiresAt > Date.now();
+          const liveOtherTab = lease && lease.tabId !== tabId && lease.expiresAt > Date.now();
 
           if (!liveOtherTab && attempt < BROWSER_LOCK_RETRY_LIMIT) {
             setTimeout(() => acquireBrowserLock(attempt + 1), BROWSER_LOCK_RETRY_MS);
