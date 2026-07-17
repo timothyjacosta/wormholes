@@ -8,7 +8,7 @@
   const FALLBACK_LEASE_MS = 8000;
   const FALLBACK_HEARTBEAT_MS = 2000;
   const FALLBACK_SETTLE_MS = 180;
-    const TAB_ID_KEY = "wormholesSingleTabId";
+  const TAB_ID_KEY = "wormholesSingleTabId";
   const BROWSER_LOCK_RETRY_MS = 100;
   const BROWSER_LOCK_RETRY_LIMIT = 20;
   const DUPLICATE_MESSAGE =
