@@ -5,7 +5,7 @@
 The stable GitHub check name is:
 
 ```text
-Baseline CI / Required baseline
+Required baseline
 ```
 
 It performs these checks in order:
@@ -23,8 +23,8 @@ It performs these checks in order:
 Wormholes includes a repository-ruleset installer that requires both stable checks on the default branch:
 
 ```text
-Baseline CI / Required baseline
-Security CI / Required security
+Required baseline
+Required security
 ```
 
 To apply it, add a repository secret named `WORMHOLES_REPOSITORY_ADMIN_TOKEN`. The token must have repository **Administration: write** permission. Then manually run the **Configure required repository checks** workflow and enter `APPLY`. The workflow creates or updates the active `Wormholes required checks` ruleset for the default branch.

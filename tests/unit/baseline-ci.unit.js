@@ -45,7 +45,7 @@ assert.match(releaseWorkflow, /baseline-ci:\n\s+name: Required baseline before r
 assert.match(releaseWorkflow, /release-artifact:\n\s+name:[^\n]+\n\s+needs: \[baseline-ci, security-ci\]/, "release publication must wait for baseline CI");
 assert.doesNotMatch(releaseWorkflow, /continue-on-error\s*:\s*true/, "release must not bypass baseline failure");
 
-assert.match(documentation, /Baseline CI \/ Required baseline/, "documentation should name the exact required check");
+assert.match(documentation, /Required baseline/, "documentation should name the exact required check");
 assert.match(documentation, /branch protection|ruleset/i, "documentation should explain the repository merge setting");
 assert.match(documentation, /release-artifact[\s\S]*needs: baseline-ci/, "documentation should explain release enforcement");
 
