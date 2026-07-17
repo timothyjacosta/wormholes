@@ -10,7 +10,7 @@ async function visibleErrorText(page) {
   };
 }
 
-test("schema failures show a format message, not a storage-full message", async ({page}) => {
+test("schema failures show a validation message, not a storage-full message", async ({page}) => {
   const runtimeErrors = await openCleanApp(page);
   const result = await page.evaluate(() => {
     const repo = window.WormholesRepositories.datasets.createRepository({
@@ -25,7 +25,7 @@ test("schema failures show a format message, not a storage-full message", async 
   expect(result.ok).toBe(false);
   expect(result.code).toBe("schema_invalid");
   const ui = await visibleErrorText(page);
-  expect(ui.message).toMatch(/format is not valid/i);
+  expect(ui.message).toMatch(/incomplete or invalid/i);
   expect(ui.message).not.toMatch(/storage is full/i);
   expect(await page.locator("#appErrorDetails li").count()).toBe(1);
   expect(runtimeErrors).toEqual([]);
